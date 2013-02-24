@@ -12,13 +12,24 @@ def test():
     with cd(code_dir):
         run("uname -n")
 
+def input():
+    foo=raw_input('Please enter a value:')
+    print "you entered ", foo
+
+def js():
+    local('sudo java -jar compiler.jar --js=public_html/js/main.js --js_output_file=public_html/js/main.min.js');
+
 # push repo to test environment        
 def push_test():
     local('sudo git push test')
 
 # push repo to production environment        
 def push_prod():
-    local('sudo git push prod')
+    conf = raw_input('Are you sure you want to push to production? ')
+    if conf == 'yes' or ans == 'y':
+        local('sudo git push prod')
+    else:
+        print "Exiting"
 
 def cron_log():
     run('cat ~/log/cron.log')
