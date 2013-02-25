@@ -19,9 +19,18 @@ def input():
 def js():
     local('sudo java -jar compiler.jar --js=public_html/js/main.js --js_output_file=public_html/js/main.min.js');
 
-# push repo to test environment        
+# push repo to test environment, and optionally minify main.js files
+# perl -pi -e 's/main.js/main.min.js/g' /Users/andy/test/index.html   
 def push_test():
     local('sudo git push test')
+    conf = raw_input('Do you want to minify js code?')
+    if conf == 'yes' or ans == 'y':
+        path = '/var/www/andyshora/';
+        run ("sudo java -jar %scompiler.jar --js=%spublic_html/js/main.js --js_output_file=%spublic_html/js/main.min.js" % path);
+        run('sudo perl -pi -e \'s/main.js/main.min.js/g\' %spublic_html/index.html');
+    else:
+        print "Exiting"
+    
 
 # push repo to production environment        
 def push_prod():
