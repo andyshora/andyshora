@@ -1,16 +1,15 @@
 from __future__ import with_statement
 from fabric.api import *
 from fabric.contrib.console import confirm
+from fabric.colors import *
 
 env.roledefs = {
     'test': ['andy@176.58.118.231:23456'],
     'prod': ['andy@176.58.115.154:23456']
 }
 
-def test():
-    code_dir = '/home/andy/py'
-    with cd(code_dir):
-        run("uname -n")
+def test(inp, out, path):
+    local("sudo perl -pi -e 's/%s/%s/g' %s" % (inp,out,path))
 
 def input():
     foo=raw_input('Please enter a value:')
@@ -22,14 +21,21 @@ def js():
 # push repo to test environment, and optionally minify main.js files and replace reference 
 def push_test():
     local('sudo git push test')
+    minify_js('main.js', 'main.min.js', '/var/www/andyshora/', '/var/www/andyshora/public_html/*.html');
+
+#sudo fab minify_js:inp=main.js,out=main.min.js,path=/var/www/andyshora/
+def minify_js(inp='', out='', path='', infiles='/var/www/andyshora/public_html/hbfeqbfhefb.html'):
     conf = raw_input('Do you want to minify js code?')
     if conf == 'yes' or conf == 'y':
-        path = '/var/www/andyshora/';
-        run ("sudo java -jar %scompiler.jar --js=%spublic_html/js/main.js --js_output_file=%spublic_html/js/main.min.js" % (path,path,path));
-        run("sudo perl -pi -e 's/main.js/main.min.js/g' %spublic_html/index.html" % path);
+        run("sudo java -jar %scompiler.jar --js=%spublic_html/js/%s --js_output_file=%spublic_html/js/%s" % (path,path,inp,path,out))
+        print(cyan("Minification complete."))
+        replace_references(inp, out, infiles)
     else:
-        print "Exiting"
-    
+        print "Exiting without minifying js."
+
+def replace_references(inp, out, infiles):
+    run("sudo perl -pi -e 's/%s/%s/g' %s" % (inp,out,infiles))
+    print(cyan("References to %s replaced with %s" % (inp, out)))
 
 # push repo to production environment        
 def push_prod():

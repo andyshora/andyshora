@@ -1,4 +1,4 @@
 $(document).ready(function(){
-	var test = 4 + 5;
+	var test = 10 + 10;
 	console.log(test);
 });
