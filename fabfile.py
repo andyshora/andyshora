@@ -42,6 +42,7 @@ def push_prod():
     conf = raw_input('Are you sure you want to push to production? ')
     if conf == 'yes' or conf == 'y':
         local('sudo git push prod')
+        minify_js('main.js', random_string(8)+'.min.js', '/var/www/andyshora/', '/var/www/andyshora/public_html/*.html');
     else:
         print "Exiting"
 
