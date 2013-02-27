@@ -37,9 +37,6 @@ def replace_references(inp, out, infiles):
     print(cyan("References to %s replaced with %s in %s" % (inp, out, infiles)))
 
 
-
-
-
 # push repo to production environment        
 def push_prod():
     conf = raw_input('Are you sure you want to push to production? ')
