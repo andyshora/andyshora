@@ -76,15 +76,15 @@ module.exports = function(grunt) {
 
     replace: {
       example: {
-        src: ['public_html/dev.html'],             // source files array (supports minimatch)
+        src: ['public_html/dev.html'],           
         dest: 'public_html/index_full.html',             // destination directory or file
         replacements: [
         { 
-          from: 'js/main.js',                   // string replacement
+          from: 'js/main.js',      
           to: 'js/m.min.js' 
         },
         { 
-          from: 'css/main.css',                   // string replacement
+          from: 'css/main.css',               
           to: 'css/s.min.css' 
         }/*, { 
           from: /(f|F)(o{2,100})/g,      // regex replacement ('Fooo' to 'Mooo')
