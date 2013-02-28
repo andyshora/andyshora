@@ -77,7 +77,7 @@ module.exports = function(grunt) {
     replace: {
       example: {
         src: ['public_html/dev.html'],             // source files array (supports minimatch)
-        dest: 'public_html/index.html',             // destination directory or file
+        dest: 'public_html/index_full.html',             // destination directory or file
         replacements: [
         { 
           from: 'js/main.js',                   // string replacement
@@ -97,6 +97,18 @@ module.exports = function(grunt) {
         }*/
         ]
       }
+    },
+
+    htmlcompressor: {
+      compile: {
+        files: {
+          'public_html/index.html': 'public_html/index_full.html'
+        },
+        options: {
+          type: 'html',
+          preserveServerScript: true
+        }
+      }
     }
 
   });
@@ -110,8 +122,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-casperjs');
   grunt.loadNpmTasks('grunt-yui-compressor');
   grunt.loadNpmTasks('grunt-text-replace');
+  grunt.loadNpmTasks('grunt-htmlcompressor');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'cssmin', 'min', 'casperjs', 'replace']);
+  grunt.registerTask('default', ['jshint', 'cssmin', 'min', 'replace', 'htmlcompressor', 'casperjs']);
 
 };
