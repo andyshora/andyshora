@@ -5,7 +5,7 @@ var casper = require("casper").create({
     onError: function(self, m) {   // Any "error" level message will be written
         console.log('FATAL:' + m); // on the console output and PhantomJS will
         self.exit();               // terminate
-    },
+    }
 });
 
 casper.on('http.status.200', function(resource) {
@@ -26,25 +26,19 @@ casper.start('http://dev.andyshora.com/', function() {
 
 	this.captureSelector('screencaptures/home.png', 'body');
    
-   	/*this.wait(2000, function() {
-   		this.test.assertResourceExists('backbone-min.js', 'backbone was loaded');
-   		this.test.assertResourceExists('underscore-min.js', 'underscore was loaded');
-
-    });*/
+/*this.wait(2000, function() {
+this.test.assertResourceExists('backbone-min.js', 'backbone was loaded');
+this.test.assertResourceExists('underscore-min.js', 'underscore was loaded');
+});*/
 
 });
 
 casper.then(function(){
-	/*this.open('http://cpdreview.com').then(function() {
-		
-		casper.wait(3000, function() {
-		    this.captureSelector('screencaptures/cpd.png', 'body');
-		});
-
-	});*/
-
-	
-
+/*this.open('http://cpdreview.com').then(function() {
+casper.wait(3000, function() {
+  this.captureSelector('screencaptures/cpd.png', 'body');
+});
+});*/
 });
 
 

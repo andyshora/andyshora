@@ -1,4 +1,5 @@
-'use strict';
+/*jslint node: true */
+"use strict";
 
 module.exports = function(grunt) {
 
@@ -12,9 +13,6 @@ module.exports = function(grunt) {
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     // Task configuration.
-    clean: {
-      files: ['dist']
-    },
     concat: {
       options: {
         banner: '<%= banner %>',
@@ -23,7 +21,7 @@ module.exports = function(grunt) {
       dist: {
         src: ['src/<%= pkg.name %>.js'],
         dest: 'dist/<%= pkg.name %>.js'
-      },
+      }
     },
     uglify: {
       options: {
@@ -32,7 +30,7 @@ module.exports = function(grunt) {
       dist: {
         src: '<%= concat.dist.dest %>',
         dest: 'dist/<%= pkg.name %>.min.js'
-      },
+      }
     },
     qunit: {
       files: ['test/**/*.html']
@@ -44,18 +42,17 @@ module.exports = function(grunt) {
         },
         src: 'Gruntfile.js'
       },
-      src: {
-        options: {
-          jshintrc: 'src/.jshintrc'
-        },
-        src: ['src/**/*.js']
+      individual_files: {
+        files: [
+          {src: 'Gruntfile.js'},
+          {src: 'js/main.js'}
+        ]
       },
-      test: {
-        options: {
-          jshintrc: 'test/.jshintrc'
-        },
-        src: ['test/**/*.js']
-      },
+      casperjs_files: {
+        files: [
+          {src: 'test/tests/*.js'}
+        ]
+      }
     },
     watch: {
       gruntfile: {
@@ -69,15 +66,19 @@ module.exports = function(grunt) {
       test: {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', 'qunit']
-      },
+      }
     },
     casperjs: {
+        options: {
+          includes: 'test/inc.js',
+          pre: 'test/pre.js',
+          post: 'test/post.js'
+        },
         files: ['test/tests/*.js']
-    },
+    }
   });
 
   // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-qunit');
@@ -86,6 +87,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-casperjs');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify', 'casperjs']);
+  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify', 'casperjs']);
 
 };

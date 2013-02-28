@@ -13,4 +13,5 @@ wp-content/backups/
 sitemap.xml
 sitemap.xml.gz
 screencaptures/
+node_modules/
 .DS_Store
