@@ -62,7 +62,7 @@ module.exports = function(grunt) {
 
     cssmin: {
         'css': {
-            'src': ['public_html/css/reset.min.css', 'public_html/css/main.css'],
+            'src': ['public_html/css/main.css'],
             'dest': 'public_html/css/s.min.css'
         }
     },
@@ -72,19 +72,46 @@ module.exports = function(grunt) {
             'src': ['public_html/js/main.js'],
             'dest': 'public_html/js/m.min.js'
         }
+    },
+
+    replace: {
+      example: {
+        src: ['public_html/dev.html'],             // source files array (supports minimatch)
+        dest: 'public_html/index.html',             // destination directory or file
+        replacements: [
+        { 
+          from: 'js/main.js',                   // string replacement
+          to: 'js/m.min.js' 
+        },
+        { 
+          from: 'css/main.css',                   // string replacement
+          to: 'css/s.min.css' 
+        }/*, { 
+          from: /(f|F)(o{2,100})/g,      // regex replacement ('Fooo' to 'Mooo')
+          to: 'M$2' 
+        }, {
+          from: 'Foo',
+          to: function (matchedWord) {   // callback replacement
+            return matchedWord + ' Bar';
+          }
+        }*/
+        ]
+      }
     }
+
   });
 
   // These plugins provide necessary tasks.
   //grunt.loadNpmTasks('grunt-contrib-concat');
   //grunt.loadNpmTasks('grunt-contrib-uglify');
   //grunt.loadNpmTasks('grunt-contrib-qunit');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
   //grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-casperjs');
   grunt.loadNpmTasks('grunt-yui-compressor');
+  grunt.loadNpmTasks('grunt-text-replace');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'cssmin', 'min', 'casperjs']);
+  grunt.registerTask('default', ['jshint', 'cssmin', 'min', 'casperjs', 'replace']);
 
 };
