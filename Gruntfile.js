@@ -23,15 +23,7 @@ module.exports = function(grunt) {
         dest: 'dist/<%= pkg.name %>.js'
       }
     },
-    uglify: {
-      options: {
-        banner: '<%= banner %>'
-      },
-      dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: 'dist/<%= pkg.name %>.min.js'
-      }
-    },
+    
     qunit: {
       files: ['test/**/*.html']
     },
@@ -54,39 +46,45 @@ module.exports = function(grunt) {
         ]
       }
     },
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
-      },
-      src: {
-        files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'qunit']
-      },
-      test: {
-        files: '<%= jshint.test.src %>',
-        tasks: ['jshint:test', 'qunit']
-      }
-    },
+
+    
     casperjs: {
-        options: {
-          includes: 'test/inc.js',
-          pre: 'test/pre.js',
-          post: 'test/post.js'
-        },
-        files: ['test/tests/*.js']
+        'homepage': {
+          options: {
+            includes: ['test/inc.js'],
+            pre: ['test/pre.js'],
+            post: ['test/post.js']
+          },
+          files: { 'src': ['test/tests/resources.js'] }
+        }
+
+    },
+
+    cssmin: {
+        'css': {
+            'src': ['public_html/css/reset.min.css', 'public_html/css/main.css'],
+            'dest': 'public_html/css/s.min.css'
+        }
+    },
+
+    min: {
+       'js': {
+            'src': ['public_html/js/main.js'],
+            'dest': 'public_html/js/m.min.js'
+        }
     }
   });
 
   // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
+  //grunt.loadNpmTasks('grunt-contrib-concat');
+  //grunt.loadNpmTasks('grunt-contrib-uglify');
+  //grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  //grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-casperjs');
+  grunt.loadNpmTasks('grunt-yui-compressor');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify', 'casperjs']);
+  grunt.registerTask('default', ['jshint', 'cssmin', 'min', 'casperjs']);
 
 };
