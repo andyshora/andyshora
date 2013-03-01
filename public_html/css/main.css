@@ -1376,16 +1376,8 @@ h2.london_post_title, h2.london_post_title a {
 	width:950px;
 	margin:40px auto 0;
 	text-align: center;
-	height:500px;
 	clear:both;
 	padding:0 15px;
-}
-#journey {
-	width:950px;
-	height:400px;
-	background:url(../img/journey.png) top center no-repeat;
-	margin:0 auto;
-	text-align: center;
 }
 .circle {
 	height:76px;
