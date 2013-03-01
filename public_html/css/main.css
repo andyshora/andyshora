@@ -194,7 +194,7 @@ footer p {
 	width:100%;
 	height:310px;
 	text-align: center;
-	background: rgb(27, 27, 27);
+	background: rgb(14, 111, 141);
 
 	background: rgb(0,0,0);
 background: -moz-linear-gradient(top,  rgba(0,0,0,1) 0%, rgba(14, 111, 141,1) 100%);
@@ -283,6 +283,7 @@ background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(14, 111, 141,1) 10
 	color: rgb(218, 232, 233);
 	font-size: 11px;
 	cursor: pointer;
+	display: none;
 }
 #window_btm {
 	height:100px;
@@ -294,6 +295,7 @@ background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(14, 111, 141,1) 10
 	width:300px;
 	margin:-14px 0 0 63px;
 	float:left;
+	display:none;
 }
 .building {
 	width:4px;
@@ -697,6 +699,7 @@ background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(14, 111, 141,1) 10
 	margin:-5px 132px 0 0;
 	text-align: center;
 	clear:right;
+	display: none;
 }
 #pods {
 	width:82px;
@@ -1142,6 +1145,7 @@ ul#links > li > a {
 	overflow: hidden;
 	background: url(../img/s.png) right -156px no-repeat;
 	height: 310px;
+	display: none;
 }
 
 /*Time to finalise the cloud shape*/
