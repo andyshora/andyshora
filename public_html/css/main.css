@@ -248,18 +248,20 @@ background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(14, 111, 141,1) 10
 	text-align: left;
 	font-size: 28px;
 	line-height: 40px;
-	color: #B8B8B8;
+	color: rgb(140, 167, 196);
 	z-index: 1000;
 	position: relative;
 	background: url(../img/andy.png) 0 0 no-repeat;
 }
 #title_sub {
-	color: rgb(138, 167, 168);
+	color: rgb(218, 232, 233);
 	margin: 0 auto;
 	padding:0 0 0 200px;
 	font-size: 12px;
 	width: 600px;
 	text-align: left;
+	z-index:1000;
+	position: relative;
 }
 #title > strong {
 	color: #fff;
@@ -269,6 +271,18 @@ background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(14, 111, 141,1) 10
 	text-decoration: none;
 	font-weight:bold;
 	color: #fff;
+}
+#stop_css3 {
+	float: left;
+	position: absolute;
+	left: 10px;
+	top: 290px;
+	width: 100px;
+	height: 20px;
+	z-index: 1000;
+	color: rgb(218, 232, 233);
+	font-size: 11px;
+	cursor: pointer;
 }
 #window_btm {
 	height:100px;
@@ -688,6 +702,8 @@ background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(14, 111, 141,1) 10
 	width:82px;
 	height:82px;
 	margin:20px auto;
+}
+#pods.spin {
 	animation-name:spinnerRotate;
 	animation-duration:50s;
 	animation-iteration-count:infinite;
@@ -988,16 +1004,16 @@ ul#links > li > a {
 }
 
 
-
-#plane_wrap {
+.plane_wrap {
 	width:100px;
 	height:50px;
-	display:none;
-	margin-left:-100px;
-	margin-top:50px;
 	float:left;
+	display:none;
+	position: absolute;
+	top: 176px;
+	left: -100px;
 }
-#plane_wrap.fly {
+#plane_wrap1.fly {
 	-webkit-animation: fly 25s linear infinite;
 	-moz-animation: fly 25s linear infinite;
 	-o-animation: fly 25s linear infinite;
@@ -1005,12 +1021,32 @@ ul#links > li > a {
 	animation: fly 25s linear infinite;
 	display:block;
 }
-#plane {
+#plane_wrap1 {
+	
+}
+#plane_wrap2 {
+	
+}
+#plane_wrap2.fly {
+	-webkit-animation: fly 25s linear infinite;
+	-moz-animation: fly 25s linear infinite;
+	-o-animation: fly 25s linear infinite;
+	-ms-animation: fly 25s linear infinite;
+	animation: fly 25s linear infinite;
+	display:block;
+
+	animation-delay:12s;
+	-ms-animation-delay:12s;
+	-o-animation-delay:12s;
+	-moz-animation-delay:12s;
+	-webkit-animation-delay:12s;
+}
+.plane {
 	width:100px;
 	height:28px;
 	background:url(../img/s.png) -11px -472px no-repeat;
 }
-#plane_lights_wrap {
+.plane_lights_wrap {
 	width:90px;
 	height: 10px;
 	float:left;
@@ -1259,39 +1295,39 @@ ul#links > li > a {
 
 
 @keyframes fly {
-	0% {margin-left: -100px; margin-top:50px; }
-	49% { margin-left:30%; }
-	50% { margin-top:50px; transform: rotatez(-7deg); }
+	0% {left: -100px; top:176px; }
+	49% { left:30%; }
+	50% { top:176px; transform: rotatez(-7deg); }
 	55% { transform: rotatez(-16deg); }
-	100% {margin-left: 100%; margin-top:-50px; }
+	100% {left: 100%; top:-50px; }
 }
 @-webkit-keyframes fly {
-	0% {margin-left: -100px; margin-top:50px; }
-	49% { margin-left:700px; }
-	50% { margin-top:50px; -webkit-transform: rotatez(-7deg); }
+	0% {left: -100px; top:176px; }
+	49% { left:700px; }
+	50% { top:176px; -webkit-transform: rotatez(-7deg); }
 	55% { -webkit-transform: rotatez(-16deg); }
-	100% {margin-left: 1400px; margin-top:-140px; }
+	100% {left: 1400px; top:-140px; }
 }
 @-moz-keyframes fly {
-	0% {margin-left: -100px; margin-top:50px; }
-	49% { margin-left:30%; }
-	50% { margin-top:50px; -moz-transform: rotatez(-7deg); }
+	0% {left: -100px; top:176px; }
+	49% { left:30%; }
+	50% { top:176px; -moz-transform: rotatez(-7deg); }
 	55% { -moz-transform: rotatez(-16deg); }
-	100% {margin-left: 100%; margin-top:-50px; }
+	100% {left: 100%; top:-50px; }
 }
 @-o-keyframes fly {
-	0% {margin-left: -100px; margin-top:50px; }
-	49% { margin-left:30%; }
-	50% { margin-top:50px; -o-transform: rotatez(-7deg); }
+	0% {left: -100px; top:176px; }
+	49% { left:30%; }
+	50% { top:176px; -o-transform: rotatez(-7deg); }
 	55% { -o-transform: rotatez(-16deg); }
-	100% {margin-left: 100%; margin-top:-50px; }
+	100% {left: 100%; top:-50px; }
 }
 @-ms-keyframes fly {
-	0% {margin-left: -100px; margin-top:50px; }
-	49% { margin-left:30%; }
-	50% { margin-top:50px; -ms-transform: rotatez(-7deg); }
+	0% {left: -100px; top:176px; }
+	49% { left:30%; }
+	50% { top:176px; -ms-transform: rotatez(-7deg); }
 	55% { -ms-transform: rotatez(-16deg); }
-	100% {margin-left: 100%; margin-top:-50px; }
+	100% {left: 100%; top:-50px; }
 }
 
 
