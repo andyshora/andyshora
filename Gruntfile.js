@@ -27,7 +27,7 @@ module.exports = function(grunt) {
     qunit: {
       files: ['test/**/*.html']
     },
-    
+
     jshint: {
       gruntfile: {
         options: {
@@ -43,20 +43,19 @@ module.exports = function(grunt) {
       },
       casperjs_files: {
         files: [
-          {src: 'test/tests/*.js'}
+          {src: 'test/casperjs/tests/*.js'}
         ]
       }
     },
 
-    
     casperjs: {
         'homepage': {
           options: {
-            includes: ['test/inc.js'],
-            pre: ['test/pre.js'],
-            post: ['test/post.js']
+            includes: ['test/casperjs/inc.js'],
+            pre: ['test/casperjs/pre.js'],
+            post: ['test/casperjs/post.js']
           },
-          files: { 'src': ['test/tests/resources.js'] }
+          files: { 'src': ['test/casperjs/tests/resources.js'] }
         }
 
     },

@@ -176,10 +176,18 @@ footer {
 	border-top:1px solid #d3d3d3;
 	background: url(../img/noisy-texture-100x100-o6-d18-c-e8e8e8-t0.png) 0 0 repeat;
 	clear:both;
+
+	background: rgb(0,0,0);
+	background: -moz-linear-gradient(top,  rgba(7, 39, 49,1) 0%, rgba(14, 111, 141,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(7, 39, 49,1)), color-stop(100%,rgba(14, 111, 141,1)));
+	background: -webkit-linear-gradient(top,  rgba(7, 39, 49,1) 0%,rgba(14, 111, 141,1) 100%);
+	background: -o-linear-gradient(top,  rgba(7, 39, 49,1) 0%,rgba(14, 111, 141,1) 100%);
+	background: -ms-linear-gradient(top,  rgba(7, 39, 49,1) 0%,rgba(14, 111, 141,1) 100%);
+	background: linear-gradient(to bottom,  rgba(7, 39, 49,1) 0%,rgba(14, 111, 141,1) 100%);
 }
 footer p {
 	font-size: 11px;
-	color: #666;
+	color: rgb(138, 167, 168);
 	text-align: center;
 }
 #c1_wrap {
