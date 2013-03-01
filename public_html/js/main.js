@@ -1,16 +1,21 @@
 var c2_fixed = false;
+var plane_html = "";
+
+function init_plane(){
+	console.log('init plane');
+	$('#plane_lights_wrap').append(plane_html);
+	$('#plane_wrap').addClass('fly');
+}
 
 $(document).ready(function(){
-	var html = "";
+	
 	var plane_light_str = '<div class="plane_light"></div>';
 	for(var i=0; i<20; i++)
-		html += plane_light_str;
+		plane_html += plane_light_str;
 
-	html += '<div class="plane_tail_light"></div>';
-	html += '<div class="plane_wing_light"></div>';
-	html += '<div class="plane_btm_light"></div>';
-
-	$('#plane_lights_wrap').append(html);
+	plane_html += '<div class="plane_tail_light"></div>';
+	plane_html += '<div class="plane_wing_light"></div>';
+	plane_html += '<div class="plane_btm_light"></div>';
 
 	// PARALLAX
 	$(window).bind('scroll.globalMessage', function(){
@@ -29,4 +34,7 @@ $(document).ready(function(){
     Modernizr.load({
       load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
     });
+
+    setTimeout(function() { init_plane(); }, 1000);
+
 });
