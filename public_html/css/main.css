@@ -1491,11 +1491,13 @@ and (max-device-width : 480px) {
 	}
 	#journey_wrap {
 		width:90%;
-		padding:0 5%;
+		padding:0;
+		margin:0 5%;
 	}
 	#featured_wrap {
 		width:90%;
-		padding:0 5%;
+		padding:0;
+		margin:0 5%;
 	}
 	#title {
 		height: 126px;
