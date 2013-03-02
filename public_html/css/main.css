@@ -1440,11 +1440,11 @@ h2.london_post_title, h2.london_post_title a {
 	text-align: left;
 }
 #journey_wrap {
-	width:950px;
+	width:960px;
 	margin:40px auto 0;
 	text-align: center;
 	clear:both;
-	padding:0 15px;
+	padding:0 10px;
 }
 .circle {
 	height:76px;
@@ -1485,10 +1485,16 @@ and (max-device-width : 480px) {
 /* Smartphones (landscape) ----------- */
 @media only screen 
 and (min-width : 321px) {
+	p {
+		font-size:15px;
+	}
 	#c1 {
 		width:480px;
 	}	
 	#journey_wrap {
+		width:400px;
+	}
+	#featured_wrap {
 		width:400px;
 	}
 	#title {
@@ -1502,11 +1508,17 @@ and (min-width : 321px) {
 /* Smartphones (portrait) ----------- */
 @media only screen 
 and (max-width : 320px) {
+	p {
+		font-size:15px;
+	}
 	#c1 {
 		width:320px;
 	}	
 	#journey_wrap {
 		width:320px;
+	}
+	#featured_wrap {
+		width:400px;
 	}
 	#title {
 		height: 126px;
