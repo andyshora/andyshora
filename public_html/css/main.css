@@ -1492,7 +1492,7 @@ and (max-device-width : 480px) {
 	#journey_wrap {
 		width:90%;
 		padding:0;
-		margin:0 5%;
+		margin:40px 5% 0;
 	}
 	#featured_wrap {
 		width:90%;
