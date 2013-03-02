@@ -1471,6 +1471,12 @@ h2.london_post_title, h2.london_post_title a {
 
 /* iPhones ----------- */
 @media only screen 
+and (max-device-width: 320px) {
+	body {
+		width:320px;
+	}
+}
+@media only screen 
 and (max-device-width: 480px) {
 	body {
 		width:480px;
