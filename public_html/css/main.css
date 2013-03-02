@@ -1504,5 +1504,7 @@ and (max-device-width: 480px) {
 	}
 	#stop_css3 {
 		display: none;
+		font-size: 13px;
 	}
+
 }
