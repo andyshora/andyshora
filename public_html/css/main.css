@@ -1467,3 +1467,14 @@ h2.london_post_title, h2.london_post_title a {
 -webkit-animation-iteration-count: infinite;  
 -webkit-animation-timing-function:ease;
 }
+
+
+
+@media only screen and (max-device-width: 480px) {
+	#c1 {
+		width:480px;
+	}	
+	#journey_wrap {
+	width:400px;
+	}
+}
