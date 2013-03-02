@@ -125,6 +125,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-htmlcompressor');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'cssmin', 'min', 'replace', 'htmlcompressor', 'casperjs']);
+  grunt.registerTask('default', ['jshint', 'cssmin', 'min', 'replace', 'htmlcompressor']);
 
 };
