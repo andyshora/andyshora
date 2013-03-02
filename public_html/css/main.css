@@ -1480,27 +1480,36 @@ h2.london_post_title, h2.london_post_title a {
 @media only screen 
 and (max-device-width: 480px) {
 	p {
-		font-size:15px;
+		font-size:20px;
+	}
+	h3 {
+		font-size: 30px;
 	}
 	#c1 {
-		width:480px;
+		width:90%;
+		padding:0 5%;
 	}	
 	#journey_wrap {
-		width:400px;
+		width:90%;
+		padding:0 5%;
 	}
 	#featured_wrap {
-		width:400px;
+		width:90%;
+		padding:0 5%;
 	}
 	#title {
 		height: 126px;
-		width: 400px;
-		margin: 0 auto 0;
-		padding: 40px 0 0 40px;
+		width: 65%;
+		margin: 0 5% 0 10%;
+		padding: 40px 0 0 20%;
 	}
 	#title_sub {
 		font-size: 14px;
 	}
 	.cloud, .plane {
+		display: none;
+	}
+	#stop_css3 {
 		display: none;
 	}
 }

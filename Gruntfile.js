@@ -81,11 +81,11 @@ module.exports = function(grunt) {
         replacements: [
         { 
           from: 'js/main.js',      
-          to: 'js/m.min.js' 
+          to: 'js/m.min.js?2' 
         },
         { 
           from: 'css/main.css',               
-          to: 'css/s.min.css' 
+          to: 'css/s.min.css?2' 
         }/*, { 
           from: /(f|F)(o{2,100})/g,      // regex replacement ('Fooo' to 'Mooo')
           to: 'M$2' 

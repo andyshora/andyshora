@@ -8,6 +8,7 @@ function init_animations(){
 	$('#buildings_wrap,#pods_wrap,#clouds').show();
 	$('.plane_wrap').addClass('fly');
 	$('#pods').addClass('spin');
+	$('#stop_css3').show();
 }
 
 function stop_animations(fade){
@@ -51,20 +52,15 @@ $(document).ready(function(){
 
 		$('#stop_css3').click(function(){
 			stop_animations(true);
+		});
 
-		}).show();
-
-		init_animations();
 	}
-
-	
 
 	Modernizr.load([{
 		test : Modernizr.cssgradients,
 		nope : ['css/gradients.css']
 	}
 	]);
-
 
 	window._gaq = [['_setAccount','UA-17716290-10'],['_trackPageview'],['_trackPageLoadTime']];
     Modernizr.load({
@@ -75,9 +71,11 @@ $(document).ready(function(){
     	window_width = $(this).width();
     	if ((window_width<=480) && animations_on) {
     		stop_animations(false);
-    	} else if ((window_width>480) && (!animations_on)) {
+    	} else if (Modernizr.cssanimations && (window_width>480) && (!animations_on)) {
     		init_animations();
     	} 
     });
+
+    $(window).trigger('resize');
 
 });
