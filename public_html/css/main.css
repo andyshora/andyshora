@@ -1469,15 +1469,16 @@ h2.london_post_title, h2.london_post_title a {
 
 
 
-/* iPhones ----------- */
+/* portrait ----------- */
 @media only screen 
-and (max-device-width: 320px) {
+and (max-width : 320px) {
 	body {
 		width:320px;
 	}
 }
+/* landscape ----------- */
 @media only screen 
-and (max-device-width: 480px) {
+and (min-width : 321px) {
 	body {
 		width:480px;
 		padding:0;
