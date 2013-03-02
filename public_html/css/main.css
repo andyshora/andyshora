@@ -1500,4 +1500,7 @@ and (max-device-width: 480px) {
 	#title_sub {
 		font-size: 14px;
 	}
+	.cloud, .plane {
+		display: none;
+	}
 }
