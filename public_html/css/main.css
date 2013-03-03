@@ -207,7 +207,9 @@ background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(14, 111, 141,1) 10
 
 
 }
-
+p.sub {
+	margin-bottom:10px;
+}
 
 
 #window_wrap {
