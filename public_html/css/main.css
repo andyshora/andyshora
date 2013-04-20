@@ -1345,7 +1345,7 @@ and (max-device-width : 480px) {
 @media only screen
 and (max-device-width : 320px) {
 	body {
-		width:480px;
+		width:320px;
 		p {
 			font-size:20px;
 		}
