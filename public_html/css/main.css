@@ -1343,7 +1343,7 @@ and (max-device-width : 480px) {
 }
 /* portrait ----------- */
 @media only screen
-and (max-width : 320px) {
+and (max-device-width : 320px) {
 	body {
 
 		p {
