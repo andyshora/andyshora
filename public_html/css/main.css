@@ -1280,12 +1280,6 @@ h2.london_post_title, h2.london_post_title a {
 }
 
 
-
-@media only screen and (max-device-width: 480px) {
-
-}
-
-
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen
 and (min-device-width : 320px)
@@ -1297,7 +1291,7 @@ and (max-device-width : 480px) {
 	}
 
 	header {
-		height:210px;
+		height:160px;
 	}
 	#c1 {
 		width:90%;
@@ -1321,8 +1315,18 @@ and (max-device-width : 480px) {
 		height: 126px;
 		width: 95%;
 		margin: 0;
-		padding: 40px 0 0 5%;
+		padding: 30px 0 0 5%;
 		background: none;
+
+
+		font-size:28px;
+		line-height:36px;
+	}
+	body, p {
+		font-size:8px;
+	}
+	h3 {
+		font-size: 24px;
 	}
 	#title_sub {
 		font-size: 14px;
@@ -1341,35 +1345,25 @@ and (max-device-width : 480px) {
 
 
 }
-/* portrait ----------- */
+
 @media only screen
-and (max-device-width : 320px) {
-	body {
+and (max-width : 320px) {
 
-		p {
-			font-size:20px;
-		}
-		h3 {
-			font-size: 30px;
-		}
-		#title {
-			font-size:22px;
-			line-height:32px;
-			padding-top:20px;
-		}
+	header {
+		height:190px;
 	}
-}
-/* landscape ----------- */
-@media only screen
-and (max-device-width : 480px) {
-	body {
+	#title {
+		height: 126px;
+		width: 95%;
+		margin: 0;
+		padding: 40px 0 0 5%;
+		background: none;
 
-		p {
-			font-size:15px;
-		}
-		h3 {
-			font-size: 24px;
-		}
+
+		font-size:20px;
+		line-height:28px;
 	}
-
+	body, p {
+		font-size:15px;
+	}
 }
