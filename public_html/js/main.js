@@ -1,12 +1,13 @@
 var c2_fixed = false;
 var plane_html = "";
-var window_width = 0;
+var windowWidth = 0;
 var animations_on = false;
+var $plane = null;
 
 function init_animations(){
 	animations_on = true;
-	$('#buildings_wrap,#pods_wrap,#clouds').show();
-	$('.plane_wrap').addClass('fly');
+	$('#buildings_wrap,#pods_wrap').show();
+	//$('.plane_wrap').addClass('fly');
 	$('#pods').addClass('spin');
 	$('#stop_css3').show();
 }
@@ -17,11 +18,40 @@ function stop_animations(fade){
 	$('#pods').removeClass('spin');
 
 	if ((fade!==undefined)&& fade)
-		$('#clouds, #buildings_wrap').fadeOut(2000);
+		$('#buildings_wrap').fadeOut(2000);
 	else 
-		$('#clouds, #buildings_wrap').hide();
+		$('#buildings_wrap').hide();
 
 	$('#stop_css3').hide();
+}
+
+// polyfill
+window.requestAnimFrame = (function(){
+	return  window.requestAnimationFrame 		|| 
+			window.webkitRequestAnimationFrame 	|| 
+			window.mozRequestAnimationFrame		|| 
+			window.oRequestAnimationFrame		|| 
+			window.msRequestAnimationFrame		|| 
+			function(/* function */ callback, /* DOMElement */ element){
+			window.setTimeout(callback, 1000 / 60);
+	};
+})();
+
+function animate(plane, startTime) {
+	var timeDiff = (new Date()).getTime() - startTime;
+	var linearSpeed = 200;
+	var newX = linearSpeed * timeDiff / 1000;
+
+	if (newX > windowWidth+200){
+		startTime = (new Date()).getTime();
+	}
+
+	$plane.style.webkitTransform = "translate3d("+newX+"px, 0, 0)";
+
+	// request new frame
+    requestAnimFrame(function() {
+      animate($plane, startTime);
+    });
 }
 
 $(document).ready(function(){
@@ -44,6 +74,10 @@ $(document).ready(function(){
 
 	}
 
+	$plane = $('.plane_wrap')[0];
+	var startTime = (new Date()).getTime();
+    animate($plane, startTime);
+
 	Modernizr.load([{
 		test : Modernizr.cssgradients,
 		nope : ['css/gradients.css']
@@ -56,11 +90,11 @@ $(document).ready(function(){
     });
 
     $(window).bind('resize', function(){
-    	window_width = $(this).width();
-    	if ((window_width<=480) && animations_on) {
+    	windowWidth = $(this).width();
+    	if ((windowWidth<=480) && animations_on) {
     		stop_animations(false);
-    	} else if (Modernizr.cssanimations && (window_width>480) && (!animations_on)) {
-    		init_animations();
+    	} else if (Modernizr.cssanimations && (windowWidth>480) && (!animations_on)) {
+    		//init_animations();
     	} 
     });
 
