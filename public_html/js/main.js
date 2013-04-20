@@ -1,25 +1,42 @@
 var c2_fixed = false;
-var plane_html = "";
+var plane_html = '';
 var windowWidth = 0;
-var animations_on = false;
+var animationsOn = false;
 var $plane = null;
+var transformPrefix = '';
+
+function GetVendorPrefix(arrayOfPrefixes) {
+
+	var tmp = document.createElement("div");
+
+	for (var i = 0; i < arrayOfPrefixes.length; ++i) {
+		if (typeof tmp.style[arrayOfPrefixes[i]] != 'undefined') {
+			return arrayOfPrefixes[i];
+		}
+	}
+
+	return false;
+}
 
 function init_animations(){
-	animations_on = true;
+	animationsOn = true;
+	//$('#buildings_wrap,#pods_wrap').show();
 	$('#buildings_wrap,#pods_wrap').show();
-	//$('.plane_wrap').addClass('fly');
 	$('#pods').addClass('spin');
 	$('#stop_css3').show();
+
+	var startTime = (new Date()).getTime();
+	animate($plane, startTime);
+
 }
 
 function stop_animations(fade){
-	animations_on = false;
-	$('#plane_wrap').removeClass('fly');
+	animationsOn = false;
 	$('#pods').removeClass('spin');
 
 	if ((fade!==undefined)&& fade)
 		$('#buildings_wrap').fadeOut(2000);
-	else 
+	else
 		$('#buildings_wrap').hide();
 
 	$('#stop_css3').hide();
@@ -27,11 +44,11 @@ function stop_animations(fade){
 
 // polyfill
 window.requestAnimFrame = (function(){
-	return  window.requestAnimationFrame 		|| 
-			window.webkitRequestAnimationFrame 	|| 
-			window.mozRequestAnimationFrame		|| 
-			window.oRequestAnimationFrame		|| 
-			window.msRequestAnimationFrame		|| 
+	return	window.requestAnimationFrame 		||
+			window.webkitRequestAnimationFrame 	||
+			window.mozRequestAnimationFrame		||
+			window.oRequestAnimationFrame		||
+			window.msRequestAnimationFrame		||
 			function(/* function */ callback, /* DOMElement */ element){
 			window.setTimeout(callback, 1000 / 60);
 	};
@@ -39,25 +56,31 @@ window.requestAnimFrame = (function(){
 
 function animate(plane, startTime) {
 	var timeDiff = (new Date()).getTime() - startTime;
-	var linearSpeed = 200;
-	var newX = linearSpeed * timeDiff / 1000;
+	var linearSpeed = 120;
+	var newX = (linearSpeed * timeDiff / 1000) - 100;
+
+	var newY = (Math.sin((newX/(windowWidth/2)) - 0.5)) * 100;
+	//console.log(newY);
 
 	if (newX > windowWidth+200){
 		startTime = (new Date()).getTime();
 	}
 
-	$plane.style.webkitTransform = "translate3d("+newX+"px, 0, 0)";
+	$plane.style[transformPrefix] = 'translate3d('+newX+'px, '+newY+'px, 0)';
 
 	// request new frame
-    requestAnimFrame(function() {
-      animate($plane, startTime);
-    });
+	if (animationsOn) {
+	    requestAnimFrame(function() {
+	      animate($plane, startTime);
+	    });
+	}
 }
 
 $(document).ready(function(){
 
+	transformPrefix = GetVendorPrefix(['transform', 'WebkitTransform', 'msTransform', 'MozTransform', 'OTransform']);
 
-	if (Modernizr.cssanimations) {
+	if (transformPrefix) {
 		var plane_light_str = '<div class="plane_light"></div>';
 		for(var i=0; i<20; i++)
 			plane_html += plane_light_str;
@@ -72,17 +95,14 @@ $(document).ready(function(){
 			stop_animations(true);
 		});
 
-	}
+		$plane = $('.plane_wrap')[0];
 
-	$plane = $('.plane_wrap')[0];
-	var startTime = (new Date()).getTime();
-    animate($plane, startTime);
-
-	Modernizr.load([{
-		test : Modernizr.cssgradients,
-		nope : ['css/gradients.css']
+		Modernizr.load([{
+			test : Modernizr.cssgradients,
+			nope : ['css/gradients.css']
+		}
+		]);
 	}
-	]);
 
 	window._gaq = [['_setAccount','UA-17716290-10'],['_trackPageview'],['_trackPageLoadTime']];
     Modernizr.load({
@@ -91,11 +111,11 @@ $(document).ready(function(){
 
     $(window).bind('resize', function(){
     	windowWidth = $(this).width();
-    	if ((windowWidth<=480) && animations_on) {
+    	if ((windowWidth<=480) && animationsOn) {
     		stop_animations(false);
-    	} else if (Modernizr.cssanimations && (windowWidth>480) && (!animations_on)) {
-    		//init_animations();
-    	} 
+    	} else if (Modernizr.cssanimations && (windowWidth>480) && (!animationsOn)) {
+    		init_animations();
+    	}
     });
 
 
