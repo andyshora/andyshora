@@ -1343,9 +1343,9 @@ and (max-device-width : 480px) {
 }
 /* portrait ----------- */
 @media only screen
-and (max-device-width : 320px) {
+and (max-width : 320px) {
 	body {
-		width:320px;
+
 		p {
 			font-size:20px;
 		}
@@ -1358,7 +1358,7 @@ and (max-device-width : 320px) {
 @media only screen
 and (max-device-width : 480px) {
 	body {
-		width:480px;
+
 		p {
 			font-size:15px;
 		}
