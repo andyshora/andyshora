@@ -1352,6 +1352,11 @@ and (max-width : 320px) {
 		h3 {
 			font-size: 30px;
 		}
+		#title {
+			font-size:22px;
+			line-height:32px;
+			padding-top:20px;
+		}
 	}
 }
 /* landscape ----------- */
