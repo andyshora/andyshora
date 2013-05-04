@@ -60,10 +60,18 @@ module.exports = function(grunt) {
 
 		},
 
+		sass: {
+			dist: {
+				files: {
+					'public_html/css/dist/main.css': 'public_html/css/sass/main.scss'
+				}
+			}
+		},
+
 		cssmin: {
 				'css': {
-						'src': ['public_html/css/main.css'],
-						'dest': 'public_html/css/s.min.css'
+						'src': ['public_html/css/dist/main.css'],
+						'dest': 'public_html/css/dist/s.min.css'
 				}
 		},
 
@@ -101,6 +109,16 @@ module.exports = function(grunt) {
 					preserveServerScript: true
 				}
 			}
+		},
+
+		watch: {
+			scripts: {
+				files: ['**/*.scss'],
+				tasks: ['sass'],
+				options: {
+					nospawn: true
+				}
+			}
 		}
 
 	});
@@ -109,14 +127,16 @@ module.exports = function(grunt) {
 	//grunt.loadNpmTasks('grunt-contrib-concat');
 	//grunt.loadNpmTasks('grunt-contrib-uglify');
 	//grunt.loadNpmTasks('grunt-contrib-qunit');
-	//grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-casperjs');
 	grunt.loadNpmTasks('grunt-yui-compressor');
 	grunt.loadNpmTasks('grunt-text-replace');
 	grunt.loadNpmTasks('grunt-htmlcompressor');
+	grunt.loadNpmTasks('grunt-contrib-sass');
+
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'cssmin', 'min', 'replace', 'htmlcompressor']);
+	grunt.registerTask('default', ['jshint', 'sass', 'cssmin', 'min', 'replace', 'htmlcompressor']);
 
 };
