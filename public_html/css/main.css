@@ -13,6 +13,7 @@ abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}
 table{border-collapse:collapse;border-spacing:0}
 hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
 input,select{vertical-align:middle}
+li{text-align: left;}
 /* END RESET */
 
 body {
@@ -1030,22 +1031,19 @@ h2.london_post_title, h2.london_post_title a {
 .london_post_date {
 	font-size:12px;
 }
-#featured_wrap {
-	width:960px;
-	margin:20px auto 50px;
-	padding:0 10px;
-}
-#journey_wrap h3, #featured_wrap h3 {
-	font-weight: bold;
-	text-align: left;
-}
-#journey_wrap {
-	width:960px;
+
+section {
+	max-width:960px;
 	margin:40px auto 0;
 	text-align: center;
 	clear:both;
-	padding:0 10px;
+	padding:0 20px;
 }
+section h3 {
+	font-weight: bold;
+	text-align: left;
+}
+
 .circle {
 	height:76px;
 	width:76px;
@@ -1068,91 +1066,33 @@ h2.london_post_title, h2.london_post_title a {
 -webkit-animation-timing-function:ease;
 }
 
-
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen
-and (min-device-width : 320px)
-and (max-device-width : 480px) {
-
-	body {
-		padding:0;
-		margin:0;
-	}
-
-	header {
-		height:160px;
-	}
-	#c1 {
-		width:90%;
-		padding:0 5%;
-
-	}
-	#window_btm {
-		display: none;
-	}
-	#journey_wrap {
-		width:90%;
-		padding:0;
-		margin:40px 5% 0;
-	}
-	#featured_wrap {
-		width:90%;
-		padding:0;
-		margin:0 5%;
-	}
-	#title {
-		height: 126px;
-		width: 95%;
-		margin: 0;
-		padding: 30px 0 0 5%;
-		background: none;
-
-
-		font-size:28px;
-		line-height:36px;
-	}
-	body, p {
-		font-size:8px;
-	}
-	h3 {
-		font-size: 24px;
-	}
-	#title_sub {
-		font-size: 14px;
-		padding:0 0 0 5%;
-	}
-	#title_sub span {
-		display: none;
-	}
-	.plane {
-		display: none;
-	}
-	#stop_css3 {
-		display: none;
-		font-size: 13px;
-	}
-
+@media only screen and (max-width: 1000px) {
 
 }
 
-@media only screen
-and (max-width : 320px) {
+@media only screen and (max-width: 800px) {
 
-	header {
-		height:190px;
-	}
+}
+
+@media only screen and (max-width: 750px) {
 	#title {
-		height: 126px;
-		width: 95%;
-		margin: 0;
-		padding: 40px 0 0 5%;
+		height: 116px;
 		background: none;
-
-
-		font-size:20px;
-		line-height:28px;
+		padding:50px 0 0 20px;
+		font-size: 20px;
+		line-height: 30px;
+		width: auto;
 	}
-	body, p {
-		font-size:15px;
+	header {
+		height: 200px;
+	}
+	#sun {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	#c1 {
+		display:none;
 	}
 }

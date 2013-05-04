@@ -118,7 +118,7 @@ $(document).ready(function(){
     $(window).bind('resize', function(){
 
     	windowWidth = $(this).width();
-    	if ((windowWidth<=480) && animationsOn) {
+    	if ((windowWidth<=750) && animationsOn) {
     		stop_animations(false);
     	} else if (Modernizr.cssanimations && (windowWidth>480) && (!animationsOn)) {
     		init_animations();
