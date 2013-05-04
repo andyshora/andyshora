@@ -21,9 +21,9 @@ body {
 	margin:0;
 	padding:0;
 	text-align: left;
-	font-family: Helvetica;
+
 	background: #f9f9f7;
-	-webkit-font-smoothing:antialiased;
+
 }
 
 p {
@@ -32,14 +32,16 @@ p {
 
 body, input, textarea {
 	color: #373737;
-	font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-weight: 300;
+	font: 15px 'Open Sans', Helvetica, Arial, sans-serif;
+	font-weight: 400;
 	line-height: 1.625;
 }
 
 /* Headings */
 h1,h2,h3,h4,h5,h6 {
 	clear: both;
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-weight: 700;
 }
 hr {
 	background-color: #ccc;
@@ -208,9 +210,8 @@ header {
 }
 .andy_post header { height:315px; }
 #c1 {
-	margin:0 auto;
-	width:960px;
-	height:110px;
+	margin:60px auto 0;
+	max-width:960px;
 	overflow: hidden;
 
 
@@ -221,15 +222,13 @@ p.sub {
 
 
 #window_wrap {
-	margin:10px auto 0;
+	margin:0 auto;
 	width:600px;
-	height:100px;
 	overflow:hidden;
 	border-radius: 0;
 }
 #window {
 	width:600px;
-	height:100px;
 	padding:0 0 0 0;
 	border-radius: 0;
 	margin:0 0 0 0;
@@ -237,17 +236,17 @@ p.sub {
 }
 
 #title_wrap {
-	height:180px;
 	width:100%;
-	margin:0 auto 20px;
+	margin:0 auto;
 	text-align: center;
 }
 #title {
-	height:126px;
+	height:110px;
 	width: 600px;
 	margin:0 auto 0;
 	padding:40px 0 0 200px;
 	font-weight: normal;
+	text-shadow: 5px 5px 9px rgba(0, 0, 0, 0.3);
 	text-align: left;
 	font-size: 28px;
 	line-height: 40px;
@@ -266,13 +265,12 @@ p.sub {
 	z-index:1000;
 	position: relative;
 }
-#title > strong {
+#title > span {
 	color: #fff;
 }
 #title a, #title a:hover {
 	color: inherit;
 	text-decoration: none;
-	font-weight:bold;
 	color: #fff;
 }
 #stop_css3 {
@@ -1076,7 +1074,7 @@ section h3 {
 
 @media only screen and (max-width: 750px) {
 	#title {
-		height: 116px;
+		height: 100px;
 		background: none;
 		padding:50px 0 0 20px;
 		font-size: 20px;
