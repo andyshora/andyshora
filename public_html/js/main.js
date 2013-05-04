@@ -1,8 +1,7 @@
 var c2_fixed = false
-, plane_html = ''
 , windowWidth = 0
 , animationsOn = false
-, $plane = null, $sun = null, $sun_wrap = null, $header = null
+, $sun = null, $sun_wrap = null, $header = null
 , transformPrefix = '';
 
 function GetVendorPrefix(arrayOfPrefixes) {
@@ -19,6 +18,7 @@ function GetVendorPrefix(arrayOfPrefixes) {
 }
 
 function init_animations(){
+
 	animationsOn = true;
 	//$('#buildings_wrap,#pods_wrap').show();
 	$('#buildings_wrap,#pods_wrap').show();
@@ -28,7 +28,7 @@ function init_animations(){
 	drawSun();
 
 	var startTime = (new Date()).getTime();
-	animate($plane, startTime);
+	animate(startTime);
 
 }
 function drawSun() {
@@ -71,29 +71,21 @@ window.requestAnimFrame = (function(){
 	};
 })();
 
-function animate(plane, startTime) {
+function animate(startTime) {
 	var timeDiff = (new Date()).getTime() - startTime;
-	var linearSpeed = 120;
-	var newX = (linearSpeed * timeDiff / 1000) - 100;
-	var newY = (Math.sin((newX/(windowWidth/2)) - 0.5)) * 100;
 
 	var rotateSpeed = 0.001;
 	var rotateSunBy = rotateSpeed * timeDiff;
 	//console.log('rotateSunBy', rotateSunBy);
 	//console.log(newY);
 
-	if (newX > windowWidth+200){
-		startTime = (new Date()).getTime();
-	}
-
-	$plane.style[transformPrefix] = 'translate3d('+newX+'px, '+newY+'px, 0)';
 
 	_drawSunburst($sun[0], {}, rotateSunBy);
 
 	// request new frame
 	if (animationsOn) {
 	    requestAnimFrame(function() {
-	      animate($plane, startTime);
+	      animate(startTime);
 	    });
 	}
 }
@@ -103,21 +95,11 @@ $(document).ready(function(){
 	transformPrefix = GetVendorPrefix(['transform', 'WebkitTransform', 'msTransform', 'MozTransform', 'OTransform']);
 
 	if (transformPrefix) {
-		var plane_light_str = '<div class="plane_light"></div>';
-		for(var i=0; i<20; i++)
-			plane_html += plane_light_str;
-
-		plane_html += '<div class="plane_tail_light"></div>';
-		plane_html += '<div class="plane_wing_light"></div>';
-		plane_html += '<div class="plane_btm_light"></div>';
-
-		$('.plane_lights_wrap').append(plane_html);
 
 		$('#stop_css3').click(function(){
 			stop_animations(true);
 		});
 
-		$plane = $('.plane_wrap')[0];
 
 		Modernizr.load([{
 			test : Modernizr.cssgradients,
@@ -166,6 +148,7 @@ $(document).ready(function(){
 	};
 
 	var _drawSunburst = function(canvas, options, rotateSunBy) {
+
 		var $$ = function(val, deflt) {
 			if("undefined"==typeof val) { return deflt; }
 			return val;
@@ -175,17 +158,15 @@ $(document).ready(function(){
 		ctx.save();
 
 
-
 		options = $$(options, {});
 		var bars = $$(options.bars, 36);
 		var fatness = $$(options.fatness, 5);
 
 		var x = Math.round(Math.sin( rotateSunBy % 360) * 255);
-		console.log(x);
+		var alpha = (Math.abs(Math.sin( rotateSunBy % 360)/3)+0.5) /10;
 
+		var color = $$(options.color, 'rgba(14, 111, '+x+','+alpha+')');
 
-		var color = $$(options.color, 'rgba(14, 111, '+x+',0.2)');
-		//console.log(color);
 		var backcolor = $$(options.backcolor, 'rgba(255,255,255,0.5)');
 
 		width = canvas.width;
@@ -203,7 +184,7 @@ $(document).ready(function(){
 			if (rotateSunBy==null) {
 				rotateSunBy = 1;
 			}
-			ctx.rotate(i*(Math.PI*2/bars));
+			ctx.rotate((i*(Math.PI*2/bars))+(rotateSunBy*-0.1));
 			_drawTriangle(ctx, fatness, max_dimen);
 			ctx.restore();
 		}
