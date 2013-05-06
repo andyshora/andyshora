@@ -37,13 +37,7 @@ module.exports = function(grunt) {
 			},
 			individual_files: {
 				files: [
-					{src: 'Gruntfile.js'},
-					{src: 'js/main.js'}
-				]
-			},
-			casperjs_files: {
-				files: [
-					{src: 'test/casperjs/tests/*.js'}
+					{src: 'assets/js/*.js'}
 				]
 			}
 		},
@@ -63,37 +57,37 @@ module.exports = function(grunt) {
 		sass: {
 			dist: {
 				files: {
-					'public_html/css/dist/main.css': 'public_html/css/sass/main.scss'
+					'public_html/assets/css/main.css': 'public_html/assets/css/sass/main.scss'
 				}
 			}
 		},
 
 		cssmin: {
 				'css': {
-						'src': ['public_html/css/dist/main.css'],
-						'dest': 'public_html/css/dist/s.min.css'
+						'src': ['public_html/assets/css/main.css'],
+						'dest': 'public_html/assets/css/m.min.css'
 				}
 		},
 
 		min: {
 			'js': {
-						'src': ['public_html/js/main.js'],
-						'dest': 'public_html/js/m.min.js'
+						'src': ['public_html/assets/js/main.js'],
+						'dest': 'public_html/assets/js/m.min.js'
 				}
 		},
 
 		replace: {
-			example: {
+			homepage: {
 				src: ['public_html/dev.html'],
 				dest: 'public_html/index_full.html',
 				replacements: [
 				{
-					from: 'js/main.js',
-					to: 'js/m.min.js?2'
+					from: 'assets/js/main.js',
+					to: 'assets/js/m.min.js'
 				},
 				{
-					from: 'css/main.css',
-					to: 'css/s.min.css?2'
+					from: 'assets/css/main.css',
+					to: 'assets/css/m.min.css'
 				}
 				]
 			}
@@ -108,6 +102,18 @@ module.exports = function(grunt) {
 					type: 'html',
 					preserveServerScript: true
 				}
+			}
+		},
+
+		compress: {
+			js: {
+				options: {
+				mode: 'gzip'
+				},
+				expand: true,
+				cwd: 'public_html/assets/js',
+				src: ['*.js'],
+				dest: 'public_html/assets/js'
 			}
 		},
 
@@ -134,9 +140,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-text-replace');
 	grunt.loadNpmTasks('grunt-htmlcompressor');
 	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-contrib-compress');
 
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'sass', 'cssmin', 'min', 'replace', 'htmlcompressor']);
+	grunt.registerTask('default', ['jshint', 'sass', 'cssmin', 'min', 'replace', 'htmlcompressor', 'compress']);
 
 };
