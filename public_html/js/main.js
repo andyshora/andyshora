@@ -74,11 +74,8 @@ window.requestAnimFrame = (function(){
 function animate(startTime) {
 	var timeDiff = (new Date()).getTime() - startTime;
 
-	var rotateSpeed = 0.001;
+	var rotateSpeed = 0.0005;
 	var rotateSunBy = rotateSpeed * timeDiff;
-	//console.log('rotateSunBy', rotateSunBy);
-	//console.log(newY);
-
 
 	_drawSunburst($sun[0], {}, rotateSunBy);
 
@@ -130,7 +127,6 @@ $(document).ready(function(){
 
     });
 
-
     $(window).trigger('resize');
 
 });
@@ -146,6 +142,19 @@ $(document).ready(function(){
 		ctx.lineTo(max_dimen*Math.sqrt(2), xPos);
 		ctx.fill();
 	};
+
+	var _rotateAndy = function(timeDiff) {
+
+		//var delta = timeDiff;
+		var r = (Math.cos(timeDiff) * 30) -15;
+		//console.log(r);
+
+
+
+		if (transformPrefix==='WebkitTransform') {
+			$('#andy').css({ WebkitTransform: 'rotateY('+r+'deg)' });
+		}
+	}
 
 	var _drawSunburst = function(canvas, options, rotateSunBy) {
 
@@ -163,9 +172,9 @@ $(document).ready(function(){
 		var fatness = $$(options.fatness, 5);
 
 		var x = Math.round(Math.sin( rotateSunBy % 360) * 255);
-		var alpha = (Math.abs(Math.sin( rotateSunBy % 360)/3)+0.5) /10;
+		var alpha = 1-((Math.abs(Math.sin( rotateSunBy % 360)/3)+0.5)*0.9);
 
-		var color = $$(options.color, 'rgba(14, 111, '+x+','+alpha+')');
+		var color = $$(options.color, 'rgba(192, 57, 43,'+alpha+')');
 
 		var backcolor = $$(options.backcolor, 'rgba(255,255,255,0.5)');
 
