@@ -275,23 +275,17 @@ h2 {
   font-size: 24px;
   line-height: 32px; }
 
-pre.prettyprint {
-  text-align: left;
-  font-size: 16px;
-  font-family: Arial;
-  letter-spacing: 1px;
-  line-height: 22px;
-  background: rgba(0, 0, 0, 0.9);
-  border-radius: 1px;
-  width: 96%;
-  padding: 20px 2%; }
+.page-article {
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 960px; }
 
 section {
   max-width: 960px;
   margin: 40px auto 0;
   text-align: center;
   clear: both;
-  padding: 0 20px; }
+  /* prettprint overrides */ }
   section h1, section h2, section h3, section h4 {
     text-align: left; }
   section.demo {
@@ -308,36 +302,55 @@ section {
     background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.1) 0%, rgba(20, 17, 17, 0.2) 100%);
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(20, 17, 17, 0.2) 100%); }
     section.parallax1 .ball {
-      width: 48px;
-      height: 48px;
+      width: 100px;
+      height: 38px;
+      padding: 10px 0 0 0;
       display: inline-block;
       background: #c0392b;
+      color: white;
       margin: 0 auto;
       position: relative;
       top: 0;
       z-index: 1; }
+  section pre.prettyprint {
+    text-align: left;
+    font-size: 16px;
+    font-family: Arial;
+    letter-spacing: 1px;
+    line-height: 22px;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 3px;
+    width: 94%;
+    padding: 20px 3%; }
+    section pre.prettyprint span.com {
+      color: #5fc5bd;
+      background: black;
+      padding: 3px 7px;
+      border-radius: 4px; }
 
 section h3 {
   font-weight: bold;
   text-align: left; }
 
 #offset-bottom {
-  width: 180px;
-  height: 30px;
-  background: black;
-  color: white;
-  position: fixed;
-  top: 10px;
-  right: 10px; }
+  width: 200px;
+  padding: 10px;
+  position: relative;
+  top: -30px;
+  right: -120px;
+  font-size: 14px;
+  line-height: 15px;
+  color: black; }
 
 #scroll-top {
-  width: 200px;
-  height: 30px;
-  background: blue;
-  color: white;
-  position: fixed;
-  top: 10px;
-  right: 200px; }
+  width: 120px;
+  padding: 10px;
+  position: relative;
+  top: -65px;
+  right: 186px;
+  font-size: 14px;
+  line-height: 15px;
+  color: black; }
 
 #body_wrap {
   width: 100%;
