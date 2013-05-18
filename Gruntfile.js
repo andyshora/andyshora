@@ -42,6 +42,25 @@ module.exports = function(grunt) {
 			}
 		},
 
+		yslow: {
+
+			options: {
+				thresholds: {
+					weight: 100,
+					speed: 1000,
+					score: 80,
+					requests: 15
+				},
+				debug: true
+			},
+			pages: {
+				files: [
+					{src: 'http://andyshora.com'}
+				]
+			}
+
+		},
+
 		casperjs: {
 				'homepage': {
 					options: {
@@ -141,6 +160,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-htmlcompressor');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-compress');
+	grunt.loadNpmTasks('grunt-yslow');
 
 
 	// Default task.

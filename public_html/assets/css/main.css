@@ -275,6 +275,17 @@ h2 {
   font-size: 24px;
   line-height: 32px; }
 
+pre.prettyprint {
+  text-align: left;
+  font-size: 16px;
+  font-family: Arial;
+  letter-spacing: 1px;
+  line-height: 22px;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 1px;
+  width: 96%;
+  padding: 20px 2%; }
+
 section {
   max-width: 960px;
   margin: 40px auto 0;
@@ -283,10 +294,50 @@ section {
   padding: 0 20px; }
   section h1, section h2, section h3, section h4 {
     text-align: left; }
+  section.demo {
+    border: 1px solid #ccc;
+    min-height: 100px; }
+  section.parallax1 {
+    height: 1000px;
+    text-align: center;
+    background: black;
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.1) 0%, rgba(20, 17, 17, 0.2) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0.1)), color-stop(100%, rgba(20, 17, 17, 0.2)));
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1) 0%, rgba(20, 17, 17, 0.2) 100%);
+    background: -o-linear-gradient(top, rgba(255, 255, 255, 0.1) 0%, rgba(20, 17, 17, 0.2) 100%);
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.1) 0%, rgba(20, 17, 17, 0.2) 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(20, 17, 17, 0.2) 100%); }
+    section.parallax1 .ball {
+      width: 48px;
+      height: 48px;
+      display: inline-block;
+      background: #c0392b;
+      margin: 0 auto;
+      position: relative;
+      top: 0;
+      z-index: 1; }
 
 section h3 {
   font-weight: bold;
   text-align: left; }
+
+#offset-bottom {
+  width: 180px;
+  height: 30px;
+  background: black;
+  color: white;
+  position: fixed;
+  top: 10px;
+  right: 10px; }
+
+#scroll-top {
+  width: 200px;
+  height: 30px;
+  background: blue;
+  color: white;
+  position: fixed;
+  top: 10px;
+  right: 200px; }
 
 #body_wrap {
   width: 100%;
