@@ -291,6 +291,8 @@ function parallax(scrollTop) {
 			$(window).resize(function() {
 				windowHeight = $(this).height();
 
+				alert('resize');
+
 				for (var id in parallaxElements) {
 					parallaxElements[id].initialOffsetY = $(parallaxElements[id].elm).offset().top;
 					parallaxElements[id].height = $(parallaxElements[id].elm).height();
