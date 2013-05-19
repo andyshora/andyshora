@@ -48,12 +48,14 @@
 			</ul>
 
 			<h2>Mobile Problems/Considerations</h2>
-			<a href="https://developer.apple.com/library/ios/#DOCUMENTATION/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html" title="Handling events on touch devices"><img class="fl-r panning-figure" src="/assets/img/events_panning.jpg" /></a>
+			<a href="https://developer.apple.com/library/ios/#DOCUMENTATION/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html" title="Handling events on touch devices"><img class="fl-r panning-figure" src="/assets/img/events_panning.jpg" alt="Handling events on touch devices" /></a>
 			<p>Previously I've referred to scroll events. Unfortunately, we have to deal with the following problem: <strong>iOS devices freeze DOM manipulation during scroll, queuing them to apply when the scroll finishes.</strong>. This is going to result in extremely jerky animations if we rely on the position of these events. Instead, we have to tie our animation logic to touch events if the browser supports them.</p>
 
 			<h3 class="inline">Binding <i>scroll</i> and <i>touchmove</i> events</h3>
-			<p>It's still not great, as <i>touchmove</i> events stop when your finger leaves the screen, but the browser will continue to scroll for around a second as part of the 'slowing down' easing effect. For this reason, I've decided to bind both the touchmove event and the scroll event. The bug you'll see is when you swipe past the end of the container and release your touch before the brick has hit the bottom, it overflows the container, and <i>position: relative</i> is only applied when the queued scroll events are fired when the scroll transition has ended.</p>
-			<p>A common solution for this problem, is to design your parallax effects with this in mind. Consider placing an overlapping element with a higher <i>z-index</i> at the end point, so even if the brick overruns, it will be behind the higher element. If the overlapping element is tall enough, it should provide enough time for the scroll events to fire and position the brick relatively in the correct position.</p>
+			<p>As <i>touchmove</i> events stop when your finger leaves the screen, but the browser will continue to scroll for around a second as part of the 'slowing down' easing effect. For this reason, I've decided to bind both the touchmove event and the scroll event. The bug you'll see is when you swipe past the end of the container and release your touch before the brick has hit the bottom, it overflows the container, and <i>position: relative</i> is only applied when the queued scroll events are fired when the scroll transition has ended.</p>
+			<p>A solution for this problem (well, more of a workaround), is to design your parallax effects with this in mind. Consider placing an overlapping element with a higher <i>z-index</i> at the end point, so even if the brick overruns, it will be behind the higher element. If the overlapping element is tall enough, it should provide enough time for the scroll events to fire and position the brick relatively in the correct position.</p>
+
+			<p><strong>Update: haven't been able to get this working correctly on iOS devices yet :-(</strong><br>I've investigated using setInterval hacks to keep checking the scrollTop position of the window, but this feels dirty, and is still unreliable considering how infrequently the value is updated. RequestAnimationFrame is only available in iOS6, so stay tuned for an update for mobile performance, or feel free to help me out in the comments!</p>
 
 		</section>
 
