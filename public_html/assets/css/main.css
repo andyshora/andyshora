@@ -1462,4 +1462,8 @@ h2.london_post_title, h2.london_post_title a {
     display: none; }
 
   section.parallax1 {
-    margin-top: 50px; } }
+    margin-top: 50px; }
+
+  pre.prettyprint {
+    font-size: 11px;
+    line-height: 15px; } }
