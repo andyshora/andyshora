@@ -276,7 +276,7 @@ function parallax(scrollTop) {
 					.bind('touchmove', function(e) {
 						console.log(e);
 						var val = e.currentTarget.scrollY;
-						parallax($(this).scrollTop(), val);
+						parallax(val);
 					});
 			}
 
@@ -320,9 +320,9 @@ function parallax(scrollTop) {
 			});
 		});
 
-		function parallax(scrollTop, pageY) {
+		function parallax(scrollTop) {
 
-			if (pageY===undefined) pageY = -1;
+			if (scrollTop===undefined) return;
 
 			// update UI
 			$('#scroll-top').html('scroll top: ' + scrollTop);
@@ -336,7 +336,7 @@ function parallax(scrollTop) {
 				var viewportOffsetBottom = windowHeight - viewportOffsetTop;
 
 				// update UI
-				$('#offset-bottom').html('b:' + viewportOffsetBottom + ' i:'+parallaxElements[id].initialOffsetY+ ' py:'+pageY);
+				$('#offset-bottom').html('b:' + viewportOffsetBottom + ' i:'+parallaxElements[id].initialOffsetY+ ' s:'+scrollTop);
 
 				if ((viewportOffsetBottom >= parallaxElements[id].start) && (viewportOffsetBottom <= parallaxElements[id].stop)) {
 					// element is now active, fix the position so when we scroll it stays fixed
