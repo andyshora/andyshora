@@ -290,6 +290,12 @@ h2 {
 .fl-r {
   float: right; }
 
+.panning-figure {
+  margin: 10px 10px 30px 20px;
+  background: white;
+  padding: 15px;
+  opacity: 0.9; }
+
 section {
   text-align: left;
   max-width: 960px;
@@ -301,11 +307,6 @@ section {
   section h3.inline {
     display: inline;
     text-align: left; }
-  section .panning-figure {
-    margin: 10px 10px 30px 20px;
-    background: white;
-    padding: 15px;
-    opacity: 0.9; }
   section.demo {
     border: 1px solid #ccc;
     min-height: 100px; }
@@ -1488,4 +1489,7 @@ h2.london_post_title, h2.london_post_title a {
 
   pre.prettyprint {
     font-size: 11px;
-    line-height: 15px; } }
+    line-height: 15px; }
+
+  .panning-figure {
+    width: 100px; } }
