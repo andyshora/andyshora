@@ -52,10 +52,8 @@
 			<p>Previously I've referred to scroll events. Unfortunately, we have to deal with the following problem: <strong>iOS devices freeze DOM manipulation during scroll, queuing them to apply when the scroll finishes.</strong>. This is going to result in extremely jerky animations if we rely on the position of these events. Instead, we have to tie our animation logic to touch events if the browser supports them.</p>
 
 			<h3 class="inline">Binding <i>scroll</i> and <i>touchmove</i> events</h3>
-				<p>It's still not great, as <i>touchmove</i> events stop when your finger leaves the screen, but the browser will continue to scroll for around a second as part of the 'slowing down' easing effect. For this reason, I've decided to bind both the touchmove event and the scroll event. The bug you'll see is when you swipe past the end of the container and release your touch before the brick has hit the bottom, it overflows the container, and <i>position: relative</i> is only applied when the queued scroll events are fired when the scroll transition has ended.</p>
-
-
-
+			<p>It's still not great, as <i>touchmove</i> events stop when your finger leaves the screen, but the browser will continue to scroll for around a second as part of the 'slowing down' easing effect. For this reason, I've decided to bind both the touchmove event and the scroll event. The bug you'll see is when you swipe past the end of the container and release your touch before the brick has hit the bottom, it overflows the container, and <i>position: relative</i> is only applied when the queued scroll events are fired when the scroll transition has ended.</p>
+			<p>A common solution for this problem, is to design your parallax effects with this in mind. Consider placing an overlapping element with a higher <i>z-index</i> at the end point, so even if the brick overruns, it will be behind the higher element. If the overlapping element is tall enough, it should provide enough time for the scroll events to fire and position the brick relatively in the correct position.</p>
 
 		</section>
 
@@ -80,7 +78,7 @@
 			<ul>
 				<li><strong>data-start:</strong> The element will become fixed when the viewport bottom offset has reached this distance. You could change this to use the distance from the top, but personally I prefer it this way.</li>
 				<li><strong>data-stop:</strong> When the viewport has been scrolled this distance, the parallax effect should end, leaving the element positioned relatively where it was at the end of the scroll. i.e. at the bottom of the container.</li>
-				<li><strong>data-id:</strong> A unique id is used as a key in the <i>parallaxElements</i> array which holds these values on initialisation.</li>
+				<li><strong>data-id:</strong> A unique id is used as a key in the <i>parallaxElements</i> array which stores these values on initialisation.</li>
 			</ul>
 
 <pre class="prettyprint lang-html">
@@ -282,7 +280,9 @@ function parallax(scrollTop) {
 
 			$(window)
 				.bind(eventsToBind, function(e) {
-					parallax($(this).scrollTop());
+
+					var val = touchSupported ? e.changedTouches[i].pageY : $(this).scrollTop();
+					parallax(val);
 				})
 
 				// update vars used in parallax calculations on window resize
