@@ -334,7 +334,7 @@ function parallax(scrollTop) {
 				var viewportOffsetBottom = windowHeight - viewportOffsetTop;
 
 				// update UI
-				$('#offset-bottom').html('window height: ' + windowHeight);
+				$('#offset-bottom').html('b:' + viewportOffsetBottom + ' i:'+parallaxElements[id].initialOffsetY+ ' s:'+scrollTop);
 
 				if ((viewportOffsetBottom >= parallaxElements[id].start) && (viewportOffsetBottom <= parallaxElements[id].stop)) {
 					// element is now active, fix the position so when we scroll it stays fixed
