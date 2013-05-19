@@ -45,6 +45,11 @@
 				<li><strong>For more complex animations, use hardware accelleration where possible.</strong><br>Mobile devices are less powerful, which can cause jerkyness when dealing with animations applied dynamically through JavaScript. When we get to dealing with the speed property, we'll look at using <i>transform</i> properties to enable supported mobile devices to use the more powerful GPU to perform the animations.</li>
 			</ul>
 
+			<h2>Mobile Problems/Considerations</h2>
+			<p>Previously I've referred to scroll events. Unfortunately, we have to deal with the following problem: <strong>iOS devices freeze DOM manipulation during scroll, queuing them to apply when the scroll finishes.</strong>. This is going to result in extremely jerky animations if we rely on the position of these events. Instead, we have to tie our animation logic to touch events if the browser supports them.</p>
+			<h3>Binding <i>scroll</i> and <i>touchmove</i> events</h3>
+			<p>It's still not great, as <i>touchmove</i> events stop when your finger leaves the screen, but the browser will continue to scroll for around a second as part of the 'slowing down' easing effect. For this reason, I've decided to bind both the touchmove event and the scroll event. The bug you'll see is when you swipe past the end of the container and release your touch before the brick has hit the bottom, it overflows the container, and <i>position: relative</i> is only applied when the queued scroll events are fired when the scroll transition has ended.</p>
+
 		</section>
 
 		<h2>Demo time: Let's make the red brick fall down the page as we scroll!</h2>
@@ -54,13 +59,13 @@
 			<li>For learning purposes, I've also shown the distance the viewport (the window) has been scrolled, and the distance of the element from the bottom of the viewport, as these values are used in the logic to start/stop/calculate the position of parallax elements.</li>
 		</ul>
 		<section class="demo parallax1">
-			<div class="parallax ball" data-id="ball-1" data-start="200" data-stop="1150">
+			<div class="parallax brick" data-id="brick-1" data-start="200" data-stop="1150">
 				<span class="content"></span>
-				<div id="offset-bottom"></div>
-				<div id="scroll-top"></div>
 			</div>
-			<!--<div class="parallax ball" data-id="ball-2" data-start="20" data-stop="1000" data-speed="1.1"></div>-->
 		</section>
+
+		<div id="offset-bottom"></div>
+		<div id="scroll-top"></div>
 
 		<section>
 			<h3>HTML markup for the parallax element</h3>
@@ -72,14 +77,14 @@
 			</ul>
 
 <pre class="prettyprint lang-html">
-&lt;div class="parallax ball" data-id="ball-1" data-start="200" data-stop="1150"&gt;&lt;/div&gt;
+&lt;div class="parallax brick" data-id="brick-1" data-start="200" data-stop="1150"&gt;&lt;/div&gt;
 </pre>
 </section>
 <section>
 <h3>CSS styles for the parallax element</h3>
 <p>The styles are pretty normal, but note the <i>top</i> property will be updated for the parallax effect.</p>
 <pre class="prettyprint lang-css">
-.ball {
+.brick {
 	width: 100px;
 	height: 38px;
 	padding: 10px 0 0 0;
@@ -106,14 +111,30 @@ var windowHeight = 0;
 $(document).ready(function() {
 
 	windowHeight = $(window).height();
-	$('html,body').scrollTop(0); // auto scroll to top
+	$('html,body').scrollTop(1); // auto scroll to top
+
+	// touch event check stolen from Modernizr
+	var touchSupported = (('ontouchstart' in window) ||
+							window.DocumentTouch && document instanceof DocumentTouch);
+
+	var eventsToBind = 'scroll';
+
+	// if touch events are supported, tie our animation to the position to these events as well
+	if (touchSupported) eventsToBind + ' touchmove';
 
 	$(window)
-		.scroll(function(e) {
+		.bind(eventsToBind, function(e) {
 			parallax($(this).scrollTop());
 		})
+
+		// update vars used in parallax calculations on window resize
 		.resize(function() {
-			windowHeight = $(this).height(); // update on window resize
+			windowHeight = $(this).height();
+
+			for (var id in parallaxElements) {
+				parallaxElements[id].initialOffsetY = $(parallaxElements[id].elm).offset().top;
+				parallaxElements[id].height = $(parallaxElements[id].elm).height();
+			}
 		});
 
 
@@ -132,7 +153,8 @@ $(document).ready(function() {
 			speed: $elm.data('speed'),
 			elm: $elm[0],
 			initialOffsetY: $elm.offset().top,
-			height: $elm.height()
+			height: $elm.height(),
+			width: $elm.outerWidth()
 		};
 
 	});
@@ -164,38 +186,50 @@ function parallax(scrollTop) {
 			var speedMultiplier = parallaxElements[id].speed || 1;
 			var pos = (windowHeight - parallaxElements[id].start);
 
-			parallaxElements[id].elm.style.position = 'fixed';
-			parallaxElements[id].elm.style.top = pos+'px';
-			parallaxElements[id].elm.style.marginLeft = '-50px';
+			$(parallaxElements[id].elm)
+				.css({
+					position: 'fixed',
+					top: pos+'px',
+					left: '50%',
+					marginLeft: -(parallaxElements[id].width/2) +'px'
+				});
 
 		} else if (viewportOffsetBottom > parallaxElements[id].stop) {
 			// scrolled past the stop value, make position relative again
 
-			parallaxElements[id].elm.style.position = 'relative';
-			parallaxElements[id].elm.style.top = (parallaxElements[id].stop-parallaxElements[id].start)+'px';
-			parallaxElements[id].elm.style.marginLeft = 0;
+			$(parallaxElements[id].elm)
+				.css({
+					position: 'relative',
+					top: (parallaxElements[id].stop-parallaxElements[id].start)+'px',
+					left: 'auto',
+					marginLeft: 'auto'
+				});
 
 		} else if (viewportOffsetBottom < parallaxElements[id].start) {
 			// scrolled up back past the start value, reset position
 
-			parallaxElements[id].elm.style.position = 'relative';
-			parallaxElements[id].elm.style.top = 0;
-			parallaxElements[id].elm.style.marginLeft = 0;
+			$(parallaxElements[id].elm)
+				.css({
+					position: 'relative',
+					top: 0,
+					left: 'auto',
+					marginLeft: 'auto'
+				});
+
 		}
 	}
 }
 </pre>
 </section>
-		<section>
+		<!--<section>
 			<h2>Grab the code from Github!</h2>
 			<p>If you want to hack around with a stripped-down version of the demo on this page, you can download a standalone example here: <a href="http://github.com/andyshora/parallax-tutorial">Parallax Tutorial</a>.</p>
 
-		</section>
+		</section>-->
 
 		<section>
 			<h2>Over and out.</h2>
 			<p>I hope you've enjoyed this tutorial. I'll add some more advanced effects in the coming weeks. Please share the f*ck out of this article, it's my first proper tutorial for a while now, and don't forget to <a href="http://twitter.com/andyshora">hit me up on twitter!</a></p>
-
 		</section>
 
 	</div>
@@ -227,14 +261,25 @@ function parallax(scrollTop) {
 		$(document).ready(function() {
 
 			windowHeight = $(window).height();
-			$('html,body').scrollTop(0); // auto scroll to top
+			$('html,body').scrollTop(1); // auto scroll to top
+
+			// touch event check stolen from Modernizr
+			var touchSupported = (('ontouchstart' in window) ||
+									window.DocumentTouch && document instanceof DocumentTouch);
+
+			var eventsToBind = 'scroll';
+
+			// if touch events are supported, tie our animation to the position to these events as well
+			if (touchSupported) eventsToBind + ' touchmove';
 
 			$(window)
-				.scroll(function(e) {
+				.bind(eventsToBind, function(e) {
 					parallax($(this).scrollTop());
 				})
+
+				// update vars used in parallax calculations on window resize
 				.resize(function() {
-					windowHeight = $(this).height(); // update on window resize
+					windowHeight = $(this).height();
 
 					for (var id in parallaxElements) {
 						parallaxElements[id].initialOffsetY = $(parallaxElements[id].elm).offset().top;
@@ -258,7 +303,8 @@ function parallax(scrollTop) {
 					speed: $elm.data('speed'),
 					elm: $elm[0],
 					initialOffsetY: $elm.offset().top,
-					height: $elm.height()
+					height: $elm.height(),
+					width: $elm.outerWidth()
 				};
 
 			});
@@ -286,32 +332,41 @@ function parallax(scrollTop) {
 					var speedMultiplier = parallaxElements[id].speed || 1;
 					var pos = (windowHeight - parallaxElements[id].start);
 
-					parallaxElements[id].elm.style.position = 'fixed';
-					parallaxElements[id].elm.style.top = pos+'px';
-					parallaxElements[id].elm.style.marginLeft = '-50px';
-
-					$(parallaxElements[id].elm).find('.content').html(parallaxElements[id].elm.style.position);
+					$(parallaxElements[id].elm)
+						.css({
+							position: 'fixed',
+							top: pos+'px',
+							left: '50%',
+							marginLeft: -(parallaxElements[id].width/2) +'px'
+						})
+						.find('.content').html(parallaxElements[id].elm.style.position);
 
 				} else if (viewportOffsetBottom > parallaxElements[id].stop) {
 					// scrolled past the stop value, make position relative again
 
-					parallaxElements[id].elm.style.position = 'relative';
-					parallaxElements[id].elm.style.top = (parallaxElements[id].stop-parallaxElements[id].start)+'px';
-					parallaxElements[id].elm.style.marginLeft = 0;
-					$(parallaxElements[id].elm).find('.content').html(parallaxElements[id].elm.style.position);
-
+					$(parallaxElements[id].elm)
+						.css({
+							position: 'relative',
+							top: (parallaxElements[id].stop-parallaxElements[id].start)+'px',
+							left: 'auto',
+							marginLeft: 'auto'
+						})
+						.find('.content').html(parallaxElements[id].elm.style.position);
 
 				} else if (viewportOffsetBottom < parallaxElements[id].start) {
 					// scrolled up back past the start value, reset position
 
-					parallaxElements[id].elm.style.position = 'relative';
-					parallaxElements[id].elm.style.top = 0;
-					parallaxElements[id].elm.style.marginLeft = 0;
-					$(parallaxElements[id].elm).find('.content').html(parallaxElements[id].elm.style.position);
+					$(parallaxElements[id].elm)
+						.css({
+							position: 'relative',
+							top: 0,
+							left: 'auto',
+							marginLeft: 'auto'
+						})
+						.find('.content').html(parallaxElements[id].elm.style.position);
+
 				}
-
 			}
-
 		}
 	</script>
 	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>

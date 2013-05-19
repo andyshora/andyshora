@@ -301,7 +301,7 @@ section {
     background: -o-linear-gradient(top, rgba(255, 255, 255, 0.1) 0%, rgba(20, 17, 17, 0.2) 100%);
     background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.1) 0%, rgba(20, 17, 17, 0.2) 100%);
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(20, 17, 17, 0.2) 100%); }
-    section.parallax1 .ball {
+    section.parallax1 .brick {
       width: 100px;
       height: 39px;
       padding: 11px 0 0 0;
@@ -332,22 +332,24 @@ section h3 {
 #offset-bottom {
   width: 200px;
   padding: 10px;
-  position: relative;
-  top: -30px;
-  right: -120px;
+  position: fixed;
+  bottom: 45px;
+  right: 10px;
   font-size: 14px;
   line-height: 15px;
-  color: black; }
+  color: black;
+  background: rgba(255, 255, 255, 0.9); }
 
 #scroll-top {
   width: 120px;
   padding: 10px;
-  position: relative;
-  top: -65px;
-  right: 186px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
   font-size: 14px;
   line-height: 15px;
-  color: black; }
+  color: black;
+  background: rgba(255, 255, 255, 0.9); }
 
 #body_wrap {
   width: 100%;
@@ -1457,4 +1459,7 @@ h2.london_post_title, h2.london_post_title a {
     display: none; } }
 @media only screen and (max-width: 480px) {
   #c1 {
-    display: none; } }
+    display: none; }
+
+  section.parallax1 {
+    margin-top: 50px; } }
