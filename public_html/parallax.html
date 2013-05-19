@@ -122,24 +122,21 @@ $(document).ready(function() {
 	var touchSupported = (('ontouchstart' in window) ||
 							window.DocumentTouch && document instanceof DocumentTouch);
 
-	var eventsToBind = 'scroll';
-
 	// if touch events are supported, tie our animation to the position to these events as well
-	if (touchSupported) eventsToBind += ' touchmove';
+	if (touchSupported) {
+
+		$(window)
+			.bind('touchmove', function(e) {
+				console.log(e);
+				var val = e.currentTarget.scrollY;
+				parallax(val);
+			});
+	}
 
 	$(window)
-		.bind(eventsToBind, function(e) {
-			parallax($(this).scrollTop());
-		})
-
-		// update vars used in parallax calculations on window resize
-		.resize(function() {
-			windowHeight = $(this).height();
-
-			for (var id in parallaxElements) {
-				parallaxElements[id].initialOffsetY = $(parallaxElements[id].elm).offset().top;
-				parallaxElements[id].height = $(parallaxElements[id].elm).height();
-			}
+		.bind('scroll', function(e) {
+			var val = $(this).scrollTop();
+			parallax(val);
 		});
 
 
@@ -267,33 +264,38 @@ function parallax(scrollTop) {
 
 			windowHeight = $(window).height();
 			$('html,body').scrollTop(1); // auto scroll to top
-			window.scrollTo(0,0);
 
 			// touch event check stolen from Modernizr
 			var touchSupported = (('ontouchstart' in window) ||
 									window.DocumentTouch && document instanceof DocumentTouch);
 
-			var eventsToBind = 'scroll';
-
 			// if touch events are supported, tie our animation to the position to these events as well
-			if (touchSupported) eventsToBind += ' touchmove';
+			if (touchSupported) {
+
+				$(window)
+					.bind('touchmove', function(e) {
+						console.log(e);
+						var val = e.currentTarget.scrollY;
+						parallax(val);
+					});
+			}
 
 			$(window)
-				.bind(eventsToBind, function(e) {
-
-					var val = touchSupported ? e.changedTouches[0].pageY : $(this).scrollTop();
+				.bind('scroll', function(e) {
+					var val = $(this).scrollTop();
 					parallax(val);
-				})
-
-				// update vars used in parallax calculations on window resize
-				.resize(function() {
-					windowHeight = $(this).height();
-
-					for (var id in parallaxElements) {
-						parallaxElements[id].initialOffsetY = $(parallaxElements[id].elm).offset().top;
-						parallaxElements[id].height = $(parallaxElements[id].elm).height();
-					}
 				});
+
+
+			// update vars used in parallax calculations on window resize
+			$(window).resize(function() {
+				windowHeight = $(this).height();
+
+				for (var id in parallaxElements) {
+					parallaxElements[id].initialOffsetY = $(parallaxElements[id].elm).offset().top;
+					parallaxElements[id].height = $(parallaxElements[id].elm).height();
+				}
+			});
 
 
 			// get parallax elements straight away as they wont change
