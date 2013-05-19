@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en-US">
 <head>
 	<meta charset="utf-8">
-	<title>Parallax Tutorial using CSS and JavaScript | andyshora.com</title>
+	<title>Parallax Tutorial using CSS and jQuery</title>
 	<link rel="stylesheet" href="assets/css/main.css">
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
 	<link rel="shortcut icon" href="/favicon.ico" />
@@ -30,16 +30,17 @@
 
 	<header class="page-header">
 		<div class="page-header__title">
-			<h1>Parallax Tutorial using CSS and JavaScript</h1>
+			<h1>Parallax Tutorial using CSS and jQuery</h1>
 			<p>How to create parallax effects on scroll, in web design. By <a href="#author">Andy Shora</a></p>
+			<a href="/">&larr; back to andyshora.com</a> | <a class="twitter-share-button-placeholder" data-via="andyshora">Tweet this article<i class="icon icon-twitter"></i></a>
 		</div>
 	</header>
 
 	<div class="page-article">
 
 		<section>
-			<h2>How to implement parallax effects on scroll using CSS &amp; JavaScript</h2>
-			<p>Ever wondered how to achieve parallax effects on scroll? I'll show you how simple it can be, using CSS &amp; a bit of JavaScript. I'm not a fan of long intros, so feel free to scroll straight down for the demo!</p>
+			<h2>How to implement parallax effects on scroll using CSS &amp; jQuery</h2>
+			<p>Ever wondered how to achieve parallax effects on scroll? I'll show you how simple it can be, using CSS &amp; a bit of jQuery. I'm not a fan of long intros, so feel free to scroll straight down for the demo!</p>
 			<h2>Performance Aims</h2>
 			<ul>
 				<li><strong>Minimise DOM interactions on scroll events.</strong><br>Ideally we should only be interacting with the parallax elements at the breakpoints (start &amp; stop positions), so we can try to make use of CSS fixed positioning to accomplish the desired parallax effect. Obviously if we're adding a speed to the effect later on, whereby the element moves at say double the speed of scroll, we're going to need to update the position on every scroll event.<br>Another important way of reducing the DOM interactions is to store all the static values from the parallax elements straight away when the page is loaded. The parallax settings defined in the HTML of each element will not change, so we would be sacrificing performance if we were grabbing these values on every scroll event.</li>
@@ -235,7 +236,7 @@ function parallax(scrollTop) {
 
 		<section>
 			<h2>Over and out.</h2>
-			<p>I hope you've enjoyed this tutorial. I'll add some more advanced effects in the coming weeks. Please share the f*ck out of this article, it's my first proper tutorial for a while now, and don't forget to <a href="http://twitter.com/andyshora">hit me up on twitter!</a></p>
+			<p>I hope you've enjoyed this tutorial. I'll add some more advanced effects in the coming weeks, introducing speed, direction and rotation to parallax animations. In the mean time, I would love you to share the f*ck out of this article, it's my first proper tutorial for a while now, and don't forget to <a href="http://twitter.com/andyshora">hit me up on twitter! @andyshora</a></p>
 		</section>
 
 	</div>
@@ -247,11 +248,11 @@ function parallax(scrollTop) {
 		<div class="author__desc">
 			<p>Hi, I'm <strong>Andy Shora</strong>. I'm a <strong>Frontend Web Developer</strong> based in London and I currently work with some very talented people over at <a href="http://www.rga.com">R/GA</a>.</p>
 			<div class="author__links">
-				<a class="author__link" href="http://twitter.com/andyshora"><i class="icon-twitter"></i> @andyshora</a>
+				<a class="author__link" href="http://twitter.com/andyshora"><i class="icon-twitter"></i> andyshora</a>
 				<a class="author__link" href="http://www.facebook.com/andyshora"><i class="icon-facebook"></i> fb<span class="link__extra">.com/andyshora</span></a>
 				<a class="author__link" href="http://www.pinterest.com/andyshora"><i class="icon-pinterest"></i> pinterest<span class="link__extra">.com/andyshora</span></a>
 				<a class="author__link" href="http://www.github.com/andyshora"><i class="icon-github"></i> github<span class="link__extra">.com/andyshora</span></a>
-				<a class="author__link" id="revealEmail()"><i class="icon-envelope"></i> contact<span class="link__extra"> me</span></a>
+				<a class="author__link" onclick="revealEmail()"><i class="icon-envelope"></i> contact<span class="link__extra"> me</span></a>
 			</div>
 		</div>
 	</section>
@@ -383,11 +384,47 @@ function parallax(scrollTop) {
 
 		/* * * DON'T EDIT BELOW THIS LINE * * */
 		(function() {
+
+			$('.twitter-share-button-placeholder').bind('mouseover', function() {
+				enableShareButton($(this));
+			});
+
+			if (Modernizr.touch) {
+				enableShareButton($('.twitter-share-button-placeholder'));
+			}
+
 			if ((window.location+'').match(/dev\./g)) return;
+
 			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+
 		})();
+
+		function enableShareButton(elm) {
+
+				elm.addClass('twitter-share-button')
+					.removeClass('twitter-share-button-placeholder')
+					.attr('href', 'https://twitter.com/share')
+					.unbind('click');
+
+				!function(d,s,id){
+					var js,
+					fjs=d.getElementsByTagName(s)[0],
+					p=/^http:/.test(d.location)?'http':'https';
+
+					if(!d.getElementById(id)){
+						js=d.createElement(s);
+						js.id=id;
+						js.src=p+'://platform.twitter.com/widgets.js';
+						fjs.parentNode.insertBefore(js,fjs);
+					}
+				}(document, 'script', 'twitter-wjs');
+
+		}
+		function revealEmail() {
+			alert('andyshora' + '@gmail.com');
+		}
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </section>
