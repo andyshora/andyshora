@@ -8,6 +8,7 @@
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<meta name="description" content="Andy Shora, Front-end Web Developer in London">
 	<meta name="author" content="Andy Shora">
+	<link rel="author" href="https://plus.google.com/115209922186713310205/posts"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 	<script src="assets/js/modernizr-min.js"></script>
@@ -46,9 +47,14 @@
 			</ul>
 
 			<h2>Mobile Problems/Considerations</h2>
+			<a href="https://developer.apple.com/library/ios/#DOCUMENTATION/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html" title="Handling events on touch devices"><img class="fl-r panning-figure" src="/assets/img/events_panning.jpg" /></a>
 			<p>Previously I've referred to scroll events. Unfortunately, we have to deal with the following problem: <strong>iOS devices freeze DOM manipulation during scroll, queuing them to apply when the scroll finishes.</strong>. This is going to result in extremely jerky animations if we rely on the position of these events. Instead, we have to tie our animation logic to touch events if the browser supports them.</p>
-			<h3>Binding <i>scroll</i> and <i>touchmove</i> events</h3>
-			<p>It's still not great, as <i>touchmove</i> events stop when your finger leaves the screen, but the browser will continue to scroll for around a second as part of the 'slowing down' easing effect. For this reason, I've decided to bind both the touchmove event and the scroll event. The bug you'll see is when you swipe past the end of the container and release your touch before the brick has hit the bottom, it overflows the container, and <i>position: relative</i> is only applied when the queued scroll events are fired when the scroll transition has ended.</p>
+
+			<h3 class="inline">Binding <i>scroll</i> and <i>touchmove</i> events</h3>
+				<p>It's still not great, as <i>touchmove</i> events stop when your finger leaves the screen, but the browser will continue to scroll for around a second as part of the 'slowing down' easing effect. For this reason, I've decided to bind both the touchmove event and the scroll event. The bug you'll see is when you swipe past the end of the container and release your touch before the brick has hit the bottom, it overflows the container, and <i>position: relative</i> is only applied when the queued scroll events are fired when the scroll transition has ended.</p>
+
+
+
 
 		</section>
 
@@ -120,7 +126,7 @@ $(document).ready(function() {
 	var eventsToBind = 'scroll';
 
 	// if touch events are supported, tie our animation to the position to these events as well
-	if (touchSupported) eventsToBind + ' touchmove';
+	if (touchSupported) eventsToBind += ' touchmove';
 
 	$(window)
 		.bind(eventsToBind, function(e) {
@@ -262,6 +268,7 @@ function parallax(scrollTop) {
 
 			windowHeight = $(window).height();
 			$('html,body').scrollTop(1); // auto scroll to top
+			window.scrollTo(0,0);
 
 			// touch event check stolen from Modernizr
 			var touchSupported = (('ontouchstart' in window) ||
@@ -270,7 +277,7 @@ function parallax(scrollTop) {
 			var eventsToBind = 'scroll';
 
 			// if touch events are supported, tie our animation to the position to these events as well
-			if (touchSupported) eventsToBind + ' touchmove';
+			if (touchSupported) eventsToBind += ' touchmove';
 
 			$(window)
 				.bind(eventsToBind, function(e) {

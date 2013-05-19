@@ -30,17 +30,32 @@ h2 {
 	padding:0 20px;
 	max-width:960px;
 }
+.fl-l {
+	float: left;
+}
+.fl-r {
+	float: right;
+}
 section {
+	text-align: left;
+	max-width:960px;
+	margin:40px auto 0;
+	clear:both;
+
 	h1,h2,h3,h4 {
 		text-align: left;
 	}
-	max-width:960px;
-	margin:40px auto 0;
-	text-align: center;
-	clear:both;
+	h3.inline {
+		display: inline;
+		text-align: left;
+	}
 
+	.panning-figure {
+		margin: 0 10px 20px 20px;
+		background: white;
+		padding: 15px;
+	}
 	&.code {
-
 	}
 	&.demo {
 		border: 1px solid #ccc;
@@ -72,6 +87,8 @@ section {
 
 		}
 	}
+
+
 
 	/* prettprint overrides */
 	pre.prettyprint {

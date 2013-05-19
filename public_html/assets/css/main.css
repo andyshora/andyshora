@@ -280,14 +280,27 @@ h2 {
   padding: 0 20px;
   max-width: 960px; }
 
+.fl-l {
+  float: left; }
+
+.fl-r {
+  float: right; }
+
 section {
+  text-align: left;
   max-width: 960px;
   margin: 40px auto 0;
-  text-align: center;
   clear: both;
   /* prettprint overrides */ }
   section h1, section h2, section h3, section h4 {
     text-align: left; }
+  section h3.inline {
+    display: inline;
+    text-align: left; }
+  section .panning-figure {
+    margin: 0 10px 20px 20px;
+    background: white;
+    padding: 15px; }
   section.demo {
     border: 1px solid #ccc;
     min-height: 100px; }
