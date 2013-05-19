@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en-US">
 <head>
 	<meta charset="utf-8">
-	<title>Andy Shora, Front-end Web Developer in London</title>
+	<title>Parallax Tutorial using CSS and JavaScript | andyshora.com</title>
 	<link rel="stylesheet" href="assets/css/main.css">
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
 	<link rel="shortcut icon" href="/favicon.ico" />
@@ -29,34 +29,32 @@
 
 	<header class="page-header">
 		<div class="page-header__title">
-			<h1>Parallax effects in web design</h1>
-			<p>Using CSS &amp; JavaScript to create parallax effects on scroll.</p>
+			<h1>Parallax Tutorial using CSS and JavaScript</h1>
+			<p>How to create parallax effects on scroll, in web design. By <a href="#author">Andy Shora</a></p>
 		</div>
 	</header>
 
 	<div class="page-article">
 
 		<section>
-			<h2>How to implement parallax effects on scroll using JavaScript &amp; CSS</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium autem ipsum deserunt. Ratione, ut, nihil, numquam molestiae placeat odit non voluptatum sed quos natus rem asperiores minima porro fugit praesentium quo omnis doloribus est accusantium officiis. Minus, iste labore recusandae consequatur sit sint dolore rem quisquam. Illum, architecto, maiores corrupti quos consectetur animi aperiam neque excepturi quis nihil vitae optio quas quam expedita blanditiis aliquam earum esse voluptatum necessitatibus dignissimos soluta eos minima provident officia voluptatem voluptas aut qui commodi recusandae culpa voluptatibus non saepe facere ipsam nemo totam eius ad amet dolorum incidunt quaerat tempore. Dolorem, commodi illo quis.</p>
+			<h2>How to implement parallax effects on scroll using CSS &amp; JavaScript</h2>
+			<p>Ever wondered how to achieve parallax effects on scroll? I'll show you how simple it can be, using CSS &amp; a bit of JavaScript. I'm not a fan of long intros, so feel free to scroll straight down for the demo!</p>
 			<h2>Performance Aims</h2>
 			<ul>
 				<li><strong>Minimise DOM interactions on scroll events.</strong><br>Ideally we should only be interacting with the parallax elements at the breakpoints (start &amp; stop positions), so we can try to make use of CSS fixed positioning to accomplish the desired parallax effect. Obviously if we're adding a speed to the effect later on, whereby the element moves at say double the speed of scroll, we're going to need to update the position on every scroll event.<br>Another important way of reducing the DOM interactions is to store all the static values from the parallax elements straight away when the page is loaded. The parallax settings defined in the HTML of each element will not change, so we would be sacrificing performance if we were grabbing these values on every scroll event.</li>
 				<li><strong>For more complex animations, use hardware accelleration where possible.</strong><br>Mobile devices are less powerful, which can cause jerkyness when dealing with animations applied dynamically through JavaScript. When we get to dealing with the speed property, we'll look at using <i>transform</i> properties to enable supported mobile devices to use the more powerful GPU to perform the animations.</li>
-				<li></li>
-				<li></li>
 			</ul>
 
 		</section>
 
-		<h4>Demo 1. Let's make the red brick fall down the page as we scroll.</h4>
+		<h2>Demo time: Let's make the red brick fall down the page as we scroll!</h2>
 		<p>We'll set bounds on the parallax effect, so the brick always stays within it's container.</p>
 		<ul>
 			<li>The CSS position value is shown inside the brick.</li>
 			<li>For learning purposes, I've also shown the distance the viewport (the window) has been scrolled, and the distance of the element from the bottom of the viewport, as these values are used in the logic to start/stop/calculate the position of parallax elements.</li>
 		</ul>
 		<section class="demo parallax1">
-			<div class="parallax ball" data-id="ball-1" data-start="200" data-stop="1152">
+			<div class="parallax ball" data-id="ball-1" data-start="200" data-stop="1150">
 				<span class="content"></span>
 				<div id="offset-bottom"></div>
 				<div id="scroll-top"></div>
@@ -69,13 +67,17 @@
 			<p>For this demo we are using a simple &lt;div&gt;, which has the following data attributes set which define the parallax effect (all values are in pixels):</p>
 			<ul>
 				<li><strong>data-start:</strong> The element will become fixed when the viewport bottom offset has reached this distance. You could change this to use the distance from the top, but personally I prefer it this way.</li>
-				<li><strong>data-stop:</strong> When the viewport has been scrolled this distance, the parallax effect should end, leaving the element positioned relatively where it was at the end of the scroll. i.e. At the bottom of the container.</li>
+				<li><strong>data-stop:</strong> When the viewport has been scrolled this distance, the parallax effect should end, leaving the element positioned relatively where it was at the end of the scroll. i.e. at the bottom of the container.</li>
 				<li><strong>data-id:</strong> A unique id is used as a key in the <i>parallaxElements</i> array which holds these values on initialisation.</li>
 			</ul>
 
 <pre class="prettyprint lang-html">
-&lt;div class="parallax ball" data-id="ball-1" data-start="200" data-stop="1152"&gt;&lt;/div&gt;
+&lt;div class="parallax ball" data-id="ball-1" data-start="200" data-stop="1150"&gt;&lt;/div&gt;
 </pre>
+</section>
+<section>
+<h3>CSS styles for the parallax element</h3>
+<p>The styles are pretty normal, but note the <i>top</i> property will be updated for the parallax effect.</p>
 <pre class="prettyprint lang-css">
 .ball {
 	width: 100px;
@@ -88,6 +90,15 @@
 	z-index: 1;
 }
 </pre>
+</section>
+<section>
+	<h3>JavaScript (jQuery) for setting things up</h3>
+	<p>We need to initialise all of the parallax effects when the document is ready, to try and minimise the amount of processing and DOM interaction done during scrolling.</p>
+	<ul>
+		<li><strong>Store all of the parallax elements</strong> as objects inside an array.</li>
+		<li><strong>Attach a window resize event handler</strong> which simply updates a value containing the current window height, which is used during calculations.</li>
+		<li><strong>Auto-scroll to the top</strong> of the page on load.</li>
+	</ul>
 <pre class="prettyprint lang-js">
 var parallaxElements = [];
 var windowHeight = 0;
@@ -127,6 +138,15 @@ $(document).ready(function() {
 	});
 });
 </pre>
+</section>
+<section>
+	<h3>JavaScript (jQuery) for achieving the parallax effects on scroll</h3>
+	<p>Our aim is to scroll down to the element (the red brick), and achieve the following behaviour:</p>
+	<ul>
+		<li>When the distance between the bottom of the viewport and the brick reaches the <i>data-start</i> value, we set <i>position: fixed</i> so the brick then scrolls with with window.</li>
+		<li>When it reaches the <i>data-stop</i> value, it becomes <i>position: relative</i> again, appearing to rest on the bottom of the container.</li>
+		<li>For this example, we are not setting a speed, we just want the brick to appear to move at the same speed as the scroll.</li>
+	</ul>
 <pre class="prettyprint lang-js">
 function parallax(scrollTop) {
 
@@ -162,33 +182,26 @@ function parallax(scrollTop) {
 			parallaxElements[id].elm.style.top = 0;
 			parallaxElements[id].elm.style.marginLeft = 0;
 		}
-
-		$(parallaxElements[id].elm).find('.content').html(parallaxElements[id].elm.style.position);
 	}
-
 }
 </pre>
-			<h3>Using RequestAnimationFrame to make animations smoother</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, voluptatibus id eius repellat porro recusandae tempora voluptate quidem fuga maiores.</p>
-			<h3>Handling the logic and setting breakpoints of a parallax animation</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, voluptatibus id eius repellat porro recusandae tempora voluptate quidem fuga maiores.</p>
+</section>
+		<section>
+			<h2>Grab the code from Github!</h2>
+			<p>If you want to hack around with a stripped-down version of the demo on this page, you can download a standalone example here: <a href="http://github.com/andyshora/parallax-tutorial">Parallax Tutorial</a>.</p>
+
 		</section>
 
 		<section>
-			<h2>Considerations</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, dolor, dolorem! Assumenda, aut laborum adipisci et quae obcaecati officiis numquam.</p>
-			<h3>Responsive Design</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora debitis repellendus in vel odit totam unde placeat necessitatibus quibusdam enim.</p>
-			<h3>Performance</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, et!</p>
-			<h3>Old Browsers &amp; Slow Machines</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore sapiente at explicabo iusto quaerat quam.</p>
+			<h2>Over and out.</h2>
+			<p>I hope you've enjoyed this tutorial. I'll add some more advanced effects in the coming weeks. Please share the f*ck out of this article, it's my first proper tutorial for a while now, and don't forget to <a href="http://twitter.com/andyshora">hit me up on twitter!</a></p>
+
 		</section>
 
 	</div>
 
 </div>
-<div class="author-wrap">
+<div class="author-wrap" id="author">
 	<section class="author">
 		<div class="author__pic"></div>
 		<div class="author__desc">
@@ -222,6 +235,11 @@ function parallax(scrollTop) {
 				})
 				.resize(function() {
 					windowHeight = $(this).height(); // update on window resize
+
+					for (var id in parallaxElements) {
+						parallaxElements[id].initialOffsetY = $(parallaxElements[id].elm).offset().top;
+						parallaxElements[id].height = $(parallaxElements[id].elm).height();
+					}
 				});
 
 
@@ -272,12 +290,16 @@ function parallax(scrollTop) {
 					parallaxElements[id].elm.style.top = pos+'px';
 					parallaxElements[id].elm.style.marginLeft = '-50px';
 
+					$(parallaxElements[id].elm).find('.content').html(parallaxElements[id].elm.style.position);
+
 				} else if (viewportOffsetBottom > parallaxElements[id].stop) {
 					// scrolled past the stop value, make position relative again
 
 					parallaxElements[id].elm.style.position = 'relative';
 					parallaxElements[id].elm.style.top = (parallaxElements[id].stop-parallaxElements[id].start)+'px';
 					parallaxElements[id].elm.style.marginLeft = 0;
+					$(parallaxElements[id].elm).find('.content').html(parallaxElements[id].elm.style.position);
+
 
 				} else if (viewportOffsetBottom < parallaxElements[id].start) {
 					// scrolled up back past the start value, reset position
@@ -285,9 +307,9 @@ function parallax(scrollTop) {
 					parallaxElements[id].elm.style.position = 'relative';
 					parallaxElements[id].elm.style.top = 0;
 					parallaxElements[id].elm.style.marginLeft = 0;
+					$(parallaxElements[id].elm).find('.content').html(parallaxElements[id].elm.style.position);
 				}
 
-				$(parallaxElements[id].elm).find('.content').html(parallaxElements[id].elm.style.position);
 			}
 
 		}

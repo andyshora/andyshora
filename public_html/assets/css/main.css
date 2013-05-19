@@ -303,8 +303,8 @@ section {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(20, 17, 17, 0.2) 100%); }
     section.parallax1 .ball {
       width: 100px;
-      height: 38px;
-      padding: 10px 0 0 0;
+      height: 39px;
+      padding: 11px 0 0 0;
       display: inline-block;
       background: #c0392b;
       color: white;
@@ -323,10 +323,7 @@ section {
     width: 94%;
     padding: 20px 3%; }
     section pre.prettyprint span.com {
-      color: #5fc5bd;
-      background: black;
-      padding: 3px 7px;
-      border-radius: 4px; }
+      color: #5fc5bd; }
 
 section h3 {
   font-weight: bold;
@@ -466,6 +463,8 @@ header {
       color: white; }
       header.page-header .page-header__title p {
         text-align: center; }
+      header.page-header .page-header__title a {
+        color: inherit; }
 
 #sun_wrap {
   width: 100%;
