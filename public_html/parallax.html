@@ -281,7 +281,7 @@ function parallax(scrollTop) {
 			$(window)
 				.bind(eventsToBind, function(e) {
 
-					var val = touchSupported ? e.changedTouches[i].pageY : $(this).scrollTop();
+					var val = touchSupported ? e.changedTouches[0].pageY : $(this).scrollTop();
 					parallax(val);
 				})
 
