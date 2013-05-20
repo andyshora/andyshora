@@ -141,6 +141,16 @@ $(document).ready(function() {
 			parallax(val);
 		});
 
+	// update vars used in parallax calculations on window resize
+	$(window).resize(function() {
+		windowHeight = $(this).height();
+
+		for (var id in parallaxElements) {
+			parallaxElements[id].initialOffsetY = $(parallaxElements[id].elm).offset().top;
+			parallaxElements[id].height = $(parallaxElements[id].elm).height();
+		}
+	});
+
 
 	// get parallax elements straight away as they wont change
 	// this will minimise DOM interactions on scroll events
