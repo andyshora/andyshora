@@ -129,7 +129,6 @@ $(document).ready(function() {
 
 		$(window)
 			.bind('touchmove', function(e) {
-				console.log(e);
 				var val = e.currentTarget.scrollY;
 				parallax(val);
 			});
@@ -286,7 +285,6 @@ function parallax(scrollTop) {
 
 				$(window)
 					.bind('touchmove', function(e) {
-						console.log(e);
 						var val = e.currentTarget.scrollY;
 						parallax(val);
 					});
