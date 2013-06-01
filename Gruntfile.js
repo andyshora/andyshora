@@ -46,7 +46,7 @@ module.exports = function(grunt) {
 
 			options: {
 				thresholds: {
-					weight: 100,
+					weight: 180,
 					speed: 1000,
 					score: 80,
 					requests: 15
@@ -55,7 +55,15 @@ module.exports = function(grunt) {
 			},
 			pages: {
 				files: [
-					{src: 'http://andyshora.com'}
+					{
+						src: 'http://andyshora.com'
+					},
+					{
+						src: 'http://www.google.co.uk',
+						thresholds: {
+							weight: 80
+						}
+					}
 				]
 			}
 
