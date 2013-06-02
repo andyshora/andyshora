@@ -151,6 +151,19 @@ module.exports = function(grunt) {
 				options: {
 					nospawn: true
 				}
+			},
+			pages: {
+				files: ['public_html/pages/*.html'],
+				tasks: ['shell'],
+				options: {
+					nospawn: true
+				}
+			},
+		},
+
+		shell: {
+			buildPages: {
+				command: 'sh build_pages.sh'
 			}
 		}
 
@@ -169,6 +182,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-compress');
 	grunt.loadNpmTasks('grunt-yslow');
+	grunt.loadNpmTasks('grunt-shell');
 
 
 	// Default task.
