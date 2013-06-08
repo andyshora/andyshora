@@ -159,6 +159,13 @@ module.exports = function(grunt) {
 					nospawn: true
 				}
 			},
+			homepage: {
+				files: ['public_html/dev.html'],
+				tasks: ['default'],
+				options: {
+					nospawn: true
+				}
+			}
 		},
 
 		shell: {
