@@ -471,7 +471,7 @@ footer p {
 header {
   position: relative;
   width: 100%;
-  height: 310px;
+  height: 300px;
   text-align: center;
   overflow: hidden;
   background: #34495e; }
@@ -495,7 +495,7 @@ header {
   height: 315px; }
 
 #c1 {
-  margin: 60px auto 0;
+  margin: 50px auto 0;
   max-width: 960px;
   overflow: hidden; }
 
@@ -1471,7 +1471,7 @@ h2.london_post_title, h2.london_post_title a {
     width: auto; }
 
   header {
-    height: 200px; } }
+    height: 160px; } }
 @media only screen and (max-width: 480px) {
   #c1 {
     display: none; }
