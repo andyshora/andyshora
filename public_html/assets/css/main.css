@@ -315,6 +315,8 @@ section {
   section h3.inline {
     display: inline;
     text-align: left; }
+  section.comments {
+    padding: 0 20px; }
   section.demo {
     border: 1px solid #ccc;
     min-height: 100px; }
