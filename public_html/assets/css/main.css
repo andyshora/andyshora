@@ -548,7 +548,7 @@ p.sub {
   float: left;
   position: absolute;
   left: 10px;
-  top: 290px;
+  top: 278px;
   width: 100px;
   height: 20px;
   z-index: 1000;
@@ -1468,12 +1468,12 @@ h2.london_post_title, h2.london_post_title a {
     height: 100px;
     background: none;
     padding: 40px 20px 0;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 30px;
     width: auto; }
 
   header {
-    height: 160px; } }
+    height: 180px; } }
 @media only screen and (max-width: 480px) {
   #c1 {
     display: none; }
@@ -1487,3 +1487,44 @@ h2.london_post_title, h2.london_post_title a {
 
   .panning-figure {
     width: 100px; } }
+.not-mobile {
+  background: #e74c3c;
+  padding: 10px 20px !important;
+  color: white; }
+
+@media only screen and (max-width: 768px) {
+  .not-mobile {
+    display: none; } }
+.mobile-scroll-bounds {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  width: 320px; }
+  .mobile-scroll-bounds div {
+    position: absolute;
+    left: 0;
+    border-top: 1px dotted #34495e;
+    width: 100%;
+    text-align: right;
+    color: black;
+    font-weight: bold;
+    font-size: 10px;
+    padding: 0; }
+
+.mobile-problems-wrap {
+  height: 2700px; }
+
+#scroll-top-mobile {
+  height: 25px;
+  width: 160px;
+  right: 100px;
+  background: red;
+  color: white;
+  font-weight: bold;
+  position: fixed;
+  top: 0px;
+  padding: 10px;
+  position: fixed;
+  font-size: 14px;
+  line-height: 15px;
+  display: none; }
