@@ -136,8 +136,6 @@
 			enableShareButton($('.twitter-share-button-placeholder'));
 		}
 
-
-
 		$(window).bind('scroll', function(e) {
 			var val = $(this).scrollTop();
 			if (val < 280 || val > 3000) {
@@ -146,6 +144,11 @@
 				$('#scroll-top-mobile').html('scroll top: ' + val + 'px').show();
 			}
 
+		});
+
+		window._gaq = [['_setAccount','UA-17716290-10'],['_trackPageview'],['_trackPageLoadTime']];
+		Modernizr.load({
+		load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
 		});
 
 

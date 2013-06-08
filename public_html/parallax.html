@@ -351,6 +351,12 @@ function parallax(scrollTop) {
 				};
 
 			});
+
+
+			window._gaq = [['_setAccount','UA-17716290-10'],['_trackPageview'],['_trackPageLoadTime']];
+			Modernizr.load({
+			load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+			});
 		});
 
 		function parallax(scrollTop) {
