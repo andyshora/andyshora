@@ -193,6 +193,6 @@ module.exports = function(grunt) {
 
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'sass', 'cssmin', 'min', 'replace', 'htmlcompressor', 'compress']);
+	grunt.registerTask('default', ['jshint', 'sass', 'cssmin', 'shell', 'min', 'replace', 'htmlcompressor', 'compress']);
 
 };

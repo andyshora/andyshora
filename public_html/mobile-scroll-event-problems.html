@@ -82,6 +82,7 @@
 	<section>
 		<h2>The Problem: Mobile browsers only fire scroll events at the end of a scroll.</h2>
 		<p>If you're viewing this on a desktop, you'll see the value in the red box updating all the time! Hundreds of scroll events will fire having scrolled down to here.</p>
+		<p>As you can see on mobile, the scroll events only fire at the end of the scroll. This is not a bug, it's by design.</p>
 
 		<h3>Use touch events? We're still screwed.</h3>
 		<p>You can easily swipe down 2000px having only fired a few touchmove events during a fast initial swipe. Sure, these will fire more frequently than scroll events, but remember to take into account all the time the mobile viewport is being auto-scrolled after you've released your finger from the screen...</p>
