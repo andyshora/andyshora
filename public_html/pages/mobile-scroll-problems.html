@@ -77,6 +77,16 @@
 <script>
 	$(document).ready(function(){
 
+		$('.twitter-share-button-placeholder').bind('mouseover', function() {
+			enableShareButton($(this));
+		});
+
+		if (Modernizr.touch) {
+			enableShareButton($('.twitter-share-button-placeholder'));
+		}
+
+
+
 		$(window).bind('scroll', function(e) {
 			var val = $(this).scrollTop();
 			if (val < 280 || val > 3000) {
@@ -86,7 +96,34 @@
 			}
 
 		});
+
+
 	});
+
+	function enableShareButton(elm) {
+
+		elm.addClass('twitter-share-button')
+			.removeClass('twitter-share-button-placeholder')
+			.attr('href', 'https://twitter.com/share')
+			.unbind('click');
+
+		!function(d,s,id){
+			var js,
+			fjs=d.getElementsByTagName(s)[0],
+			p=/^http:/.test(d.location)?'http':'https';
+
+			if(!d.getElementById(id)){
+				js=d.createElement(s);
+				js.id=id;
+				js.src=p+'://platform.twitter.com/widgets.js';
+				fjs.parentNode.insertBefore(js,fjs);
+			}
+		}(document, 'script', 'twitter-wjs');
+
+	}
+	function revealEmail() {
+		alert('andyshora' + '@gmail.com');
+	}
 </script>
 
 <!-- INCLUDE:footer -->
