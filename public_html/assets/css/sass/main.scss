@@ -273,14 +273,7 @@ header {
 	height: 310px;
 	text-align: center;
 	overflow: hidden;
-	background: rgb(14, 111, 141);
-	background: rgb(0,0,0);
-	background: -moz-linear-gradient(top,  rgba(192, 57, 43,0.8) 0%, rgba(20,17,17,1) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(192, 57, 43,0.8)), color-stop(100%,rgba(20,17,17,1)));
-	background: -webkit-linear-gradient(top,  rgba(192, 57, 43,0.8) 0%,rgba(20,17,17,1) 100%);
-	background: -o-linear-gradient(top,  rgba(192, 57, 43,0.8) 0%,rgba(20,17,17,1) 100%);
-	background: -ms-linear-gradient(top,  rgba(192, 57, 43,0.8) 0%,rgba(20,17,17,1) 100%);
-	background: linear-gradient(to bottom,  rgba(192, 57, 43,0.8) 0%,rgba(20,17,17,1) 100%);
+	background: $primary;
 
 	&.page-header {
 		width: 98%;
@@ -308,11 +301,7 @@ header {
 	}
 
 }
-#sun_wrap {
-	width:100%;
-	height:0;
-	position: relative;
-}
+
 .andy_post header { height:315px; }
 #c1 {
 	margin:60px auto 0;
@@ -1181,9 +1170,7 @@ h2.london_post_title, h2.london_post_title a {
 	header {
 		height: 200px;
 	}
-	#sun {
-		display: none;
-	}
+
 }
 
 @media only screen and (max-width: 550px) {
