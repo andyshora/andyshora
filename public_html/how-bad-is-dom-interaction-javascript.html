@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+	<meta charset="utf-8">
+<title>How Bad is DOM Interaction - Really?</title>
+<meta name="description" content="How Bad is DOM Interaction - Really?">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<meta name="author" content="Andy Shora">
+	<link rel="author" href="https://plus.google.com/115209922186713310205/posts"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<script src="assets/js/modernizr-min.js"></script>
+	<!--[if lt IE 9]>
+	<meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
+	<script src="js/html5shiv.js" type="text/javascript"></script>
+	<![endif]-->
+
+	<script src="assets/js/jquery-1.9.1.min.js"></script>
+
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<!--[if lt IE 7 ]><script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+	<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})});</script><![endif]-->
+
+</head>
+<body>
+
+<div id="body_wrap">
+
+	<header class="page-header">
+		<div class="page-header__title">
+			<h1>How Bad is DOM Interaction - Really?</h1>
+			<p>A JavaScript performance investigation. By <a href="#author">Andy Shora</a></p>
+			<a href="/">&larr; back to andyshora.com</a> | <a class="twitter-share-button-placeholder" data-via="andyshora">Tweet this article<i class="icon icon-twitter"></i></a>
+		</div>
+	</header>
+
+	<section>
+		<p><strong>Lots of us frontend developers seem to be increasingly concerned with interacting with the DOM lately, during a time when JavaScript engines and browser rendering performance has been faster than ever!</strong></p>
+		<p>In this article I will try to douse a few myths about DOM interaction in foam, whilst giving a few little performance tips to make sure your apps run super fast when you're interacting with the DOM.</p>
+	</section>
+
+
+	<section>
+		<h2>Performance Question: Is DOM interaction expensive?</h2>
+		<p><em>The short answer is, yes. The long answer is, expensive in relation to what exactly?</em></p>
+	</section>
+
+	<section>
+		<h2>The Difference between DOM reading and writing</h2>
+		<p><em>Do you want to extract some data from the DOM, or actually update things?</em></p>
+		<p>As you probably guessed, writing to the DOM is more expensive. When the DOM is updated, the browser has to re-parse parts of the DOM, and re-render styles.</p>
+		<p><strong>Performance Demo: Let's see the difference in speed...</strong></p>
+		<div class="performance-test">
+			<div id="test-box-1" class="test-box">Tests will read and write from this div</div>
+			<button id="dom-test-1">Do some DOM reading and writing</button>
+			<h3>Results will appear here...</h3>
+			<p>Time for 1000 reads: <strong id="read-result">-</strong><br>
+			Time for 1000 writes: <strong id="write-result">-</strong></p>
+			<p id="ratio-result"></p>
+		</div>
+		<div class="takeaway-tip">Performance Tip: Reading from the DOM is inexpensive, but only write to the DOM when absolutely necessary!</div>
+	</section>
+
+	<!-- section>h2+(p>em)+p -->
+
+	<section>
+		<h2>DOM interaction on resize</h2>
+		<p><em>I felt you shudder for a moment. You anticipated the danger ahead - but is all as it seems?</em></p>
+		<p>Firstly, we have to question how important is it to interact with the DOM on a window resize event? On desktop browsers, resize events will fire in the order of hundreds of times per second, so you'll have to question how critical is it to execute your DOM interaction logic on every single event. This introduces us to an important concept, <strong>debouncing events</strong>.</p>
+		<p><a href="http://davidwalsh.name/function-debounce" target="_blank">How to implement debounced events with Underscore.js</a></p>
+		<p>Debounced events are exactly the same as normal events, except they fire less frequently. This allows is to execute some logic for maybe every 1 in 20 resize events. If a resize event is fired for an orientation change, the event will always be debounced, so you can be sure that mobile browsers won't miss anything.</p>
+		<p>On mobile browsers, resize events will only fire when you change your device orientation, so this in itself handles a lot of performance problems for us. However, the JavaScript on your page shouldn't really know if it's executing in a mobile browser, so all you need to know is you can rest assured that mobile browsers won't miss out on any code execution due to the small number of resize events fired.</p>
+		<div class="takeaway-tip">Performance Tip: Debounce your resize events, and only perform essential work when frequently fired events are debounced.</div>
+	</section>
+
+	<section>
+		<h2>Caching jQuery selectors</h2>
+		<p><em>Make use of caching parts of the DOM you will be interacting with often.</em></p>
+		<p>Every time you specify a jQuery selector, say <span class="inline-code">$('.my-boxes')</span>, you're asking jQuery to search the entire DOM for all matches. For optimal performance, you should store the matches for this selector in a JavaScript variable, and reference this when getting and setting it's contents:</p>
+		<pre class="prettyprint lang-js">// convention is to name your cached selector variable starting with a $
+var $myBoxes;
+
+$(document).ready(function() {
+
+	// initialization
+	$myBoxes = $('.my-boxes');
+
+	// ...
+
+	// retrieve some data
+	var boxCount = $myBoxes.length;
+
+	// do some updates later - remember its already a jQuery object
+	$myBoxes.css('background-color', 'red');
+});
+</pre>
+		<div class="performance-test">
+			<div id="test-box-3" class="test-box">Tests will read and write from this div</div>
+			<button id="dom-test-3">Do some DOM reading and writing</button>
+			<h3>Results will appear here...</h3>
+			<p>Time for 1000 reads (selector not cached): <strong id="read-result-normal">-</strong><br>
+			Time for 1000 reads (cached selector): <strong id="read-result-cached">-</strong></p>
+			<p id="ratio-result-3"></p>
+		</div>
+	</section>
+
+
+</div>
+<script>
+	$(document).ready(function() {
+		$('#dom-test-1').click(function(){
+			var t1;
+			var $box = $('#test-box-1');
+
+			function readFromDiv() {
+				var c = $box.html();
+			}
+
+			function writeToDiv() {
+				$box.html(Math.random());
+			}
+
+			// read test
+			t1 = +new Date;
+			for(var i=0; i<1000; i++) {
+				readFromDiv();
+			}
+			t2 = +new Date;
+
+			var tDiff1 = t2 - t1;
+			$('#read-result').html(tDiff1 + 'ms');
+
+			// write test
+			t1 = +new Date;
+			for(var i=0; i<1000; i++) {
+				writeToDiv();
+			}
+			t2 = +new Date;
+
+			var tDiff2 = t2 - t1;
+			$('#write-result').html(tDiff2 + 'ms');
+
+			// calc ratio
+			var ratio = Math.round(tDiff2/tDiff1);
+			$('#ratio-result').html('Wow, reading was about ' + ratio + ' times faster!');
+
+		});
+
+		$('#dom-test-3').click(function(){
+			var t1;
+			var $box = $('#test-box-3');
+
+			function readFromDivCached() {
+				var c = $box.html();
+			}
+
+			function readFromDiv() {
+				var c = $('#test-box-3').html();
+			}
+
+			// read test - normal
+			t1 = +new Date;
+			for(var i=0; i<1000; i++) {
+				readFromDiv();
+			}
+			t2 = +new Date;
+
+			var tDiff1 = t2 - t1;
+			$('#read-result-normal').html(tDiff1 + 'ms');
+
+			// read test - cached
+			t1 = +new Date;
+			for(var i=0; i<1000; i++) {
+				readFromDivCached();
+			}
+			t2 = +new Date;
+
+			var tDiff2 = t2 - t1;
+			$('#read-result-cached').html(tDiff2 + 'ms');
+
+			// calc ratio
+			var ratio = Math.round(tDiff2/tDiff1);
+			$('#ratio-result-3').html('Wow, caching a selector made the read ' + ratio + ' times faster!');
+
+		});
+
+
+	});
+</script>
+<div class="author-wrap" id="author">
+	<section class="author">
+		<div class="author__pic"></div>
+		<div class="author__desc">
+			<p>Hi, I'm <strong>Andy Shora</strong>. I'm a <strong>Frontend Web Developer</strong> based in London and I currently work with some very talented people over at <a href="http://www.rga.com">R/GA</a>.</p>
+			<div class="author__links">
+				<a class="author__link" href="http://twitter.com/andyshora"><i class="icon-twitter"></i> andyshora</a>
+				<a class="author__link" href="http://www.facebook.com/andyshora"><i class="icon-facebook"></i> fb<span class="link__extra">.com/andyshora</span></a>
+				<a class="author__link" href="http://www.pinterest.com/andyshora"><i class="icon-pinterest"></i> pinterest<span class="link__extra">.com/andyshora</span></a>
+				<a class="author__link" href="http://www.github.com/andyshora"><i class="icon-github"></i> github<span class="link__extra">.com/andyshora</span></a>
+				<a class="author__link" onclick="revealEmail()"><i class="icon-envelope"></i> contact<span class="link__extra"> me</span></a>
+			</div>
+		</div>
+	</section>
+</div>
+<section class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'andyshora'; // required: replace example with your forum shortname
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			if ((window.location+'').match(/dev\./g)) return;
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<!-- footer -->
+<footer>
+	<p>Andy Shora &copy; 2013</p>
+</footer>
+<!-- end footer -->
+</body>
+</html>

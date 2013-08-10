@@ -381,6 +381,29 @@ section h3 {
   color: black;
   background: rgba(255, 255, 255, 0.9); }
 
+.performance-test {
+  padding: 20px;
+  border: 2px dashed #d3d3d3;
+  text-align: center; }
+  .performance-test button {
+    margin: 0 auto; }
+
+.test-box {
+  background: white;
+  border: 1px solid #d3d3d3;
+  margin: 0 0 10px;
+  padding: 20px;
+  text-align: center; }
+
+.takeaway-tip {
+  padding: 20px;
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: #70b863;
+  border: 1px solid #2B9921; }
+
 footer {
   width: 100%;
   padding: 20px 0;
