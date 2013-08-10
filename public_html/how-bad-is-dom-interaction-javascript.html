@@ -72,9 +72,9 @@
 		<p>
 		<h3>How to debounce events:</h3>
 		<a href="http://davidwalsh.name/function-debounce" target="_blank">How to implement debounced events with Underscore.js</a></p>
-		<p>Debounced events are exactly the same as normal events, except you set how frequently an event should become 'debounced'. This allows is to execute some logic for maybe every 1 in 20 resize events. If a resize event is fired for an orientation change, the event will always be debounced, so you can be sure that mobile browsers won't miss anything.</p>
+		<p>Debounced events are exactly the same as normal events, except you set how frequently an event should become 'debounced'. This allows us to execute some logic for maybe every 1 in 20 resize events. If a resize event is fired for an orientation change, the event will always be debounced, so you can be sure that mobile browsers won't miss anything.</p>
 		<h3>What's a realistic use case for using debounced events?</h3>
-		<p>Say I need to update the src of an image when the window is made larger, in order to serve a better quality image for the new wider viewport, I'm going to need to execute some JavaScript to measure the new fluid container's width, and request an image suited to the new size...</p>
+		<p>Say I need to update the src of an image when the window is made larger, in order to serve a better quality image suited to the new wider viewport, I'm going to need to execute some JavaScript to measure the new fluid container's width, and request an image suited to the new size...</p>
 		<p>If I'm on a desktop browser, and someone is dragging the window wider, there's potentially going to be hundreds of window resize events firing. However, its not critical that I execute this <i>requestNewImage()</i> function on every event. I just need to ensure it's fired maybe every 500ms. So, I'll debounce the resize event, and only call the function when the event is debounced.</p>
 		<pre class="prettyprint lang-js">
 // Underscore.js method, via David Walsh (link above)
@@ -83,7 +83,7 @@ var requestNewImage = _.debounce(function(e) {
 	// lets assume I've already cached my image and imageContainer selectors, and I have a nice dynamic image resizing service
 	var containerWidth = $imageContainer.width();
 	var newImageSrc = 'http://myimageservice.com/my-image/w=' + containerWidth;
-	$img.src(newImageSrc);
+	$img.attr('src', newImageSrc);
 
 }, 500); // maximum run of once per 500 milliseconds
 
@@ -92,14 +92,16 @@ window.addEventListener("resize", requestNewImage, false);
 
 		</pre>
 
+		<p>(Of course I was using a service like <a href="http://www.resrc.it/" target="_blank">ReSRC.it to serve responsive images</a> all this would be taken care of!)</p>
+
 		<p>On mobile browsers, resize events will only fire when you change your device orientation, so this in itself handles a lot of performance problems for us. However, the JavaScript on your page shouldn't really know if it's executing in a mobile browser, so all you need to know is you can rest assured that mobile browsers won't miss out on any code execution due to the small number of resize events fired.</p>
-		<div class="takeaway-tip">Performance Tip: Debounce your resize events, and only perform essential work when frequently fired events are debounced.</div>
+		<div class="takeaway-tip">Performance Tip: Debounce your resize events, and only perform DOM-intensive work when frequently fired events are debounced.</div>
 	</section>
 	<hr>
 	<section>
 		<h2>3. Caching jQuery selectors</h2>
 		<p><em>Make use of caching parts of the DOM you will be interacting with often.</em></p>
-		<p>Every time you specify a jQuery selector, say <span class="inline-code">$('.my-boxes')</span>, you're asking jQuery to search the entire DOM for all matches. For optimal performance, you should store the matches for this selector in a JavaScript variable, and reference this when getting and setting it's contents:</p>
+		<p>Every time you specify a jQuery selector, say <span class="inline-code">$('.my-boxes')</span>, you're asking jQuery to search the entire DOM for all matches. For optimal performance, you should store the matches for this selector in a JavaScript variable, and reference this when getting and setting it's contents.</p>
 		<h3>How to cache jQuery selectors...</h3>
 		<pre class="prettyprint lang-js">// convention is to name your cached selector variable starting with a $
 var $myBoxes;
