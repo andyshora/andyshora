@@ -24,9 +24,9 @@
 		<h2>Performance Question: Is DOM interaction expensive?</h2>
 		<p><em>The short answer is, yes. The long answer is, expensive in relation to what exactly?</em></p>
 	</section>
-
+	<hr>
 	<section>
-		<h2>The Difference between DOM reading and writing</h2>
+		<h2>1. The Difference between DOM reading and writing</h2>
 		<p><em>Do you want to extract some data from the DOM, or actually update things?</em></p>
 		<p>As you probably guessed, writing to the DOM is more expensive. When the DOM is updated, the browser has to re-parse parts of the DOM, and re-render styles.</p>
 		<p><strong>Performance Demo: Let's see the difference in speed...</strong></p>
@@ -41,22 +41,43 @@
 		<div class="takeaway-tip">Performance Tip: Reading from the DOM is inexpensive, but only write to the DOM when absolutely necessary!</div>
 	</section>
 
-	<!-- section>h2+(p>em)+p -->
-
+	<hr>
 	<section>
-		<h2>DOM interaction on resize</h2>
+		<h2>2. DOM interaction on resize</h2>
 		<p><em>I felt you shudder for a moment. You anticipated the danger ahead - but is all as it seems?</em></p>
 		<p>Firstly, we have to question how important is it to interact with the DOM on a window resize event? On desktop browsers, resize events will fire in the order of hundreds of times per second, so you'll have to question how critical is it to execute your DOM interaction logic on every single event. This introduces us to an important concept, <strong>debouncing events</strong>.</p>
-		<p><a href="http://davidwalsh.name/function-debounce" target="_blank">How to implement debounced events with Underscore.js</a></p>
-		<p>Debounced events are exactly the same as normal events, except they fire less frequently. This allows is to execute some logic for maybe every 1 in 20 resize events. If a resize event is fired for an orientation change, the event will always be debounced, so you can be sure that mobile browsers won't miss anything.</p>
+		<p>
+		<h3>How to debounce events:</h3>
+		<a href="http://davidwalsh.name/function-debounce" target="_blank">How to implement debounced events with Underscore.js</a></p>
+		<p>Debounced events are exactly the same as normal events, except you set how frequently an event should become 'debounced'. This allows is to execute some logic for maybe every 1 in 20 resize events. If a resize event is fired for an orientation change, the event will always be debounced, so you can be sure that mobile browsers won't miss anything.</p>
+		<h3>What's a realistic use case for using debounced events?</h3>
+		<p>Say I need to update the src of an image when the window is made larger, in order to serve a better quality image for the new wider viewport, I'm going to need to execute some JavaScript to measure the new fluid container's width, and request an image suited to the new size...</p>
+		<p>If I'm on a desktop browser, and someone is dragging the window wider, there's potentially going to be hundreds of window resize events firing. However, its not critical that I execute this <i>requestNewImage()</i> function on every event. I just need to ensure it's fired maybe every 500ms. So, I'll debounce the resize event, and only call the function when the event is debounced.</p>
+		<pre class="prettyprint lang-js">
+// Underscore.js method, via David Walsh (link above)
+var requestNewImage = _.debounce(function(e) {
+
+	// lets assume I've already cached my image and imageContainer selectors, and I have a nice dynamic image resizing service
+	var containerWidth = $imageContainer.width();
+	var newImageSrc = 'http://myimageservice.com/my-image/w=' + containerWidth;
+	$img.src(newImageSrc);
+
+}, 500); // maximum run of once per 500 milliseconds
+
+// Add the event listener
+window.addEventListener("resize", requestNewImage, false);
+
+		</pre>
+
 		<p>On mobile browsers, resize events will only fire when you change your device orientation, so this in itself handles a lot of performance problems for us. However, the JavaScript on your page shouldn't really know if it's executing in a mobile browser, so all you need to know is you can rest assured that mobile browsers won't miss out on any code execution due to the small number of resize events fired.</p>
 		<div class="takeaway-tip">Performance Tip: Debounce your resize events, and only perform essential work when frequently fired events are debounced.</div>
 	</section>
-
+	<hr>
 	<section>
-		<h2>Caching jQuery selectors</h2>
+		<h2>3. Caching jQuery selectors</h2>
 		<p><em>Make use of caching parts of the DOM you will be interacting with often.</em></p>
 		<p>Every time you specify a jQuery selector, say <span class="inline-code">$('.my-boxes')</span>, you're asking jQuery to search the entire DOM for all matches. For optimal performance, you should store the matches for this selector in a JavaScript variable, and reference this when getting and setting it's contents:</p>
+		<h3>How to cache jQuery selectors...</h3>
 		<pre class="prettyprint lang-js">// convention is to name your cached selector variable starting with a $
 var $myBoxes;
 
@@ -78,13 +99,18 @@ $(document).ready(function() {
 			<div id="test-box-3" class="test-box">Tests will read and write from this div</div>
 			<button id="dom-test-3">Do some DOM reading and writing</button>
 			<h3>Results will appear here...</h3>
-			<p>Time for 1000 reads (selector not cached): <strong id="read-result-normal">-</strong><br>
-			Time for 1000 reads (cached selector): <strong id="read-result-cached">-</strong></p>
+			<p>Time for 10,000 reads (selector not cached): <strong id="read-result-normal">-</strong><br>
+			Time for 10,000 reads (cached selector): <strong id="read-result-cached">-</strong></p>
 			<p id="ratio-result-3"></p>
 		</div>
+
+		<div class="takeaway-tip">Performance Tip: Cache jQuery selectors, so you don't have to search the entire DOM on every operation.</div>
 	</section>
-
-
+	<hr>
+	<section>
+		<h2>webPagePerformance++</h2>
+		<p>Hopefully you're now armed with a few performance tweaks for your web apps. Thanks for reading, hit me up with any questions/comments regarding these topics below!</p>
+	</section>
 </div>
 <script>
 	$(document).ready(function() {
@@ -140,7 +166,7 @@ $(document).ready(function() {
 
 			// read test - normal
 			t1 = +new Date;
-			for(var i=0; i<1000; i++) {
+			for(var i=0; i<10000; i++) {
 				readFromDiv();
 			}
 			t2 = +new Date;
@@ -150,7 +176,7 @@ $(document).ready(function() {
 
 			// read test - cached
 			t1 = +new Date;
-			for(var i=0; i<1000; i++) {
+			for(var i=0; i<10000; i++) {
 				readFromDivCached();
 			}
 			t2 = +new Date;
@@ -159,7 +185,7 @@ $(document).ready(function() {
 			$('#read-result-cached').html(tDiff2 + 'ms');
 
 			// calc ratio
-			var ratio = Math.round(tDiff2/tDiff1);
+			var ratio = Math.round(tDiff1/tDiff2);
 			$('#ratio-result-3').html('Wow, caching a selector made the read ' + ratio + ' times faster!');
 
 		});
