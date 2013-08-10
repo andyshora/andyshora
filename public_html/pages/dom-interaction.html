@@ -79,7 +79,7 @@ window.addEventListener("resize", requestNewImage, false);
 	<section>
 		<h2>3. Caching jQuery selectors</h2>
 		<p><em>Make use of caching parts of the DOM you will be interacting with often.</em></p>
-		<p>Every time you specify a jQuery selector, say <span class="inline-code">$('.my-boxes')</span>, you're asking jQuery to search the entire DOM for all matches. For optimal performance, you should store the matches for this selector in a JavaScript variable, and reference this when getting and setting it's contents.</p>
+		<p>Every time you specify a jQuery selector, say <span class="inline-code">$('.my-boxes')</span>, you're asking jQuery to search the entire DOM for all matches. For optimal performance, you should store the matches for this selector in a JavaScript variable, and reference them during interaction.</p>
 		<h3>How to cache jQuery selectors...</h3>
 		<pre class="prettyprint lang-js">// convention is to name your cached selector variable starting with a $
 var $myBoxes;
