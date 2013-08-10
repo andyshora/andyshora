@@ -100,7 +100,7 @@ $(document).ready(function() {
 });
 </pre>
 		<div class="performance-test">
-			<div id="test-box-3" class="test-box">Tests will read and write from this div</div>
+			<div id="test-box-3" class="test-box test-box-3">Tests will read and write from this div</div>
 			<button id="dom-test-3">Do some DOM reading</button>
 			<h3>Results will appear here...</h3>
 			<p>Time for 10,000 reads (searching entire DOM): <strong id="read-result-normal">-</strong><br>
@@ -170,14 +170,14 @@ $(document).ready(function() {
 
 		$('#dom-test-3').click(function(){
 			var t1;
-			var $box = $('#test-box-3');
+			var $box = $('.test-box-3');
 
 			function readFromDivCached() {
 				var c = $box[0].innerHTML;
 			}
 
 			function readFromDiv() {
-				var c = $('#test-box-3')[0].innerHTML;
+				var c = $('.test-box-3')[0].innerHTML;
 			}
 
 			// read test - normal
