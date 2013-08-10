@@ -95,6 +95,7 @@ window.addEventListener("resize", requestNewImage, false);
 		<p>(Of course I was using a service like <a href="http://www.resrc.it/" target="_blank">ReSRC.it to serve responsive images</a> all this would be taken care of!)</p>
 
 		<p>On mobile browsers, resize events will only fire when you change your device orientation, so this in itself handles a lot of performance problems for us. However, the JavaScript on your page shouldn't really know if it's executing in a mobile browser, so all you need to know is you can rest assured that mobile browsers won't miss out on any code execution due to the small number of resize events fired.</p>
+		<p>I'm sticking my neck out here, but if your web page is purely for mobile browsers (such as in a web view in a native app), then it's ok to not debounce events such as resize, as they will only fire on orientation change.</p>
 		<div class="takeaway-tip">Performance Tip: Debounce your resize events, and only perform DOM-intensive work when frequently fired events are debounced.</div>
 	</section>
 	<hr>
@@ -124,7 +125,7 @@ $(document).ready(function() {
 			<div id="test-box-3" class="test-box">Tests will read and write from this div</div>
 			<button id="dom-test-3">Do some DOM reading and writing</button>
 			<h3>Results will appear here...</h3>
-			<p>Time for 10,000 reads (selector not cached): <strong id="read-result-normal">-</strong><br>
+			<p>Time for 10,000 reads (searching entire DOM): <strong id="read-result-normal">-</strong><br>
 			Time for 10,000 reads (cached selector): <strong id="read-result-cached">-</strong></p>
 			<p id="ratio-result-3"></p>
 		</div>
