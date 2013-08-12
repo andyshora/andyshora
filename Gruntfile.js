@@ -61,7 +61,7 @@ module.exports = function(grunt) {
 					{
 						src: 'http://www.google.co.uk',
 						thresholds: {
-							weight: 80
+							weight: 200
 						}
 					}
 				]

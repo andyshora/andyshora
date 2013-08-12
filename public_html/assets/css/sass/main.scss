@@ -116,10 +116,9 @@ section {
 	/* prettprint overrides */
 	pre.prettyprint {
 		text-align: left;
-		font-size: 16px;
-		font-family: Arial;
-		letter-spacing: 1px;
-		line-height: 22px;
+		font-size: 14px;
+		font-family: Consolas, monaco, monospace;
+		line-height: 20px;
 		background: rgba(0,0,0,0.9);
 		border-radius: 3px;
 		width: 94%;
@@ -186,6 +185,44 @@ section h3 {
 	color: white;
 	background: rgb(112, 184, 99);
 	border: 1px solid #2B9921;
+}
+
+// image hack page
+.grumpy-section {
+	width:25%;
+	margin-right: 5%;
+	display: inline-block;
+	vertical-align: top;
+
+	h3 {
+		margin-left: 5%;
+	}
+}
+	.grumpy-image-wrap {
+		width: 100%;
+		margin: 5px auto;
+		border: 2px solid white;
+		padding: 0;
+
+		img {
+			width: 100%;
+		}
+	}
+	.grumpy-image-wrap-fixed {
+		@extend .grumpy-image-wrap;
+		position: relative;
+		padding-bottom: 66.67%;
+
+		img {
+			position: absolute;
+		}
+
+	}
+
+@media only screen and (max-width: 480px) {
+	.grumpy-section {
+		width: 40%;
+	}
 }
 
 footer {
