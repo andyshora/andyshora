@@ -2,8 +2,8 @@
 <html dir="ltr" lang="en-US">
 <head>
 	<meta charset="utf-8">
-<title>Fluid Image Padding Hack</title>
-<meta name="description" content="Fluid Image Padding Hack">
+<title>Sizing Image Containers with a Little CSS Padding Hack</title>
+<meta name="description" content="Sizing Image Containers with a Little CSS Padding Hack">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
 	<link rel="shortcut icon" href="/favicon.ico" />
@@ -30,7 +30,7 @@
 
 	<header class="page-header">
 		<div class="page-header__title">
-			<h1>Fluid Image Padding Hack</h1>
+			<h1>Sizing Image Containers with a Little CSS Padding Hack</h1>
 			<p>A useful frontend development tip. By <a href="#author">Andy Shora</a></p>
 			<a href="/">&larr; back to andyshora.com</a> | <a class="twitter-share-button-placeholder" data-via="andyshora">Tweet this article<i class="icon icon-twitter"></i></a>
 		</div>
@@ -38,21 +38,24 @@
 
 	<section>
 		<h2>The Problem</h2>
-		<p><strong>Scenario: Responsively sizes images, before images load, the image containers initially appear collapsed.</strong></p>
+		<p><strong>Scenario: Responsively sized images, before the images load, the image containers initially appear collapsed.</strong></p>
 		<p>The problem here is the image containers don't initially have a height, and setting a fixed height would be wrong as we don't know how much space these fluid-width images are going to occupy once they load.</p>
 	</section>
 	<section>
 
 	<pre class="prettyprint lang-html">
-&lt;div class="image-wrapper"&gt;
-	&lt;img src="images/pages/grumpy-cat.jpg" /&gt;
+&lt;div class="grumpy-image-wrapper"&gt;
+	&lt;img class="grumpy-image" src="images/grumpy-cat.jpg" /&gt;
 &lt;/div&gt;
 	</pre>
 
 	<pre class="prettyprint lang-css">
-.image-wrapper {
+.grumpy-image-wrapper {
 	width: 90%;
-	border: 2px solid white;
+	border: 2px solid white; /* simply to show you the collapsed state for this demo */
+}
+.grumpy-image {
+	width: 100%;
 }
 	</pre>
 
@@ -81,36 +84,50 @@
 	</section>
 
 	<section>
-		<p>This means whatever content you have directly below the images will suddenly shift down the viewport as the images load.</p>
+		<p>This means the inital structure looks horrible and collasped, and whatever content you have directly below the images will suddenly shift down the viewport as the images load.</p>
 	</section>
 
 	<section>
 		<h2>The Fix</h2>
 		<p><strong>Padding to the rescue! Here's what we need to know: the image ratio</strong></p>
-		<p>If we know the ratio the image is going to be once the image has loaded, we can <strong>add this handy padding hack to the container</strong>, so it resizes fluidly to the correct dimensions!</p>
+		<p>If we know the ratio the image is going to be once the image has loaded, we can add this handy padding hack to the container, so it resizes fluidly to the correct dimensions:</p>
+		<div class="takeaway-tip">Padding Bottom = (Image Height / Image Width) * 100%</div>
 		<p>Don't know the ratio? Perhaps you should explore a way of returning the image dimensions to the frontend before the images are requested. It's not the perfect solution but you will then be able to apply this padding dynamically via JavaScript.</p>
-		<p>In the case of my grumpy cat picture, the original image dimensions are 360 x 240, so the amount of padding I need to apply to the wrapper can be calculated via:</p>
-		<h3>Padding Bottom = (Image Height / Image Width) * 100%</h3>
+		<p>In the case of my grumpy cat picture, the original image dimensions are 360 x 240, so my <i>padding-bottom</i> on the wrapper should be 66.67% to simulate the correct height.</p>
+		<p>(There's a couple more critical instructions below...)</p>
 	</section>
 
 	<section>
 		<pre class="prettyprint lang-html">
-&lt;div class="image-wrapper" style="padding-bottom:66.67%"&gt;
-	&lt;img src="images/pages/grumpy-cat.jpg" /&gt;
+&lt;div class="grumpy-image-wrapper"&gt;
+	&lt;img class="grumpy-image" src="images/grumpy-cat.jpg" /&gt;
 &lt;/div&gt;
-&lt;div class="image-wrapper" style="padding-bottom:66.67%"&gt;
-	&lt;img src="images/pages/grumpy-cat.jpg" /&gt;
+&lt;div class="grumpy-image-wrapper"&gt;
+	&lt;img class="grumpy-image" src="images/grumpy-cat.jpg" /&gt;
 &lt;/div&gt;
-&lt;div class="image-wrapper" style="padding-bottom:66.67%"&gt;
-	&lt;img src="images/pages/grumpy-cat.jpg" /&gt;
+&lt;div class="grumpy-image-wrapper"&gt;
+	&lt;img class="grumpy-image" src="images/grumpy-cat.jpg" /&gt;
 &lt;/div&gt;
+	</pre>
+
+	<pre class="prettyprint lang-css">
+.grumpy-image-wrapper {
+	width: 90%;
+	padding-bottom: 66.67%;
+	border: 2px solid white;
+	position: relative;
+}
+.grumpy-image {
+	width: 100%;
+	position: absolute;
+}
 	</pre>
 	</section>
 
 	<section>
-		<h2>Important Notes!</h2>
+		<h2>More Important Instructions!</h2>
 		<p><strong>We also need to add <i>position: absolute</i> to the image, and <i>position: relative</i> to the wrapper</strong>, to ensure the padding is not added to the height of the image when the browser calculates the wrapper's height.</p>
-		<p>If you require extra padding on your image container, you will need to take this into account when calculating the amount of bottom padding to apply in this fix. If the amount of extra padding or border is not fluid, then you'll probably need to look at using <a href="http://www.paulirish.com/2012/box-sizing-border-box-ftw/" target="_blank">box-sizing: border-box</a>, so your wrapper's widths aren't made any bigger by the box styling.</p>
+		<p>If you require extra padding on your image container, you will need to take this into account when calculating the amount of bottom padding to apply in this fix. If the amount of extra padding or border is not a %, then you'll probably need to look at using <a href="http://www.paulirish.com/2012/box-sizing-border-box-ftw/" target="_blank">box-sizing: border-box</a>, so your wrapper's dimensions aren't made any bigger by the box styling.</p>
 		<p>So, here's the result:</p>
 
 		<div class="grumpy-section">
@@ -135,17 +152,15 @@
 	</section>
 
 	<section>
-		<h2>Extras: how about a nice preloading state, and fading in images?</h2>
-		<p>If you're after some bells and whistles, here's a bit of extra code I like to implement, to give the image wrappers a nice preloading state, and fade the images in only when they have completely loaded:</p>
-			<pre class="prettyprint lang-css">
-.image-wrapper {
-	width: 90%;
-	border: 2px solid white;
-	background: white url(data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH+GkNyZWF0ZWQgd2l0aCBhamF4bG9hZC5pbmZvACH5BAAKAAAAIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQACgABACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkEAAoAAgAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkEAAoAAwAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkEAAoABAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQACgAFACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQACgAGACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAAKAAcALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==) center center no-repeat;
-}
-			</pre>
+		<h2>Extras: how about a nice preloading state, and fading in images when they are ready?</h2>
+		<p>If you're after some bells and whistles, here's a bit of extra code I like to implement, to give the image wrappers a nice preloading state, and fade in the images only when they have completely loaded:</p>
 
-		<p>Demo: <a href="http://jsfiddle.net/andyshora/5YVNN/">http://jsfiddle.net/andyshora/5YVNN/</a></p>
+		<p>Demo: <a href="http://jsfiddle.net/andyshora/5YVNN/" target="_blank">http://jsfiddle.net/andyshora/5YVNN/</a></p>
+	</section>
+
+	<section>
+		<h3>That's all for now!</h3>
+		<p>Thanks for reading, as always please leave your questions and comments below!</p>
 	</section>
 
 

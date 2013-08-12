@@ -416,13 +416,13 @@ section h3 {
   margin: 5px auto;
   border: 2px solid white;
   padding: 0; }
-  .grumpy-image-wrap img, .grumpy-image-wrap-fixed img {
+  .grumpy-image-wrap > img, .grumpy-image-wrap-fixed > img {
     width: 100%; }
 
 .grumpy-image-wrap-fixed {
   position: relative;
   padding-bottom: 66.67%; }
-  .grumpy-image-wrap-fixed img {
+  .grumpy-image-wrap-fixed > img {
     position: absolute; }
 
 @media only screen and (max-width: 480px) {

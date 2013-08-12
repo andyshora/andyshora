@@ -204,7 +204,7 @@ section h3 {
 		border: 2px solid white;
 		padding: 0;
 
-		img {
+		> img {
 			width: 100%;
 		}
 	}
@@ -213,7 +213,7 @@ section h3 {
 		position: relative;
 		padding-bottom: 66.67%;
 
-		img {
+		> img {
 			position: absolute;
 		}
 
