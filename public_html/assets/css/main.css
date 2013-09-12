@@ -403,6 +403,14 @@ section h3 {
   background: #70b863;
   border: 1px solid #2B9921; }
 
+.tutorial-screenshot {
+  width: 100%;
+  margin: 0 auto; }
+
+@media only screen and (max-width: 480px) {
+  .tutorial-screenshot {
+    width: 100%;
+    margin: 0 auto; } }
 .grumpy-section {
   width: 25%;
   margin-right: 5%;

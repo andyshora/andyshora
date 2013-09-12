@@ -3,8 +3,8 @@
 <html dir="ltr" lang="en-US">
 <head>
 	<meta charset="utf-8">
-<title>A Windows Azure Tutorial For Hipsters</title>
-<meta name="description" content="A Windows Azure Tutorial For Hipsters">
+<title>Promises in AngularJS</title>
+<meta name="description" content="Promises in AngularJS">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
 	<link rel="shortcut icon" href="/favicon.ico" />
@@ -31,8 +31,8 @@
 
 	<header class="page-header">
 		<div class="page-header__title">
-			<h1>A Windows Azure Tutorial For Hipsters</h1>
-			<p>A useful frontend development tip. By <a href="#author">Andy Shora</a></p>
+			<h1>Promises in AngularJS</h1>
+			<p>A frontend development tutorial. By <a href="#author">Andy Shora</a></p>
 			<a href="/">&larr; back to andyshora.com</a> | <a class="twitter-share-button-placeholder" data-via="andyshora">Tweet this article<i class="icon icon-twitter"></i></a>
 		</div>
 	</header>
@@ -53,23 +53,26 @@
 
 	<section>
 		<p><strong>If your application root isn't at the root of your repo...</strong><br>Simply include a file named <i>.deployment</i> at the root of your repo, which contains the path to the folder you would like deployed to your Azure website.</p>
-		<pre class="prettyprint">
-[config]
-project = public_html
+		<pre class="prettyprint lang-js">
+// Service containing http call to API
+var app = angular.module('AwardProvider', []);
+app.factory('MediaService', function($rootScope, $http, $q) {
+	return {
+		getRecentMedia: function(location_id) {
+			var deferred = $q.defer();
+			$http.post('/api/recent_media', { location_id: location_id}).success(function (data) {
+				// resolve the promise
+				deferred.resolve(data);
+			});
+			return deferred.promise; // returns promise to caller (with no data yet)
+		}
+	};
+});
 </pre>
 
 	</section>
 
-	<section>
-		<img class="tutorial-screenshot" src="assets/img/pages/Screen Shot 2013-09-01 at 12.59.50.png" alt="">
-		<img class="tutorial-screenshot" src="assets/img/pages/Screen Shot 2013-09-01 at 13.01.12.png" alt="">
-		<img class="tutorial-screenshot" src="assets/img/pages/Screen Shot 2013-09-01 at 13.01.25.png" alt="">
-		<img class="tutorial-screenshot" src="assets/img/pages/Screen Shot 2013-09-01 at 13.02.05.png" alt="">
-		<img class="tutorial-screenshot" src="assets/img/pages/Screen Shot 2013-09-01 at 13.02.18.png" alt="">
-		<img class="tutorial-screenshot" src="assets/img/pages/Screen Shot 2013-09-01 at 13.03.44.png" alt="">
-		<img class="tutorial-screenshot" src="assets/img/pages/Screen Shot 2013-09-01 at 13.03.58.png" alt="">
-		<img class="tutorial-screenshot" src="assets/img/pages/Screen Shot 2013-09-01 at 13.06.15.png" alt="">
-	</section>
+
 
 
 	<section>

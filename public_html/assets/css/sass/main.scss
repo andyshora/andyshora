@@ -187,6 +187,19 @@ section h3 {
 	border: 1px solid #2B9921;
 }
 
+// hipster page
+.tutorial-screenshot {
+	width: 100%;
+	margin: 0 auto;
+}
+
+@media only screen and (max-width: 480px) {
+	.tutorial-screenshot {
+		width: 100%;
+		margin: 0 auto;
+	}
+}
+
 // image hack page
 .grumpy-section {
 	width:25%;
