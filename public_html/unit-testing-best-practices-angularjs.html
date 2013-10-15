@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+	<meta charset="utf-8">
+<title>Unit Testing Best Practices in AngularJS</title>
+<meta name="description" content="Unit Testing Best Practices in AngularJS">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<meta name="author" content="Andy Shora">
+	<link rel="author" href="https://plus.google.com/115209922186713310205/posts"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<script src="assets/js/modernizr-min.js"></script>
+	<!--[if lt IE 9]>
+	<meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
+	<script src="js/html5shiv.js" type="text/javascript"></script>
+	<![endif]-->
+
+	<script src="assets/js/jquery-1.9.1.min.js"></script>
+
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<!--[if lt IE 7 ]><script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+	<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})});</script><![endif]-->
+
+</head>
+<body>
+
+<div id="body_wrap">
+
+	<header class="page-header">
+		<div class="page-header__title">
+			<h1>Unit Testing Best Practices in AngularJS</h1>
+			<p>What should I be testing and when should I be writing tests? A frontend development article by <a href="#author">Andy Shora</a></p>
+			<a href="/">&larr; back to andyshora.com</a> | <a class="twitter-share-button-placeholder" data-via="andyshora">Tweet this article<i class="icon icon-twitter"></i></a>
+		</div>
+	</header>
+
+
+	<section>
+		<h2>Writing tests feels good!</h2>
+		<p><strong>I think it's essential that you learn to love the feeling of having a water-tight app. One which you know is not going to, you know, suddenly die the moment someone else starts making changes.</strong></p>
+		<p>It might just be me, but when you've written a nice function, and you've verified it works the way it should, it feels solid. You see green ticks on a command line, all tests passed. BOOM! You've just written some of the most solid, reliable code that's ever been written!</p>
+	</section>
+
+
+	<section>
+		<h2>Level 1. Unit Testing</h2>
+		<p>Everyone has to reach level 1! Breaking down the logic of your application into small chunks or 'units', and verifying that each unit works as desired, makes for a very happy app lifecycle!</p>
+		<p>Image the developer you were five years ago, imagine he or she inheriting your codebase, and imagine how it would be massacred into a small pile of turd the moment urgent changes are made. Ok, maybe you weren't that bad, but still, you need to write at least basic unit tests to make sure regressions don't spring up because some new developer doesn't understand what's going on.</p>
+		<p>The core units which make up features should be 'secured' with accompanying unit tests. In JavaScript apps, the smallest units of code you can test are usually individual functions.</p>
+
+		<div class="takeaway-tip"><p>The core units which make up features should be 'secured' with accompanying unit tests. In JavaScript apps, the smallest units of code you can test are usually individual functions.</p></div>
+
+		<h3>Recommended Unit Testing Tools</h3>
+		<ul>
+			<li><a href="http://pivotal.github.io/jasmine/" title="Jasmine - Jasmine is a behavior-driven development framework for testing JavaScript code">Jasmine</a> - <i>"Jasmine is a behavior-driven development framework for testing JavaScript code." <strong>(personal favourite, awesome docs)</strong></i></li>
+			<li><a href="http://visionmedia.github.io/mocha/" title="Mocha - the fun, simple, flexible JavaScript test framework">Mocha</a> - <i>"The fun, simple, flexible JavaScript test framework."</i></li>
+			<li><a href="" title="QUnit: A JavaScript Unit Testing framework.">QUnit</a> - <i>"A JavaScript Unit Testing framework, used by jQuery."</i></li>
+		</ul>
+
+		<h4>Examples</h4>
+		<ul>
+			<li>A function which displays an error message.</li>
+			<li>A function which validates an email address.</li>
+			<li>A function which sorts a list of names.</li>
+			<li>A function which changes the state of a product to 'out of stock'.</li>
+			<li>A function which adds a list of numbers together.</li>
+		</ul>
+
+		<p>In the grand scheme of things, these units may be very abstracted away from the users of the app, they may even be unaware of this level of functionality happening under the hood. Still, it's our job to verify that each of the chunks of an app work individually, so when they are joined together they have a good chance of working as a whole.</p>
+
+		<div class="takeaway-tip">...it's our job to verify that each of the chunks of an app <u>work individually</u>, so when they are joined together they have a good chance of working as a whole.</div>
+	</section>
+
+	<section>
+
+		<h3>When is a good time to write Unit Tests?</h3>
+<p>It's easy for a semi-technical manager to say "write all tests at the start", but the truth is, you often don't know all the small components which are required when presented with a high level user story.</p>
+
+<p>I usually write unit tests as I go along, as I develop all the 'units' required to implement a user story. You're going to constantly be changing functions around, refactoring and abstracting parts away, tidying up what's going in and coming out of functions, trying to preempt any of this is going to be a lot of wasted time.</p>
+
+<h4>Scenario</h4>
+<ul><li>User story: "As a user, when I login to my app, I am taken to the dashboard page."</li></ul>
+
+<h4>How do we break it down into tests? &nbsp;Story &rarr; Features &rarr; Units</h4>
+<p>I'll immediately select the 'login form' as a feature of this story which I can test, and I'll add the following test outlines for the important units that are required to implement this feature correctly:</p>
+
+<pre class="prettyprint lang-js">describe('user login form', function() {
+
+    // critical
+    it('ensure invalid email addresses are caught', function() {});
+    it('ensure valid email addresses pass validation', function() {});
+    it('ensure submitting form changes path', function() { });
+
+    // nice-to-haves
+    it('ensure client-side helper shown for empty fields', function() { });
+    it('ensure hitting enter on password field submits form', function() { });
+
+});</pre>
+	</section>
+
+	<section>
+		<p>Depending on your time constraints, you may decide to skip some of those tests, but hopefully you can see how critical the first three are, as if they failed, they could completely block people from using the app.</p>
+
+		<div class="takeaway-tip">Consider building a car from start to finish, each of the parts which make the engine, the chassis, the wheels, must be individually vefiried to be in working order before they are to be assembled into a 'car'.</div>
+
+<p><i>Consider building a car from start to finish, each of the parts which make the engine, the chassis, the wheels, must be individually vefiried to be in working order before they are to be assembled into a 'car'.</i></p>
+
+<p><i>If you've been told time is off the essence, less important parts can be de-prioritised. For example, tyres might not be checked for pressure, the stitching in the interior may not be checked for damage. This could result is a slightly shoddy car, but hey that's not your problem, you don't manage your time! (Always best to confirm its ok to skip these things first though, could be dangerous!)</i></p>
+	</section>
+
+	<section>
+		<h2>Level 2. Integration Testing</h2>
+
+		<p>Integration testing is where we write end-to-end tests, performing a sequence of a workflow or user journey, and verifying the state of the app/UI along the way.</p>
+
+		<p>This task is still mostly done manually by QA, and good QA engineers do automate tests using tools like <a href="http://docs.seleniumhq.org/" title="Selinium">Selinium</a> or <a href="http://phantomjs.org/" title="PhantomJS is a headless WebKit scriptable with a JavaScript API">PhantomJS</a> to make their life easier, but we're seeing a shift in responsibility now that developers have easy access to the tools required to automate end-to-end integration tests right from a task runner such as <a href="http://gruntjs.com/" title="Grunt, the JavaScript Task Runner">Grunt</a>.</p>
+		<h4>Use Grunt Y'all</h4>
+		<p>Quite simply, if you're not yet using <a href="http://gruntjs.com/" title="Grunt, the JavaScript Task Runner">Grunt</a> for your test and build process, you either haven't heard of it yet, haven't heard how awesome it is, or you're potentially an old, stubborn developer who doesn't like change.</p>
+		<p>Anyway, back to testing... we're essentially going to program the interactions needed to perform a task, and our headless browser is going to do all the work.
+
+		<h3>Recommended Intagration Testing Tools</h3>
+		<ul>
+			<li><a href="http://karma-runner.github.io/" title="Karma - Spectacular Test Runner for JavaScript">Karma</a> - <i>"Spectacular Test Runner for JavaScript."</i> <strong>(my favourite + uses real browsers!)</strong></li>
+			<li><a href="http://casperjs.org/" title="CasperJS">CasperJS</a> - <i>"CasperJS is a navigation scripting &amp; testing utility which uses headless browsers."</i></li>
+		</ul>
+
+		<h4>Examples</h4>
+		<ul>
+			<li>User logs into a website via the homepage, and sees a dashboard.</li>
+			<li>User searches for a product, clicks on a search result, and is taken to a product page.</li>
+			<li>User opens the basket, removes an item, and sees the number of items and the subtotal decrease.</li>
+			<li>User clicks '2', then '+', then '3', then '=', and sees '5' in the result area.</li>
+		</ul>
+
+		<p><i>Going back to our car example, integration testing is a bit like automating a robot to perform some function like drive the car. We consider the car as a whole, we tell the robot to get in, turn on the engine, and see if the car moved forward after a set sequence of opetations.</i></p>
+
+		<h3>When is a good time to write Integration Tests?</h3>
+		<p>When user stories are being created, it's a good idea to flesh out integration tests which will correspond to user journeys.</p>
+
+		<h4>Scenario</h4>
+		<ul><li>User story: "As a user, when I login to my app, I am taken to the dashboard page."</li></ul>
+
+		<p>At this point, I might decide my integration tests will look like this:</p>
+<pre class="prettyprint lang-js">describe('user login', function() {
+
+    it('ensures user is logged in', function() {
+        // expect current scope to contain username
+    });
+    it('ensures path has changed', function() {
+        // expect path to equal '/dashboard'
+    });
+
+});</pre>
+	</section>
+
+	<section>
+		<h3>What about verifying visual aspects?</h3>
+		<p>If you wanted to programatically vefiry the design is pixel perfect when rendered, you're actually asking for the world! Although integration testing frameworks such as PhantomJS has become advanced enough to take screenshots at different points in a test, you're always going to need a manual stage to tests where someone can verify the  rendered design against a visual design.</p>
+
+		<p>Developers have even started creating image diff tools to detect regressions in design, which is fantastic, but also comes with the burden of having to mock all content which is rendered.</p>
+	</section>
+
+	<section>
+		<h2>Unit Testing in AngularJS</h2>
+		<p><strong>Scenario: We are viewing a group in the admin. When clicking 'Edit Group' button, we should be presented with a form containing editable inputs, which are preloaded with the group data.</strong></p>
+
+		<p>First, let's formalise the components we need to perform our tests:</p>
+
+		<h3>X: The interaction/event you are going to test</h3>
+		<p>Example: clicking a button.</p>
+
+		<h3>Y: The 'thing' which is going to change in state once X happens</h3>
+		<p>Example: the path shown in the address bar, a form input.</p>
+
+		<h3>Z: An event fired to indicate that Y has changed</h3>
+		<p>Example: router fires a '$routeChangeSuccess' event, form fires a 'ready' event.</p>
+
+
+		<h2>Mocking Services and Modules</h2>
+
+		<p>Instead of our tests talking to real services, it will often suffice to speak to the 'mock' versions of the services, which will respond to calls accurately, but rather unintelligently. We use mocks because if we started replying on a real service writing real data, or a service changing the location in the address bar, or an unreliable external API, then it may interfere with the execution of our test runner in its own potentially sandboxed environment.</p>
+
+		<p>In fact, a lot of the time it's better, as we are concentrating code execution on our module. Stubbing out endpoints which our module is interacting with is a really good way of ensuring the reliability of our tests is dependent purely on how well the code inside our module performs.</p>
+		<p><strong>The aim of mocking objects is to emove dependencies on any external factors that module Y may be interfacing with, such as a browser's API, or an external http endpoint. This stuff has already been tested.</strong></p>
+
+		<p>The important thing to remember is that we aren't testing service Y, it's an abstracted-away module which we assume has it's own tests. If this module Y ships with a mock version, then we can assume that all essential logic is still included, and we are simply interfacing a dumb version which will act as an endpoint for our tests.</p>
+
+		<div class="takeaway-tip">Stubbing out endpoints which our module is interacting with is a really good way of ensuring the reliability of our tests is dependent purely on how well the code <u>inside</u> our module performs.</div>
+
+		<p>Consider the $location service which should do the following things when it's path() function is called with a path string as a param:</p>
+
+		<ul>
+			<li>Change the path in the address bar.</li>
+			<li>Fire a '$routeChangeSuccess' event.</li>
+		</ul>
+
+		<p>In this situation it would be ok for the mock $location service to store the new path in the instance, and fire the '$routeChangeSuccess' event when it's updated, but not actually redirect the browser. We assume this will already work, and has been tested by the guy at Google who wrote this service.</p>
+	</section>
+
+	<section>
+		<h2>Summary</h2>
+		<p>To round things up, remember to keep these rules in mind when writing Unit Tests and Integration Tests for your applcation:</p>
+		<ul>
+			<li>Break components down into units/chunks (which will often be single functions), and identify the units which are critical to the reliability of your component. Write unit tests for these chunks.</li>
+			<li>Remember to test for failure, as well as success. For example, check that an invalid email address doesn't pass an email validation function. Send it some test cases with really bizzare input as well as just a slightly invalid email address.</li>
+			<li>Try and flesh out outlines for the Integration Tests required, at the point where your user stories are becoming formalised.</li>
+			<li>Consider using Karma or CasperJS for performing end-to-end integration tests.</li>
+			<li>Mock external modules and services which simply act as endpoints for your module. Don't test things like third party services which should have their own tests.</li>
+		</ul>
+	</section>
+
+	<section>
+		<h3>That's all for now!</h3>
+		<p>Thanks for reading, as always please leave your questions and comments below!</p>
+	</section>
+
+
+</div>
+<script>
+	$(document).ready(function() {
+
+		$('.twitter-share-button-placeholder').bind('mouseover', function() {
+			enableShareButton($(this));
+		});
+
+		if (Modernizr.touch) {
+			enableShareButton($('.twitter-share-button-placeholder'));
+		}
+
+		window._gaq = [['_setAccount','UA-17716290-10'],['_trackPageview'],['_trackPageLoadTime']];
+		Modernizr.load({
+		load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+		});
+
+
+	});
+
+	function enableShareButton(elm) {
+
+		elm.addClass('twitter-share-button')
+			.removeClass('twitter-share-button-placeholder')
+			.attr('href', 'https://twitter.com/share')
+			.unbind('click');
+
+		!function(d,s,id){
+			var js,
+			fjs=d.getElementsByTagName(s)[0],
+			p=/^http:/.test(d.location)?'http':'https';
+
+			if(!d.getElementById(id)){
+				js=d.createElement(s);
+				js.id=id;
+				js.src=p+'://platform.twitter.com/widgets.js';
+				fjs.parentNode.insertBefore(js,fjs);
+			}
+		}(document, 'script', 'twitter-wjs');
+
+	}
+	function revealEmail() {
+		alert('andyshora' + '@gmail.com');
+	}
+</script>
+<div class="author-wrap" id="author">
+	<section class="author">
+		<div class="author__pic"></div>
+		<div class="author__desc">
+			<p>Hi, I'm <strong>Andy Shora</strong>. I'm a <strong>Frontend Web Developer</strong> based in London and I currently work with some very talented people over at <a href="http://www.rga.com">R/GA</a>.</p>
+			<div class="author__links">
+				<a class="author__link" href="http://twitter.com/andyshora"><i class="icon-twitter"></i> andyshora</a>
+				<a class="author__link" href="http://www.facebook.com/andyshora"><i class="icon-facebook"></i> fb<span class="link__extra">.com/andyshora</span></a>
+				<a class="author__link" href="http://www.pinterest.com/andyshora"><i class="icon-pinterest"></i> pinterest<span class="link__extra">.com/andyshora</span></a>
+				<a class="author__link" href="http://www.github.com/andyshora"><i class="icon-github"></i> github<span class="link__extra">.com/andyshora</span></a>
+				<a class="author__link" onclick="revealEmail()"><i class="icon-envelope"></i> contact<span class="link__extra"> me</span></a>
+			</div>
+		</div>
+	</section>
+</div>
+<section class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'andyshora'; // required: replace example with your forum shortname
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			if ((window.location+'').match(/dev\./g)) return;
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<!-- footer -->
+<footer>
+	<p>Andy Shora &copy; 2013</p>
+</footer>
+<!-- end footer -->
+</body>
+</html>

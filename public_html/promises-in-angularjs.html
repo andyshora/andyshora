@@ -52,7 +52,7 @@
 
 
 	<section>
-		<p><strong>If your application root isn't at the root of your repo...</strong><br>Simply include a file named <i>.deployment</i> at the root of your repo, which contains the path to the folder you would like deployed to your Azure website.</p>
+		<p><strong>An Angular service containing a HTTP</strong><br>Simply include a file named <i>.deployment</i> at the root of your repo, which contains the path to the folder you would like deployed to your Azure website.</p>
 		<pre class="prettyprint lang-js">
 // Service containing http call to API
 var app = angular.module('AwardProvider', []);
@@ -60,9 +60,10 @@ app.factory('MediaService', function($rootScope, $http, $q) {
 	return {
 		getRecentMedia: function(location_id) {
 			var deferred = $q.defer();
+
+			// http post to api (may take a second or two)
 			$http.post('/api/recent_media', { location_id: location_id}).success(function (data) {
-				// resolve the promise
-				deferred.resolve(data);
+				deferred.resolve(data); // resolve the promise
 			});
 			return deferred.promise; // returns promise to caller (with no data yet)
 		}
