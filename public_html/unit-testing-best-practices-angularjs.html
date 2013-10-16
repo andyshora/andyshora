@@ -51,9 +51,9 @@
 		<h2>Level 1. Unit Testing</h2>
 		<p>Welcome to the first level of testing. Everyone has to reach level 1! Breaking down the logic of your application into small chunks or 'units', and verifying that each unit works as desired, makes for a very happy and resilient app lifecycle!</p>
 		<p>Image the developer you were five years ago, imagine he or she inheriting your codebase, and imagine how it would be massacred into a small pile of excrement the moment urgent changes are made. Ok, maybe you weren't that bad. Still, you need to <strong>write at least basic unit tests to make sure regressions don't spring up because some new developer doesn't understand what's going on.</strong></p>
-		<p>The core units which make up features should be 'secured' with accompanying unit tests. In JavaScript apps, the smallest units of code you can test are usually individual functions.</p>
+		<p>The core units which make up features should be verified with accompanying unit tests. In JavaScript apps, the smallest units of code you can test are usually individual functions.</p>
 
-		<div class="takeaway-tip"><p>The core units which make up features should be 'secured' with accompanying unit tests. In JavaScript apps, the smallest units of code you can test are usually individual functions.</p></div>
+		<div class="takeaway-tip"><p>The core units which make up features should be verified with accompanying unit tests. In JavaScript apps, the smallest units of code you can test are usually individual functions.</p></div>
 
 		<h3>Recommended Unit Testing Tools</h3>
 		<ul>
@@ -79,9 +79,9 @@
 	<section>
 
 		<h2>When is a good time to write Unit Tests?</h2>
-<p>It's easy for a semi-technical manager to say "write all tests at the start", but the truth is, you often don't know all the small components which are required when presented with a high-level user story.</p>
+<p>It's easy for a semi-technical manager to say <i>"write all tests at the start"</i>, but the truth is, you often don't know all the small components which are required when presented with a high-level user story.</p>
 
-<p>I usually write unit tests as I go along, as I develop all the 'units' required to implement a user story. You're going to constantly be changing functions around, refactoring and abstracting parts away, tidying up what's going in and coming out of functions, trying to preempt any of this is going to be a lot of wasted time.</p>
+<p>I usually write unit tests as I go along, as I develop all the 'units' required to implement a user story. You're going to constantly be changing functions around, refactoring and abstracting parts away, tidying up what's going in and coming out of functions, trying to preempt any of this is going to cause a lot of wasted time.</p>
 
 <h4>Scenario</h4>
 <ul><li>User story: "As a user, when I login to my app, I am taken to the dashboard page."</li></ul>
@@ -119,42 +119,43 @@
 
 <pre class="prettyprint lang-js">describe("Unit Testing Examples", function() {
 
-	beforeEach(angular.mock.module('App'));
+  beforeEach(angular.mock.module('App'));
 
-	it('should have a LoginCtrl controller', function() {
-		expect(App.LoginCtrl).not.to.equal(null);
-	});
+  it('should have a LoginCtrl controller', function() {
+    expect(App.LoginCtrl).not.to.equal(null);
+  });
 
-	it('should have a working $loginService service', inject(['$loginService',
-		function($loginService) {
-			expect($loginService.isValidEmail).not.to.equal(null);
+  it('should have a working LoginService service', inject(['LoginService',
+    function(LoginService) {
+      expect(LoginService.isValidEmail).not.to.equal(null);
 
-			// test cases - testing for success
-			var validEmails = [
-				'test@test.com',
-				'test@test.co.uk',
-				'test734ltylytkliytkryety9ef@jb-fe.com'
-			];
+      // test cases - testing for success
+      var validEmails = [
+        'test@test.com',
+        'test@test.co.uk',
+        'test734ltylytkliytkryety9ef@jb-fe.com'
+      ];
 
-			// test cases - testing for failure
-			var invalidEmails = [
-				'test@testcom',
-				'test@ test.co.uk',
-				'ghgf@fe.com.co.',
-				'tes*t@test.com'
-			];
+      // test cases - testing for failure
+      var invalidEmails = [
+        'test@testcom',
+        'test@ test.co.uk',
+        'ghgf@fe.com.co.',
+        'tes*t@test.com'
+      ];
 
-			for (var i in validEmails) {
-				var valid = $loginService.isValidEmail(validEmails[i]);
-				expect(valid).toBeTruthy();
-			}
-			for (var i in invalidEmails) {
-				var valid = $loginService.isValidEmail(validEmails[i]);
-				expect(valid).toBeFalsy();
-			}
+      // you can loop through arrays of test cases like this
+      for (var i in validEmails) {
+        var valid = LoginService.isValidEmail(validEmails[i]);
+        expect(valid).toBeTruthy();
+      }
+      for (var i in invalidEmails) {
+        var valid = LoginService.isValidEmail(invalidEmails[i]);
+        expect(valid).toBeFalsy();
+      }
 
-		}])
-	);
+    }])
+  );
 });</pre>
 
 
@@ -170,6 +171,7 @@
 		<p>This task is still mostly done manually by QA, and good QA engineers do automate tests using tools like <a href="http://docs.seleniumhq.org/" title="Selinium">Selinium</a> or <a href="http://phantomjs.org/" title="PhantomJS is a headless WebKit scriptable with a JavaScript API">PhantomJS</a> to make their life easier, but we're seeing a shift in responsibility now that developers have easy access to the tools required to automate end-to-end integration tests right from a task runner such as <a href="http://gruntjs.com/" title="Grunt, the JavaScript Task Runner">Grunt</a>.</p>
 		<h4>Use Grunt Y'all</h4>
 		<p>Quite simply, if you're not yet using <a href="http://gruntjs.com/" title="Grunt, the JavaScript Task Runner">Grunt</a> for your test and build process, you either haven't heard of it yet, haven't heard exactly how awesome it is, or you're potentially an old, stubborn developer who doesn't like change.</p>
+		<p>Grunt allows us to install testing frameworks like Jasmine or Karma in a single command, and then execute all tests within a project when files change, or during the build process. Simply executing a command like <strong>grunt test</strong> can lint your code and peform all unit and integration tests. Also take a look at <a href="http://yeoman.io/">Yeoman</a> as a complete solution for setting up an app skeleton as well as full build and testing procedures, which uses Grunt by default.</p>
 		<p>Anyway, back to testing... we're essentially going to program the interactions needed to perform a task, and our headless browser is going to do all the work.
 
 		<h2>Recommended Integration Testing Tools</h2>
@@ -186,10 +188,12 @@
 			<li>User clicks '2', then '+', then '3', then '=', and sees '5' in the result area.</li>
 		</ul>
 
-		<p><i>Going back to our car example, integration testing is a bit like automating a robot to perform some function like drive the car. We consider the car as a whole, we tell the robot to get in, turn on the engine, and see if the car moved forward after a set sequence of opetations.</i></p>
+		<p><i>Going back to our car example, integration testing is a bit like automating a robot to perform some function like drive the car. We consider the car as a whole, we tell the robot to get in, turn on the engine, and see if the car moved forward after a set sequence of operations.</i></p>
 
 		<h2>When is a good time to write Integration Tests?</h2>
 		<p>When user stories are being created, it's a good idea to flesh out integration tests which will correspond to user journeys. A good thing about higher level testing like this, is that the tests will be pretty resilient to changes in your code. As long as the elements rendered on a page, and the routing stays the same, if you change the underlying implementation one day, your E2E tests should still pass.</p>
+
+		<div class="takeaway-tip">When user stories are being created, it's a good idea to flesh out integration tests which will correspond to user journeys.</div>
 
 		<h4>Scenario</h4>
 		<ul><li>User story: "As a user, when I login to my app, I am taken to the dashboard page."</li></ul>
@@ -197,14 +201,12 @@
 		<p>At this point, I've literally just heard about the user story, I might decide my integration tests will look something like this:</p>
 <pre class="prettyprint lang-js">describe('user login', function() {
 
-    // perform steps here
-
-    it('ensures user can log in', function() {
-        // expect current scope to contain username
-    });
-    it('ensures path has changed', function() {
-        // expect path to equal '/dashboard'
-    });
+  it('ensures user can log in', function() {
+    // expect current scope to contain username
+  });
+  it('ensures path has changed', function() {
+    // expect path to equal '/dashboard'
+  });
 
 });</pre>
 	</section>
@@ -213,56 +215,59 @@
 		<h2>What about verifying visual aspects?</h2>
 		<p>If you wanted to programatically vefiry the design is pixel perfect when rendered, you're actually asking for the world! Although integration testing frameworks such as PhantomJS has become advanced enough to take screenshots at different points in a test, you're always going to need a manual stage to tests where someone can verify the  rendered design against a visual design.</p>
 
-		<p>Developers have even started creating image diff tools to detect regressions in design, which is fantastic, but also comes with the burden of having to mock all content which is rendered, to prevent image diff libraries mistakenly detecting different content as a visual regression.</p>
+		<p>Developers have even started creating image diff tools to detect regressions in design, which is fantastic, but also comes with the burden of having to mock all content which is rendered, to prevent image diff libraries mistakenly detecting different content as visual regressions.</p>
 
-		<p>I recently saw a talk at LondonJS by <a href="http://twitter.com/jamescryer">James Cryer</a> who wrote a really cool CSS Regression Testing tool, <a href="http://tldr.huddle.com/blog/css-testing/">PhantomCSS</a>, which can produce screenshots of various parts of an app, overlayed with a bright colour indication visual regressions.</p>
+		<p>I recently saw a talk at LondonJS by <a href="http://twitter.com/jamescryer">James Cryer</a> who wrote a really cool CSS Regression Testing tool, <a href="http://tldr.huddle.com/blog/css-testing/">PhantomCSS</a>, which can produce screenshots of various parts of an app, overlayed with a bright colour indicating visual regressions. Amazing stuff, but perhaps a bit out of scope for this article.</p>
 	</section>
+
 
 	<section>
 		<h2>Writing Good Integration/E2E Tests for AngularJS</h2>
 		<p>Here's some examples of higher-level Integration Tests, which interact with the application level, as opposed to the actual functions in your app.</p>
 		<pre class="prettyprint lang-js">describe("Integration/E2E Testing", function() {
 
-	// start at root before every test is run
-	beforeEach(function() {
-		browser().navigateTo('/');
-	});
+  // start at root before every test is run
+  beforeEach(function() {
+    browser().navigateTo('/');
+  });
 
-	// test default route
-	it('should jump to the /home path when / is accessed', function() {
-		browser().navigateTo('#/');
-		expect(browser().location().path()).toBe("/login");
-	});
+  // test default route
+  it('should jump to the /home path when / is accessed', function() {
+    browser().navigateTo('#/');
+    expect(browser().location().path()).toBe("/login");
+  });
 
-	it('ensures user can log in', function() {
-		browser().navigateTo('#/login');
-		expect(browser().location().path()).toBe("/login");
+  it('ensures user can log in', function() {
+    browser().navigateTo('#/login');
+    expect(browser().location().path()).toBe("/login");
 
-		// assuming inputs have ng-model specified, and this conbination will successfully login
-		input('email').enter('test@test.com');
-		input('password').enter('password');
-		element('submit').click();
+    // assuming inputs have ng-model specified, and this conbination will successfully login
+    input('email').enter('test@test.com');
+    input('password').enter('password');
+    element('submit').click();
 
-		// logged in route
-		expect(browser().location().path()).toBe("/dashboard");
+    // logged in route
+    expect(browser().location().path()).toBe("/dashboard");
 
-		// my dashboard page has a label for the email address of the logged in user
-		expect(element('#email').html()).toContain('test@test.com');
-	});
+    // my dashboard page has a label for the email address of the logged in user
+    expect(element('#email').html()).toContain('test@test.com');
+  });
 
-	it('should keep invalid logins on this page', function() {
-		browser().navigateTo('#/login');
-		expect(browser().location().path()).toBe("/login");
+  it('should keep invalid logins on this page', function() {
+    browser().navigateTo('#/login');
+    expect(browser().location().path()).toBe("/login");
 
-		// assuming inputs have ng-model specified, and this conbination will successfully login
-		input('email').enter('invalid@test.com');
-		input('password').enter('wrong password');
-		element('submit').click();
+    // assuming inputs have ng-model specified, and this conbination will successfully login
+    input('email').enter('invalid@test.com');
+    input('password').enter('wrong password');
+    element('submit').click();
 
-		// logged out route
-		expect(browser().location().path()).toBe("/login");
+    expect(element('#message').html().toLowerCase()).toContain('failed');
 
-	});
+    // logged out route
+    expect(browser().location().path()).toBe("/login");
+
+  });
 
 });</pre>
 	</section>
@@ -273,12 +278,14 @@
 
 		<h2>Mocking Services and Modules in AngularJS</h2>
 
-		<p>Instead of our tests talking to real services, it will often suffice to speak to the 'mock' versions of the services, which will respond to calls accurately, but rather unintelligently. We use mocks because if we started replying on a real service writing real data, or a service changing the location in the address bar, or an unreliable external API, then it may interfere with the execution of our test runner in its own potentially sandboxed environment.</p>
+		<p>Instead of our tests talking to real services, it will often suffice to speak to the 'mock' versions of the services, which will respond to calls accurately, but rather unintelligently. We use mocks because if we started relying on a real service writing real data, or a service changing the location in the address bar, or an unreliable external API, then it may interfere with the execution of our test runner in its own potentially sandboxed environment.</p>
 
-		<p>In fact, a lot of the time it's better, as we are concentrating code execution on our module. Stubbing out endpoints which our module is interacting with is a really good way of ensuring the reliability of our tests is dependent purely on how well the code inside our module performs.</p>
-		<p><strong>The aim of mocking objects is to emove dependencies on any external factors that module Y may be interfacing with, such as a browser's API, or an external http endpoint. This stuff has already been tested.</strong></p>
+		<p>In fact, it's a lot better to mock as we concentrate test code coverage purely on our module. Stubbing out endpoints which our module is interacting with is a really good way of ensuring the reliability of our tests is dependent purely on how well the code inside our module performs.</p>
+		<p><strong>The aim of mocking objects is to remove dependencies on any external factors that module X may be interfacing with, such as a browser's API, or an external API endpoint. We can assume this stuff has already been tested.</strong></p>
 
-		<p>The important thing to remember is that we aren't testing this external service X, it's an abstracted-away module which we assume has it's own tests. If this module X ships with a mock version, then we can assume that all essential logic is still included, and we are simply interfacing a dumb version which will act as an endpoint for our tests.</p>
+		<p>The important thing to remember is that we aren't testing this external service 'Y', it's an abstracted-away module which we assume has its own tests. If this service Y ships with a mock version, then we can assume that all essential logic is still included, and we are simply interfacing a dumb version which will act as a static endpoint to satisfy our tests.</p>
+
+		<p><i>In our car example, objects we may decide to mock out would be pedestrians, maybe other cars, even passengers are 'mocked out' in the form of crash test dummies!</i></p>
 
 		<div class="takeaway-tip">Stubbing out endpoints which our module is interacting with is a really good way of ensuring the reliability of our tests is dependent purely on how well the code <u>inside</u> our module performs.</div>
 
@@ -289,20 +296,38 @@
 			<li>Fire a '$routeChangeSuccess' event.</li>
 		</ul>
 
-		<p>In this situation it would be ok for the mock $location service to store the new path in the instance, and fire the '$routeChangeSuccess' event when it's updated, but not actually redirect the browser. We assume this will already work, and has been tested by the guy at Google who wrote this service.</p>
+		<p>In this situation it would be ok for the mock $location service to store the new path in the instance, and fire the '$routeChangeSuccess' event when it's updated, but not actually redirect the browser. We assume this will already work, and has been tested by the person who wrote this service.</p>
+
+		<h2>Mocking HTTP Requests with $httpBackend</h2>
+		<p>Here's an example showing how to mock a http request, using the $httpBackend service to intercept the request if it meets certain conditions. Note that the LoginService.login method uses the $http service to send a POST request, and this service relies on $httpBackend in Angular.</p>
+<pre class="prettyprint lang-js">it('should get login success',
+  inject(function(LoginService, $httpBackend) {
+
+    $httpBackend.expect('POST', 'https://api.mydomain.com/login')
+      .respond(200, "[{ success : 'true', id : 123 }]");
+
+    LoginService.login('test@test.com', 'password')
+      .then(function(data) {
+        expect(data.success).toBeTruthy();
+    });
+
+  $httpBackend.flush();
+});</pre>
+
+
 	</section>
 
 	<hr>
 
 	<section>
 		<h2>Summary</h2>
-		<p>To round things up, remember to keep these rules in mind when writing Unit Tests and Integration Tests for your applcation:</p>
+		<p>To round things up, remember to keep these rules in mind when writing Unit Tests and Integration Tests for your application:</p>
 		<ul>
-			<li>Try and flesh out outlines for the Integration Tests required, at the point where your user stories are becoming formalised.</li>
+			<li>Try and flesh out outlines for the Integration Tests at the point where your user stories are becoming formalised.</li>
 			<li>When writing E2E/Integration Tests, always bear in mind they should be application-level, so they should be pretty resistant to changes in the underlying implementation.</li>
 			<li>Break components down into units/chunks (which will often be single functions), and identify the units which are critical to the reliability of your component. Write unit tests for these chunks.</li>
-			<li>Remember to test for failure, as well as success. For example, check that an invalid email address doesn't pass an email validation function. Send it some test cases with really bizzare input as well as just a slightly invalid email address.</li>
-			<li>Consider using <a href="http://karma-runner.github.io/" title="Karma - Spectacular Test Runner for JavaScript">Karma</a> for performing end-to-end integration tests.</li>
+			<li>Remember to test for failure, as well as success. For example, check that an invalid email address doesn't pass an email validation function. Set up some test cases with really bizzare input as well as just a slightly invalid email address.</li>
+			<li>Consider using <a href="http://pivotal.github.io/jasmine/" title="Jasmine - Jasmine is a behavior-driven development framework for testing JavaScript code">Jasmine</a> for unit tests, and  <a href="http://karma-runner.github.io/" title="Karma - Spectacular Test Runner for JavaScript">Karma</a> for performing end-to-end integration tests.</li>
 			<li>Mock external modules and services which simply act as endpoints for the code in your module. Don't test things like third party services which should have their own tests.</li>
 		</ul>
 	</section>
