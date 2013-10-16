@@ -55,7 +55,7 @@
 
 	<section>
 
-		<h3>When is a good time to write Unit Tests?</h3>
+		<h2>When is a good time to write Unit Tests?</h2>
 <p>It's easy for a semi-technical manager to say "write all tests at the start", but the truth is, you often don't know all the small components which are required when presented with a high-level user story.</p>
 
 <p>I usually write unit tests as I go along, as I develop all the 'units' required to implement a user story. You're going to constantly be changing functions around, refactoring and abstracting parts away, tidying up what's going in and coming out of functions, trying to preempt any of this is going to be a lot of wasted time.</p>
@@ -149,7 +149,7 @@
 		<p>Quite simply, if you're not yet using <a href="http://gruntjs.com/" title="Grunt, the JavaScript Task Runner">Grunt</a> for your test and build process, you either haven't heard of it yet, haven't heard exactly how awesome it is, or you're potentially an old, stubborn developer who doesn't like change.</p>
 		<p>Anyway, back to testing... we're essentially going to program the interactions needed to perform a task, and our headless browser is going to do all the work.
 
-		<h3>Recommended Intagration Testing Tools</h3>
+		<h2>Recommended Integration Testing Tools</h2>
 		<ul>
 			<li><a href="http://karma-runner.github.io/" title="Karma - Spectacular Test Runner for JavaScript">Karma</a> - <i>"Spectacular Test Runner for JavaScript."</i> <strong>(my favourite + uses real browsers!)</strong></li>
 			<li><a href="http://casperjs.org/" title="CasperJS">CasperJS</a> - <i>"CasperJS is a navigation scripting &amp; testing utility which uses headless browsers."</i></li>
@@ -165,18 +165,18 @@
 
 		<p><i>Going back to our car example, integration testing is a bit like automating a robot to perform some function like drive the car. We consider the car as a whole, we tell the robot to get in, turn on the engine, and see if the car moved forward after a set sequence of opetations.</i></p>
 
-		<h3>When is a good time to write Integration Tests?</h3>
-		<p>When user stories are being created, it's a good idea to flesh out integration tests which will correspond to user journeys.</p>
+		<h2>When is a good time to write Integration Tests?</h2>
+		<p>When user stories are being created, it's a good idea to flesh out integration tests which will correspond to user journeys. A good thing about higher level testing like this, is that the tests will be pretty resilient to changes in your code. As long as the elements rendered on a page, and the routing stays the same, if you change the underlying implementation one day, your E2E tests should still pass.</p>
 
 		<h4>Scenario</h4>
 		<ul><li>User story: "As a user, when I login to my app, I am taken to the dashboard page."</li></ul>
 
-		<p>At this point, I might decide my integration tests will look like this:</p>
+		<p>At this point, I've literally just heard about the user story, I might decide my integration tests will look something like this:</p>
 <pre class="prettyprint lang-js">describe('user login', function() {
 
     // perform steps here
 
-    it('ensures user is logged in', function() {
+    it('ensures user can log in', function() {
         // expect current scope to contain username
     });
     it('ensures path has changed', function() {
@@ -187,14 +187,17 @@
 	</section>
 
 	<section>
-		<h3>What about verifying visual aspects?</h3>
+		<h2>What about verifying visual aspects?</h2>
 		<p>If you wanted to programatically vefiry the design is pixel perfect when rendered, you're actually asking for the world! Although integration testing frameworks such as PhantomJS has become advanced enough to take screenshots at different points in a test, you're always going to need a manual stage to tests where someone can verify the  rendered design against a visual design.</p>
 
 		<p>Developers have even started creating image diff tools to detect regressions in design, which is fantastic, but also comes with the burden of having to mock all content which is rendered, to prevent image diff libraries mistakenly detecting different content as a visual regression.</p>
+
+		<p>I recently saw a talk at LondonJS by <a href="http://twitter.com/jamescryer">James Cryer</a> who wrote a really cool CSS Regression Testing tool, <a href="http://tldr.huddle.com/blog/css-testing/">PhantomCSS</a>, which can produce screenshots of various parts of an app, overlayed with a bright colour indication visual regressions.</p>
 	</section>
 
 	<section>
 		<h2>Writing Good Integration/E2E Tests for AngularJS</h2>
+		<p>Here's some examples of higher-level Integration Tests, which interact with the application level, as opposed to the actual functions in your app.</p>
 		<pre class="prettyprint lang-js">describe("Integration/E2E Testing", function() {
 
 	// start at root before every test is run
@@ -208,7 +211,7 @@
 		expect(browser().location().path()).toBe("/login");
 	});
 
-	it('should have a working /login route', function() {
+	it('ensures user can log in', function() {
 		browser().navigateTo('#/login');
 		expect(browser().location().path()).toBe("/login");
 
@@ -272,9 +275,10 @@
 		<h2>Summary</h2>
 		<p>To round things up, remember to keep these rules in mind when writing Unit Tests and Integration Tests for your applcation:</p>
 		<ul>
+			<li>Try and flesh out outlines for the Integration Tests required, at the point where your user stories are becoming formalised.</li>
+			<li>When writing E2E/Integration Tests, always bear in mind they should be application-level, so they should be pretty resistant to changes in the underlying implementation.</li>
 			<li>Break components down into units/chunks (which will often be single functions), and identify the units which are critical to the reliability of your component. Write unit tests for these chunks.</li>
 			<li>Remember to test for failure, as well as success. For example, check that an invalid email address doesn't pass an email validation function. Send it some test cases with really bizzare input as well as just a slightly invalid email address.</li>
-			<li>Try and flesh out outlines for the Integration Tests required, at the point where your user stories are becoming formalised.</li>
 			<li>Consider using <a href="http://karma-runner.github.io/" title="Karma - Spectacular Test Runner for JavaScript">Karma</a> for performing end-to-end integration tests.</li>
 			<li>Mock external modules and services which simply act as endpoints for the code in your module. Don't test things like third party services which should have their own tests.</li>
 		</ul>
