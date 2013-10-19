@@ -1,0 +1,128 @@
+<!-- INCLUDE:html_open -->
+<title>Promises in AngularJS, as a Cartoon</title>
+<meta name="description" content="Promises in AngularJS, as a Cartoon">
+<!-- INCLUDE:head -->
+
+<div id="body_wrap">
+
+	<header class="page-header">
+		<div class="page-header__title">
+			<h1>Promises in AngularJS, as a Cartoon</h1>
+			<p>A useful frontend development tip. By <a href="#author">Andy Shora</a></p>
+			<a href="/">&larr; back to andyshora.com</a> | <a class="twitter-share-button-placeholder" data-via="andyshora">Tweet this article<i class="icon icon-twitter"></i></a>
+		</div>
+	</header>
+
+	<section>
+		<p>Every Saturday morning, a father asks his son to go and find out tomorrow's weather forecast, by sending an SMS to a weather service! But there's no reception in their home, so he has to go and climb the hill.</p>
+
+<p>The son promises his dad he will go and get the weather forecast. He creates a promise with his dad at the door when he leaves.</p>
+
+<pre class="prettyprint lang-js">
+  // function somewhere in father-controller.js
+  var makePromiseWithSon = function() {
+    // This service's function returns a promise, but we'll deal with that shortly
+    SonService.goAndGetWeatherForecast();
+  };
+</pre>
+
+<p>At that point, the dad decides if the weather tomorrow is good, he'll prepare a fishing trip for tomorrow. If it's bad he won't. Also, if the son is unable to get a forecast, he'll stay in as well.</p>
+
+<pre class="prettyprint lang-js">
+  if (forecast==='good') {
+    prepareFishingTrip();
+  } else {
+    prepareSundayRoastDinner();
+  }
+</pre>
+
+<p>After 30mins or so, the son comes back. Different things happen from week-to-week:</p>
+<ol>
+	<li>The <strong>son successfully retrieved the weather forecast</strong>, clear skies and sunshine! The <strong>promise had been fulfilled</strong> (the son got the forecast) and dad decided to pack up for the fishing trip for Sunday.</li>
+	<li>The <strong>son successfully retrieved the weather forecast</strong>, but it said cloudy and rain. The <strong>promise had been fulfilled</strong> (the son got the forecast) but dad decided to stay in because of the bad weather.</li>
+	<li>The son <strong>failed to retrieve the forecast</strong>, he didn't get an SMS back due to some kind of error with the service. The promise the son made when he left was broken - <strong>promise rejected</strong>! The dad decided to stay in.</li>
+</ol>
+
+<pre class="prettyprint lang-js">
+  // function somewhere in father-controller.js
+  var makePromiseWithSon = function() {
+    // This service's function returns a promise, but we'll deal with that shortly
+    SonService.goAndGetWeatherForecast()
+      // then() called when son gets back
+      .then(function(forecast) {
+        // promise fulfilled
+        if (forecast==='good') {
+          prepareFishingTrip();
+        } else {
+          prepareSundayRoastDinner();
+        }
+      }, function(error) {
+        // promise rejected
+        console.log('error', error);
+        prepareSundayRoastDinner();
+      });
+  };
+</pre>
+
+<p>This analogy demonstrates the asynchronous nature of the request the dad makes to his son, for the weather forecast. The dad doesn't want to wait at the door in anticipation when the son leaves, because he has other stuff to do. Instead, he makes a promise at the door, and decides what will happen in either of the 3 scenarios (good weather/bad weather/no forecast). The son immediately gives a promise to his dad when he leaves, and will resolve or reject it on his return.</p>
+
+<p>The son is dealing with an asynchronous service (the SMS weather service) to get data, but all of this is correctly abstracted away from his old man, who doesn't really understand technology!</p>
+	</section>
+
+</div>
+<script>
+	$(document).ready(function() {
+
+		$('.twitter-share-button-placeholder').bind('mouseover', function() {
+			enableShareButton($(this));
+		});
+
+		prettyPrint();
+
+		enableShareButton($('.twitter-share-button-placeholder'));
+
+
+		window._gaq = [['_setAccount','UA-17716290-10'],['_trackPageview'],['_trackPageLoadTime']];
+		Modernizr.load({
+		load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+		});
+
+
+
+
+	});
+
+	function enableShareButton(elm) {
+
+		elm.addClass('twitter-share-button')
+			.removeClass('twitter-share-button-placeholder')
+			.attr('href', 'https://twitter.com/share')
+			.unbind('click');
+
+		!function(d,s,id){
+			var js,
+			fjs=d.getElementsByTagName(s)[0],
+			p=/^http:/.test(d.location)?'http':'https';
+
+			if(!d.getElementById(id)){
+				js=d.createElement(s);
+				js.id=id;
+				js.src=p+'://platform.twitter.com/widgets.js';
+				fjs.parentNode.insertBefore(js,fjs);
+			}
+		}(document, 'script', 'twitter-wjs');
+
+	}
+
+	function revealEmail() {
+		alert('andyshora' + '@gmail.com');
+	}
+</script>
+<!-- INCLUDE:author -->
+<!-- INCLUDE:comments -->
+
+
+<!-- INCLUDE:footer -->
+<!-- INCLUDE:html_close -->
+
+
