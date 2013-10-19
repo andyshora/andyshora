@@ -99,7 +99,7 @@
   beforeEach(angular.mock.module('App'));
 
   it('should have a LoginCtrl controller', function() {
-    expect(App.LoginCtrl).not.to.equal(null);
+    expect(App.LoginCtrl).toBeDefined();
   });
 
   it('should have a working LoginService service', inject(['LoginService',
@@ -118,7 +118,8 @@
         'test@testcom',
         'test@ test.co.uk',
         'ghgf@fe.com.co.',
-        'tes*t@test.com'
+        'tes@t@test.com',
+        ''
       ];
 
       // you can loop through arrays of test cases like this
@@ -139,7 +140,6 @@
 	</section>
 
 	<hr>
-
 	<section>
 		<h2>Level 2. Integration Testing</h2>
 
@@ -332,6 +332,8 @@
 		load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
 		});
 
+		prettyPrint();
+
 
 	});
 
@@ -356,12 +358,12 @@
 		}(document, 'script', 'twitter-wjs');
 
 	}
+
 	function revealEmail() {
 		alert('andyshora' + '@gmail.com');
 	}
 </script>
 <!-- INCLUDE:author -->
 <!-- INCLUDE:comments -->
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
 <!-- INCLUDE:footer -->
 <!-- INCLUDE:html_close -->

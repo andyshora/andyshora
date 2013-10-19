@@ -5,7 +5,6 @@
 <title>Unit Testing Best Practices in AngularJS</title>
 <meta name="description" content="Unit Testing Best Practices in AngularJS">
 	<link rel="stylesheet" href="assets/css/main.css">
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<meta name="author" content="Andy Shora">
 	<link rel="author" href="https://plus.google.com/115209922186713310205/posts"/>
@@ -18,6 +17,7 @@
 	<![endif]-->
 
 	<script src="assets/js/jquery-1.9.1.min.js"></script>
+	<script src="assets/js/prettify.js"></script>
 
 	<meta http-equiv="X-UA-Compatible" content="chrome=1">
 	<!--[if lt IE 7 ]><script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
@@ -122,7 +122,7 @@
   beforeEach(angular.mock.module('App'));
 
   it('should have a LoginCtrl controller', function() {
-    expect(App.LoginCtrl).not.to.equal(null);
+    expect(App.LoginCtrl).toBeDefined();
   });
 
   it('should have a working LoginService service', inject(['LoginService',
@@ -141,7 +141,8 @@
         'test@testcom',
         'test@ test.co.uk',
         'ghgf@fe.com.co.',
-        'tes*t@test.com'
+        'tes@t@test.com',
+        ''
       ];
 
       // you can loop through arrays of test cases like this
@@ -162,7 +163,6 @@
 	</section>
 
 	<hr>
-
 	<section>
 		<h2>Level 2. Integration Testing</h2>
 
@@ -355,6 +355,8 @@
 		load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
 		});
 
+		prettyPrint();
+
 
 	});
 
@@ -379,6 +381,7 @@
 		}(document, 'script', 'twitter-wjs');
 
 	}
+
 	function revealEmail() {
 		alert('andyshora' + '@gmail.com');
 	}
@@ -413,7 +416,6 @@
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </section>
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
 <!-- footer -->
 <footer>
 	<p>Andy Shora &copy; 2013</p>

@@ -163,6 +163,8 @@ $(document).ready(function(){
 			return val;
 		}
 
+		if (!canvas) return;
+
 		var ctx = canvas.getContext('2d');
 		ctx.save();
 

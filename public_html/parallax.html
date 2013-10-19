@@ -6,7 +6,6 @@
 <title>Parallax Tutorial using CSS and jQuery</title>
 <meta name="description" content="Andy Shora, Front-end Web Developer in London">
 	<link rel="stylesheet" href="assets/css/main.css">
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<meta name="author" content="Andy Shora">
 	<link rel="author" href="https://plus.google.com/115209922186713310205/posts"/>
@@ -19,6 +18,7 @@
 	<![endif]-->
 
 	<script src="assets/js/jquery-1.9.1.min.js"></script>
+	<script src="assets/js/prettify.js"></script>
 
 	<meta http-equiv="X-UA-Compatible" content="chrome=1">
 	<!--[if lt IE 7 ]><script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
@@ -357,6 +357,8 @@ function parallax(scrollTop) {
 			Modernizr.load({
 			load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
 			});
+
+			prettyPrint();
 		});
 
 		function parallax(scrollTop) {
@@ -445,7 +447,6 @@ function parallax(scrollTop) {
 			alert('andyshora' + '@gmail.com');
 		}
 	</script>
-	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
 
 <!-- footer -->
 <footer>
