@@ -72,6 +72,37 @@ h2 {
 		padding: 0 20px;
 	}
 }
+.featured {
+
+	ul {
+		margin: 0 0 30px 0;
+		padding: 0;
+		font-size: 0;
+
+		> li {
+			margin: 10px 0;
+			padding: 20px;
+			display: inline-block;
+			width: 33%;
+			font-size: 20px;
+			vertical-align: top;
+			box-sizing: border-box;
+			color: white;
+
+			@media only screen and (max-width: 768px) {
+				width: 50%;
+			}
+
+			a {
+				text-decoration: none;
+				color: white;
+				background: rgba(0, 0, 0, 0.68);
+				padding: 5px;
+				line-height: 39px;
+			}
+		}
+	}
+}
 section {
 	text-align: left;
 	max-width:960px;
