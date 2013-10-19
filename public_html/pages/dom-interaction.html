@@ -210,9 +210,10 @@ $(document).ready(function() {
 			enableShareButton($(this));
 		});
 
-		if (Modernizr.touch) {
-			enableShareButton($('.twitter-share-button-placeholder'));
-		}
+
+		prettyPrint();
+
+		enableShareButton($('.twitter-share-button-placeholder'));
 
 		window._gaq = [['_setAccount','UA-17716290-10'],['_trackPageview'],['_trackPageLoadTime']];
 		Modernizr.load({
