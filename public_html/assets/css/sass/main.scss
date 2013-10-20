@@ -154,6 +154,7 @@ section {
 
 	h1,h2,h3,h4 {
 		text-align: left;
+		margin-bottom: 6px;
 	}
 	h3.inline {
 		display: inline;
@@ -440,11 +441,12 @@ footer p {
 
 
 .author2-wrap {
+	width: 90%;
 	margin-top: 10px;
 	padding-left: 10%;
 
 	.author {
-		height: 110px;
+		height: 130px;
 	}
 
 	.author__desc {

@@ -380,7 +380,8 @@ section {
   margin: 40px auto 0;
   clear: both; }
   section h1, section h2, section h3, section h4 {
-    text-align: left; }
+    text-align: left;
+    margin-bottom: 6px; }
   section h3.inline {
     display: inline;
     text-align: left; }
@@ -597,10 +598,11 @@ footer p {
   #body_wrap section {
     padding: 0 10px; } }
 .author2-wrap {
+  width: 90%;
   margin-top: 10px;
   padding-left: 10%; }
   .author2-wrap .author {
-    height: 110px; }
+    height: 130px; }
   .author2-wrap .author__desc {
     padding: 15px 0 0 2%;
     float: left;
