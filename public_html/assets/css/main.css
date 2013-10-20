@@ -338,6 +338,8 @@ h2 {
       background: rgba(0, 0, 0, 0.68);
       padding: 5px;
       line-height: 39px; }
+      .featured ul > li a:hover {
+        background: rgba(53, 69, 136, 0.72); }
 
 section {
   text-align: left;
