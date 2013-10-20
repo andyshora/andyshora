@@ -304,6 +304,7 @@ footer p {
 	border-top: 1px solid $secondary;
 	border-bottom: 1px solid $secondary;
 }
+
 .author {
 	padding:0;
 	height:140px;
@@ -320,6 +321,7 @@ footer p {
 	margin: -30px 0 0 20px;
 	border: 1px solid rgb(196, 196, 196);
 }
+
 .author__desc {
 	width: 75%;
 	padding:30px 0 0 2%;
@@ -389,6 +391,37 @@ footer p {
 	}
 
 
+}
+
+
+.author2-wrap {
+	margin-top: 10px;
+	padding-left: 10%;
+
+	.author {
+		height: 110px;
+	}
+
+	.author__desc {
+		padding: 15px 0 0 2%;
+		float: left;
+		vertical-align: middle;
+
+		p {
+			margin-bottom: 10px;
+		}
+	}
+}
+
+.author__pic-wilf {
+	background: #fff url(../img/wilf.jpg) center center no-repeat;
+	background-size: 100%;
+	width: 100px;
+	height: 100px;
+	float: left;
+	border-radius: 50px 50px 0 50px;
+	margin: 6px 0 0 20px;
+	border: none;
 }
 
 

@@ -560,6 +560,28 @@ footer p {
 
   #body_wrap section {
     padding: 0 10px; } }
+.author2-wrap {
+  margin-top: 10px;
+  padding-left: 10%; }
+  .author2-wrap .author {
+    height: 110px; }
+  .author2-wrap .author__desc {
+    padding: 15px 0 0 2%;
+    float: left;
+    vertical-align: middle; }
+    .author2-wrap .author__desc p {
+      margin-bottom: 10px; }
+
+.author__pic-wilf {
+  background: white url(../img/wilf.jpg) center center no-repeat;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+  float: left;
+  border-radius: 50px 50px 0 50px;
+  margin: 6px 0 0 20px;
+  border: none; }
+
 header {
   position: relative;
   width: 100%;
