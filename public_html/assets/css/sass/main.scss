@@ -11,7 +11,7 @@ body {
 	font: 15px 'Open Sans', Helvetica, Arial, sans-serif;
 	font-weight: 400;
 	line-height: 1.625;
-	background: #f9f9f7 url(../img/noisy-texture-100x100-o6-d18-c-e8e8e8-t0.png) 0 0 repeat;
+	background: #f9f9f7 url(http://andyshora.blob.core.windows.net/assets/noisy-texture-100x100-o6-d18-c-e8e8e8-t0.png) 0 0 repeat;
 }
 
 h1 {
@@ -81,7 +81,7 @@ h2 {
 
 		> li {
 			margin: 10px 0;
-			padding: 20px;
+			padding: 20px 20px 20px 0;
 			display: inline-block;
 			width: 33%;
 			font-size: 20px;
@@ -101,7 +101,7 @@ h2 {
 				line-height: 39px;
 
 				&:hover {
-					background: rgba(53, 69, 136, 0.68);
+					background: #34495e;
 				}
 			}
 		}
@@ -291,7 +291,7 @@ footer {
 	padding:20px 0;
 	text-align: center;
 	border-top:1px solid #d3d3d3;
-	background: url(../img/noisy-texture-100x100-o6-d18-c-e8e8e8-t0.png) 0 0 repeat;
+	background: url(http://andyshora.blob.core.windows.net/assets/noisy-texture-100x100-o6-d18-c-e8e8e8-t0.png) 0 0 repeat;
 	clear:both;
 }
 footer p {
@@ -321,7 +321,7 @@ footer p {
 	height: 150px;
 	float: left;
 	border-radius: 75px 75px 0 75px;
-	background: #fff url(../img/andy.png) center center no-repeat;
+	background: #fff url(http://andyshora.blob.core.windows.net/assets/andy.png) center center no-repeat;
 	margin: -30px 0 0 20px;
 	border: 1px solid rgb(196, 196, 196);
 }
@@ -418,7 +418,7 @@ footer p {
 }
 
 .author__pic-wilf {
-	background: #fff url(../img/wilf.jpg) center center no-repeat;
+	background: #fff url(http://andyshora.blob.core.windows.net/assets/wilf.jpg) center center no-repeat;
 	background-size: 100%;
 	width: 100px;
 	height: 100px;
@@ -435,7 +435,7 @@ header {
 	height: 300px;
 	text-align: center;
 	overflow: hidden;
-	background: #1A1A1A;
+	background: rgba(0, 0, 0, 0.71) url(http://andyshora.blob.core.windows.net/assets/s.png) right -158px no-repeat;
 
 	&.page-header {
 		width: 98%;
@@ -544,7 +544,7 @@ p.sub {
 #window_btm {
 	height:100px;
 	width:600px;
-	background: transparent url(../img/s.png) -30px -32px no-repeat;
+	background: transparent url(http://andyshora.blob.core.windows.net/assets/s.png) -30px -32px no-repeat;
 }
 #buildings_wrap {
 	height:100px;
@@ -557,7 +557,7 @@ p.sub {
 	width:4px;
 	height:4px;
 	border-radius: 2px;
-	background: url(../img/rainbow.png) 0 0 repeat;
+	background: url(http://andyshora.blob.core.windows.net/assets/rainbow.png) 0 0 repeat;
 	box-shadow: 0 0 9px white;
 	position: relative;
 	float: left;
@@ -1017,7 +1017,7 @@ p.sub {
 	width:4px;
 	height:4px;
 	border-radius: 2px;
-	background: url(../img/rainbow.png) 0 0 repeat;
+	background: url(http://andyshora.blob.core.windows.net/assets/rainbow.png) 0 0 repeat;
 	box-shadow: 0 0 9px white;
 	position: relative;
 	float: left;
@@ -1255,23 +1255,6 @@ ul#links > li > a {
 }
 
 .andy_post ul#links > li > a { text-shadow: none; color: #8D8D8D; }
-.icon_twitter {
-	background: url(../img/social/twitter.png) center top no-repeat;
-	background-size:50px 50px;
-	padding:50px 0 0 0;
-}
-.icon_fb {
-	background: url(../img/social/facebook.png) center top no-repeat;
-	background-size:50px 50px;
-	padding:50px 0 0 0;
-}
-.icon_linkedin {
-	background: url(../img/social/linkedin.png) center top no-repeat;
-	background-size:50px 50px;
-	padding:50px 0 0 0;
-}
-
-
 
 h2.london_post_title, h2.london_post_title a {
 	color:#000;
@@ -1299,7 +1282,7 @@ h2.london_post_title, h2.london_post_title a {
 	position: relative;
 	top:20px;
 	left:400px;
-	background:url(../img/circle.png) -6px -5px no-repeat;
+	background:url(http://andyshora.blob.core.windows.net/assets/circle.png) -6px -5px no-repeat;
 }
 .circle:hover {
 -webkit-transform: rotatey(360deg);
