@@ -13,60 +13,103 @@
 		</div>
 	</header>
 	<section>
-		<p>Every Saturday morning, a father asks his son to go and find out tomorrow's weather forecast, by sending an SMS to a weather service! But there's no reception in their home, so he has to go and climb the hill.</p>
-
-<p>The son promises his dad he will go and get the weather forecast. He creates a promise with his dad at the door when he leaves.</p>
-
-<pre class="prettyprint lang-js">
-  // function somewhere in father-controller.js
-  var makePromiseWithSon = function() {
-    // This service's function returns a promise, but we'll deal with that shortly
-    SonService.goAndGetWeatherForecast();
-  };
-</pre>
-
-<p>At that point, the dad decides if the weather tomorrow is good, he'll prepare a fishing trip for tomorrow. If it's bad he won't. Also, if the son is unable to get a forecast, he'll stay in as well.</p>
-
-<pre class="prettyprint lang-js">
-  if (forecast==='good') {
-    prepareFishingTrip();
-  } else {
-    prepareSundayRoastDinner();
-  }
-</pre>
-
-<p>After 30mins or so, the son comes back. Different things happen from week-to-week:</p>
-<ol>
-	<li>The <strong>son successfully retrieved the weather forecast</strong>, clear skies and sunshine! The <strong>promise had been fulfilled</strong> (the son got the forecast) and dad decided to pack up for the fishing trip for Sunday.</li>
-	<li>The <strong>son successfully retrieved the weather forecast</strong>, but it said cloudy and rain. The <strong>promise had been fulfilled</strong> (the son got the forecast) but dad decided to stay in because of the bad weather.</li>
-	<li>The son <strong>failed to retrieve the forecast</strong>, he didn't get an SMS back due to some kind of error with the service. The promise the son made when he left was broken - <strong>promise rejected</strong>! The dad decided to stay in.</li>
-</ol>
-
-<pre class="prettyprint lang-js">
-  // function somewhere in father-controller.js
-  var makePromiseWithSon = function() {
-    // This service's function returns a promise, but we'll deal with that shortly
-    SonService.goAndGetWeatherForecast()
-      // then() called when son gets back
-      .then(function(forecast) {
-        // promise fulfilled
-        if (forecast==='good') {
-          prepareFishingTrip();
-        } else {
-          prepareSundayRoastDinner();
-        }
-      }, function(error) {
-        // promise rejected
-        console.log('error', error);
-        prepareSundayRoastDinner();
-      });
-  };
-</pre>
-
-<p>This analogy demonstrates the asynchronous nature of the request the dad makes to his son, for the weather forecast. The dad doesn't want to wait at the door in anticipation when the son leaves, because he has other stuff to do. Instead, he makes a promise at the door, and decides what will happen in either of the 3 scenarios (good weather/bad weather/no forecast). The son immediately gives a promise to his dad when he leaves, and will resolve or reject it on his return.</p>
-
-<p>The son is dealing with an asynchronous service (the SMS weather service) to get data, but all of this is correctly abstracted away from his old man, who doesn't really understand technology!</p>
+		<h2>One morning, a father says to his son: "Go and get the weather forecast, son!"</h2>
+		<p>Every Sunday morning, a father asks his son to go and find out the weather forecast for the afternoon, by using his super-strong telescope to look across the horizon from the tallest hill by their house. The son promises his dad he will go and get the weather forecast. He creates a promise with his dad at the door when he leaves.</p>
+		<p>At that point, the dad decides if the weather tomorrow is good, he'll prepare a fishing trip for tomorrow. If it's bad he won't. Also, if the son is unable to get a forecast, he'll stay in as well.</p>
+		<p>After 30mins or so, the son comes back. Different things happen from week-to-week:</p>
 	</section>
+
+<section>
+
+	<div class="outcomes">
+
+		<div class="outcomes__item">
+			<h2><span>Outcome A)</span> Weather forecast retrieved! Sunshine :-)</h2>
+			<p>The son succeeded in retrieving the weather forecast, <span class="mood-sunshine">clear skies and sunshine!</span> The <span class="text-success">promise was resolved</span> (the son got the forecast) and the dad decided to pack up for the fishing trip for Sunday.</p>
+			<img src="assets/img/pages/promise1.png" alt="Promise resolved, and weather is good">
+		</div>
+		<div class="outcomes__item">
+			<h2><span>Outcome B)</span> Weather forecast retrieved! Cloudy and rain :-(</h2>
+			<p>The son succeeded in retrieving the weather forecast</strong>, but it looked like <span class="mood-rain">cloudy and rain</span>. The <span class="text-success">promise was resolved</span> (the son got the forecast) but dad decided to stay in because of the bad weather. It was probably best to stay in and have a roast dinner.</p>
+			<img src="assets/img/pages/promise3.png" alt="Promise fulfilled, but weather is bad">
+		</div>
+		<div class="outcomes__item">
+			<h2><span>Outcome C)</span> Couldn't get the weather forecast :-/</h2>
+			<p>The son failed to retrieve the forecast, <strong>there was a problem</strong>; it was way too foggy to see what weather was coming over the hills. The promise the son made when he left was broken - the <span class="text-failure">promise was rejected</span>! The dad decided to stay in.</p>
+			<img src="assets/img/pages/promise2.png" alt="Promise rejected">
+		</div>
+	</div>
+</section>
+
+<section>
+	<h2>How does this look in code?</h2>
+	<p>The dad is controlling the logic in this situation, and he's dealing with the Son as if he's a service.</p>
+	<p>We've already stated the logic, the father asks the son to get the weather forecast, and as the son can't tell him immediately, and the father has other things to do while he waits, the son makes a promise he shall return with the weather. When the dad has the forecast, he'll either pack up the boat, or stay inside.</p>
+	<p>Using Angular's then() function we can specify what the Dad needs to do in the event of each outcome. The then() function accepts 2 functions as parameters: a function to be executed when the promise is resolved, and a function to be executed when the promise is rejected.</p>
+</section>
+
+
+<section>
+	<h2>Controller: FatherCtrl</h2>
+	<p>The father is controlling the situation here:</p>
+
+	<pre class="prettyprint lang-js">
+	    // function somewhere in father-controller.js
+	    var makePromiseWithSon = function() {
+	        // This service's function returns a promise, but we'll deal with that shortly
+	        SonService.goAndGetWeatherForecast()
+	            // then() called when son gets back
+	            .then(function(forecast) {
+	                // promise fulfilled
+	                if (forecast==='good') {
+	                    prepareFishingTrip();
+	                } else {
+	                    prepareSundayRoastDinner();
+	                }
+	            }, function(error) {
+	                // promise rejected, could log the error with: console.log('error', error);
+	                prepareSundayRoastDinner();
+	            });
+	    };
+	</pre>
+
+</section>
+
+<section>
+	<h2>Service: SonService</h2>
+	<p>The Son is being used as a service, he climbs the hill and tried to see the weather. We'll suppose when the son is looking through his telescope and looking for the approaching weather, it's analogous to using a weather API, in the sense that it's an asynchronous operation, he may get a variable answer, and there may be a problem (say, a 500 response, foggy skies).</p>
+	<p>The response from the 'Fishing Weather API' will be returned with the promise, if it was resolved. It will be in the format: <strong>{ "forecast": "good" }</strong></p>
+	<pre class="prettyprint lang-js">
+	app.factory('SonService', function ($http, $q) {
+	    return {
+	        getWeather: function() {
+	            var deferred = $q.defer();
+
+	            $http.get('http://fishing-weather-api.com/sunday')
+	                .success(function(data) {
+	                    if (typeof data === 'object') {
+	                        deferred.resolve(data);
+	                    } else {
+	                        // invalid response
+	                        deferred.reject(data);
+	                    }
+	                    deferred.resolve(data);
+
+	                }).error(function(data, status, headers, config) {
+	                    deferred.reject(data);
+	                });
+	            return deferred.promise;
+	        }
+	    };
+	});
+	</pre>
+</section>
+
+<section>
+	<p>This analogy demonstrates the asynchronous nature of the request the dad makes to his son, for the weather forecast. The dad doesn't want to wait at the door in anticipation when the son leaves, because he has other stuff to do. Instead, he makes a promise at the door, and decides what will happen in either of the 3 scenarios (good weather/bad weather/no forecast). The son immediately gives a promise to his dad when he leaves, and will resolve or reject it on his return.</p>
+
+	<p>The son is dealing with an asynchronous service (the SMS weather service) to get data, but all of this is correctly abstracted away from his old man, who doesn't really understand technology!</p>
+</section>
 
 </div>
 <script>

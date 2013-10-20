@@ -107,6 +107,45 @@ h2 {
 		}
 	}
 }
+.outcomes {
+	margin: 0;
+	padding: 0;
+}
+	.outcomes__item {
+		margin: 0 0 50px;
+
+		h2 > span {
+			color: #524256;
+			padding: 0 5px 0 0;
+		}
+
+		> img {
+			width: 94%;
+			margin: 10px auto 20px;
+			padding: 20px 3%;
+			display: block;
+			background: rgba(0, 0, 0, 0.9) url(../img/pages/w.png) 0 0 repeat;
+			border-radius: 8px;
+		}
+	}
+.mood-sunshine {
+
+	font-weight: bold;
+}
+.mood-rain {
+
+	font-weight: bold;
+}
+.text-success {
+	color: rgb(0, 92, 0);
+	font-weight: bold;
+	text-decoration: underline;
+}
+.text-failure {
+	color: rgb(146, 0, 0);
+	font-weight: bold;
+	text-decoration: underline;
+}
 section {
 	text-align: left;
 	max-width:960px;
@@ -161,21 +200,23 @@ section {
 
 
 
-	/* prettprint overrides */
-	pre.prettyprint {
-		text-align: left;
-		font-size: 14px;
-		font-family: Consolas, monaco, monospace;
-		line-height: 20px;
-		background: rgba(0,0,0,0.9);
-		border-radius: 3px;
-		width: 94%;
-		padding: 20px 3%;
-		color: white;
 
-		span.com {
-			color: rgb(95, 197, 189);
-		}
+}
+
+/* prettprint overrides */
+pre.prettyprint {
+	text-align: left;
+	font-size: 14px;
+	font-family: Consolas, monaco, monospace;
+	line-height: 20px;
+	background: rgba(0,0,0,0.9);
+	border-radius: 3px;
+	width: 94%;
+	padding: 20px 3%;
+	color: white;
+
+	span.com {
+		color: rgb(95, 197, 189);
 	}
 }
 section h3 {
@@ -1418,7 +1459,7 @@ pre.prettyprint, code.prettyprint{
 }
 
 pre.prettyprint {
-        width: 95%;
+        width: 100%;
         margin: 1em auto;
         padding: 1em;
 }

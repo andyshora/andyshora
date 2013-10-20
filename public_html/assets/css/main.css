@@ -341,12 +341,44 @@ h2 {
       .featured ul > li a:hover {
         background: #34495e; }
 
+.outcomes {
+  margin: 0;
+  padding: 0; }
+
+.outcomes__item {
+  margin: 0 0 50px; }
+  .outcomes__item h2 > span {
+    color: #524256;
+    padding: 0 5px 0 0; }
+  .outcomes__item > img {
+    width: 94%;
+    margin: 10px auto 20px;
+    padding: 20px 3%;
+    display: block;
+    background: rgba(0, 0, 0, 0.9) url(../img/pages/w.png) 0 0 repeat;
+    border-radius: 8px; }
+
+.mood-sunshine {
+  font-weight: bold; }
+
+.mood-rain {
+  font-weight: bold; }
+
+.text-success {
+  color: #005c00;
+  font-weight: bold;
+  text-decoration: underline; }
+
+.text-failure {
+  color: #920000;
+  font-weight: bold;
+  text-decoration: underline; }
+
 section {
   text-align: left;
   max-width: 960px;
   margin: 40px auto 0;
-  clear: both;
-  /* prettprint overrides */ }
+  clear: both; }
   section h1, section h2, section h3, section h4 {
     text-align: left; }
   section h3.inline {
@@ -378,18 +410,20 @@ section {
       position: relative;
       top: 0;
       z-index: 1; }
-  section pre.prettyprint {
-    text-align: left;
-    font-size: 14px;
-    font-family: Consolas, monaco, monospace;
-    line-height: 20px;
-    background: rgba(0, 0, 0, 0.9);
-    border-radius: 3px;
-    width: 94%;
-    padding: 20px 3%;
-    color: white; }
-    section pre.prettyprint span.com {
-      color: #5fc5bd; }
+
+/* prettprint overrides */
+pre.prettyprint {
+  text-align: left;
+  font-size: 14px;
+  font-family: Consolas, monaco, monospace;
+  line-height: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 3px;
+  width: 94%;
+  padding: 20px 3%;
+  color: white; }
+  pre.prettyprint span.com {
+    color: #5fc5bd; }
 
 section h3 {
   font-weight: bold;
@@ -1685,7 +1719,7 @@ pre.prettyprint, code.prettyprint {
   border-radius: 8px; }
 
 pre.prettyprint {
-  width: 95%;
+  width: 100%;
   margin: 1em auto;
   padding: 1em; }
 
