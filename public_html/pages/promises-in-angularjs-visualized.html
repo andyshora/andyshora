@@ -24,17 +24,17 @@
 
 		<div class="outcomes__item">
 			<h2><span>Outcome A)</span> Weather forecast retrieved! Sunshine :-)</h2>
-			<p>The son succeeded in retrieving the weather forecast, <span class="mood-sunshine">clear skies and sunshine!</span> The <span class="text-success">promise was resolved</span> (the son got the forecast) and the dad decided to pack up for the fishing trip for Sunday.</p>
+			<p>The son succeeded in retrieving the weather forecast, <span class="mood-sunshine">clear skies and sunshine!</span> The <span class="text-success">promise was resolved</span> (the son kept his promise) and the dad decided to pack up for the fishing trip for Sunday.</p>
 			<img src="assets/img/pages/promise1.png" alt="Promise resolved, and weather is good">
 		</div>
 		<div class="outcomes__item">
 			<h2><span>Outcome B)</span> Weather forecast retrieved! Cloudy and rain :-(</h2>
-			<p>The son succeeded in retrieving the weather forecast</strong>, but it looked like <span class="mood-rain">cloudy and rain</span>. The <span class="text-success">promise was resolved</span> (the son got the forecast) but dad decided to stay in because of the bad weather. It was probably best to stay in and have a roast dinner.</p>
+			<p>The son succeeded in retrieving the weather forecast</strong>, but it looked like <span class="mood-rain">cloudy and rain</span>. The <span class="text-success">promise was resolved</span> but dad decided to stay in because of the bad weather.</p>
 			<img src="assets/img/pages/promise3.png" alt="Promise fulfilled, but weather is bad">
 		</div>
 		<div class="outcomes__item">
 			<h2><span>Outcome C)</span> Couldn't get the weather forecast :-/</h2>
-			<p>The son failed to retrieve the forecast, <strong>there was a problem</strong>; it was way too foggy to see what weather was coming over the hills. The promise the son made when he left was broken - the <span class="text-failure">promise was rejected</span>! The dad decided to stay in.</p>
+			<p>The son failed to retrieve the forecast, <strong>there was a problem</strong>; it was way too foggy to see what weather was coming over the hills. The promise the son made when he left was broken - the <span class="text-failure">promise was rejected</span>! The dad decided to stay in, it wasn't worth the risk.</p>
 			<img src="assets/img/pages/promise2.png" alt="Promise rejected">
 		</div>
 	</div>
@@ -45,7 +45,7 @@
 <section>
 	<h2>How does this look in code?</h2>
 	<p>The dad is controlling the logic in this situation, and he's dealing with the Son as if he's a service.</p>
-	<p>We've already stated the logic, the father asks the son to get the weather forecast, and as the son can't tell him immediately, and the father has other things to do while he waits, the son makes a promise he shall return with the weather. When the dad has the forecast, he'll either pack up the boat, or stay inside.</p>
+	<p>We've already stated the logic, the father asks the son to get the weather forecast, and as the son can't tell him immediately, and the father has other things to do while he waits, the son makes a promise he shall return with the weather. When the dad has the forecast, he'll either pack up the boat, or stay inside. The important thing to note here, is the son's trip up the hill shouldn't 'block' the dad from doing anything, so this is why the situation is perfect for the creation of a promise, which can be resolved or rejected later on.</p>
 	<p>Using Angular's then() function we can specify what the Dad needs to do in the event of each outcome. The then() function accepts 2 functions as parameters: a function to be executed when the promise is resolved, and a function to be executed when the promise is rejected.</p>
 </section>
 
@@ -60,9 +60,9 @@
 	        // This service's function returns a promise, but we'll deal with that shortly
 	        SonService.goAndGetWeatherForecast()
 	            // then() called when son gets back
-	            .then(function(forecast) {
+	            .then(function(data) {
 	                // promise fulfilled
-	                if (forecast==='good') {
+	                if (data.forecast==='good') {
 	                    prepareFishingTrip();
 	                } else {
 	                    prepareSundayRoastDinner();
@@ -86,7 +86,7 @@
 	        getWeather: function() {
 	            var deferred = $q.defer();
 
-	            $http.get('http://fishing-weather-api.com/sunday')
+	            $http.get('http://fishing-weather-api.com/sunday/afternoon')
 	                .success(function(data) {
 	                    if (typeof data === 'object') {
 	                        deferred.resolve(data);
