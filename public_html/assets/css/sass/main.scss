@@ -506,7 +506,23 @@ header {
 			}
 		}
 	}
+}
+.header_twitter {
+	background: url(../img/social/twitter_red.png) 0 0 no-repeat;
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-size: 48px 48px;
+	opacity: 0.8;
 
+	a {
+		display: block;
+		width: 48px;
+		height: 48px;
+		cursor: pointer;
+	}
 }
 
 .andy_post header { height:315px; }

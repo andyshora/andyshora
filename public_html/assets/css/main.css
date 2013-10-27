@@ -406,7 +406,7 @@ section {
       height: 39px;
       padding: 11px 0 0 0;
       display: inline-block;
-      background: #34495e;
+      background: #b81414;
       color: white;
       margin: 0 auto;
       position: relative;
@@ -562,7 +562,7 @@ footer p {
     margin: 0 0 0 0;
     font-size: 11px;
     padding: 6px 10px;
-    background: #34495e;
+    background: #b81414;
     text-decoration: none;
     color: white;
     float: left; }
@@ -632,7 +632,7 @@ header {
     width: 98%;
     height: auto;
     padding: 40px 1% 30px;
-    background: #34495e; }
+    background: #b81414; }
     header.page-header .page-header__title {
       color: white; }
       header.page-header .page-header__title p {
@@ -643,6 +643,21 @@ header {
       header.page-header .page-header__title .twitter-share-button {
         position: relative;
         top: 5px; }
+
+.header_twitter {
+  background: url(../img/social/twitter_red.png) 0 0 no-repeat;
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-size: 48px 48px;
+  opacity: 0.8; }
+  .header_twitter a {
+    display: block;
+    width: 48px;
+    height: 48px;
+    cursor: pointer; }
 
 .andy_post header {
   height: 315px; }
@@ -1639,7 +1654,7 @@ h2.london_post_title, h2.london_post_title a {
   .mobile-scroll-bounds div {
     position: absolute;
     left: 0;
-    border-top: 1px dotted #34495e;
+    border-top: 1px dotted #b81414;
     width: 100%;
     text-align: right;
     color: black;
