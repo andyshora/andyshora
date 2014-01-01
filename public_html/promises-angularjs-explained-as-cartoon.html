@@ -48,12 +48,12 @@
 
 		<div class="outcomes__item">
 			<h2><span>Outcome A)</span> Weather forecast retrieved! Sunshine :-)</h2>
-			<p>The son succeeded in retrieving the weather forecast, <span class="mood-sunshine">clear skies and sunshine!</span> The <span class="text-success">promise was resolved</span> (the son kept his promise) and the dad decided to pack up for the fishing trip for Sunday.</p>
-			<img src="assets/img/pages/promise1.png" alt="Promise resolved, and weather is good">
+			<p>The son succeeded in retrieving the weather forecast, <span class="mood-sunshine">clear skies and sunshine!</span> The <span class="text-success">promise was fulfilled</span> (the son kept his promise) and the dad decided to pack up for the fishing trip for Sunday.</p>
+			<img src="assets/img/pages/promise1.png" alt="Promise fulfilled, and weather is good">
 		</div>
 		<div class="outcomes__item">
 			<h2><span>Outcome B)</span> Weather forecast retrieved! Cloudy and rain :-(</h2>
-			<p>The son succeeded in retrieving the weather forecast</strong>, but it looked like <span class="mood-rain">cloudy and rain</span>. The <span class="text-success">promise was resolved</span> but dad decided to stay in because of the bad weather.</p>
+			<p>The son succeeded in retrieving the weather forecast</strong>, but it looked like <span class="mood-rain">cloudy and rain</span>. The <span class="text-success">promise was fulfilled</span> but dad decided to stay in because of the bad weather.</p>
 			<img src="assets/img/pages/promise3.png" alt="Promise fulfilled, but weather is bad">
 		</div>
 		<div class="outcomes__item">
@@ -69,8 +69,8 @@
 <section>
 	<h2>How does this look in code?</h2>
 	<p>The dad is controlling the logic in this situation, and he's dealing with the Son as if he's a service.</p>
-	<p>We've already stated the logic, the father asks the son to get the weather forecast, and as the son can't tell him immediately, and the father has other things to do while he waits, the son makes a promise he shall return with the weather. When the dad has the forecast, he'll either pack up the boat, or stay inside. The important thing to note here, is the son's trip up the hill shouldn't 'block' the dad from doing anything, so this is why the situation is perfect for the creation of a promise, which can be resolved or rejected later on.</p>
-	<p>Using Angular's then() function we can specify what the Dad needs to do in the event of each outcome. The then() function accepts 2 functions as parameters: a function to be executed when the promise is resolved, and a function to be executed when the promise is rejected.</p>
+	<p>We've already stated the logic, the father asks the son to get the weather forecast, and as the son can't tell him immediately, and the father has other things to do while he waits, the son makes a promise he shall return with the weather. When the dad has the forecast, he'll either pack up the boat, or stay inside. The important thing to note here, is the son's trip up the hill shouldn't 'block' the dad from doing anything, so this is why the situation is perfect for the creation of a promise, which can be resolved (fulfilled or rejected) later on.</p>
+	<p>Using Angular's then() function we can specify what the Dad needs to do in the event of each outcome. The then() function accepts 2 functions as parameters: a function to be executed when the promise is fulfilled, and a function to be executed when the promise is rejected.</p>
 </section>
 
 
@@ -103,7 +103,7 @@
 <section>
 	<h2>Service: SonService</h2>
 	<p>The Son is being used as a service, he climbs the hill and tried to see the weather. We'll suppose when the son is looking through his telescope and looking for the approaching weather, it's analogous to using a weather API, in the sense that it's an asynchronous operation, he may get a variable answer, and there may be a problem (say, a 500 response, foggy skies).</p>
-	<p>The response from the 'Fishing Weather API' will be returned with the promise, if it was resolved. It will be in the format: <strong>{ "forecast": "good" }</strong></p>
+	<p>The response from the 'Fishing Weather API' will be returned with the promise, if it was fulfilled. It will be in the format: <strong>{ "forecast": "good" }</strong></p>
 	<pre class="prettyprint lang-js">
 	app.factory('SonService', function ($http, $q) {
 	    return {
