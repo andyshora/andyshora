@@ -170,7 +170,7 @@ module.exports = function(grunt) {
 
 		shell: {
 			buildPages: {
-				command: 'sh build_pages.sh'
+				command: 'sudo sh build_pages.sh'
 			}
 		}
 
