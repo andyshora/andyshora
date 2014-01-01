@@ -583,7 +583,9 @@ footer p {
   height: 150px;
   float: left;
   border-radius: 75px 75px 0 75px;
-  background: white url(http://andyshora.blob.core.windows.net/assets/andy.png) center center no-repeat;
+  background: white url(../img/2014-500.png) center center no-repeat;
+  -webkit-background-size: 160px;
+  background-size: 160px;
   margin: -30px 0 0 20px;
   border: 1px solid #c4c4c4; }
 
