@@ -290,6 +290,40 @@ section h3 {
 	border: 1px solid #2B9921;
 }
 
+.page-article__heading {
+	margin: 50px 0 20px;
+}
+
+// follow page
+.follow-list {
+	margin: 0;
+	padding: 0;
+
+	> li {
+		display: block;
+		list-style-type: none;
+		margin: 0 0 50px 0;
+		padding: 0;
+		p {
+			margin: 8px 0;
+		}
+	}
+}
+.follow-list__title {
+	font-size: 24px;
+}
+.follow-list__index {
+	float: left;
+	width: 73px;
+	height: 68px;
+	background: black;
+	color: white;
+	margin: 0 0px 10px 0;
+	font-size: 40px;
+	text-align: center;
+	padding: 5px 0 0 0;
+}
+
 // hipster page
 .tutorial-screenshot {
 	width: 100%;
