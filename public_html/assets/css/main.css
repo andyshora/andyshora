@@ -291,6 +291,16 @@ h2 {
   margin: 0 0 0 5px;
   color: white; }
 
+.tag {
+  padding: 4px 7px;
+  margin: 1px 1px 0 0;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.68);
+  color: black;
+  line-height: 19px;
+  font-size: 15px;
+  float: right; }
+
 .page-article {
   margin: 0 auto;
   padding: 0 20px;
@@ -336,6 +346,8 @@ h2 {
       text-decoration: none;
       background: #fff;
       color: #b81414;
+      display: block;
+      margin: 0 0 1px;
       padding: 5px;
       line-height: 39px; }
       .featured ul > li a:hover {
