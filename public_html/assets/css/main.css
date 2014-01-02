@@ -300,6 +300,8 @@ h2 {
   line-height: 19px;
   font-size: 15px;
   float: right; }
+  .follow-list .tag {
+    float: none; }
 
 .page-article {
   margin: 0 auto;
