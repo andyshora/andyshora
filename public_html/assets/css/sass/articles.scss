@@ -1,0 +1,18 @@
+/* ARTICLE: function binding angularjs */
+.demo-wrapper {
+	padding: 10px;
+	border: 1px solid grey;
+	margin: 20px 0;
+}
+.demo-dialog {
+	background: white;
+	padding: 10px;
+	text-align: center;
+	border: 1px solid green;
+	margin: 20px 0 0;
+
+	> h3 {
+		text-align: center;
+		margin: 10px auto;
+	}
+}
