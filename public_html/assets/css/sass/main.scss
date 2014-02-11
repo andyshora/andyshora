@@ -112,6 +112,7 @@ h2 {
 				color: rgb(184, 20, 20);
 				display: block;
 				margin: 0 0 1px;
+				position: relative;
 
 				padding: 5px;
 				line-height: 39px;
@@ -119,6 +120,23 @@ h2 {
 				&:hover {
 					color: white;
 					background: rgb(184, 20, 20);
+				}
+
+				&:after {
+					content: attr(data-rt-count);
+					background: white url(../img/social/twitter_red.png) center 6px no-repeat;
+					background-size: 32px 32px;
+					display: block;
+					position: absolute;
+					top: -37px;
+					right: -16px;
+					width: 40px;
+					height: 15px;
+					padding: 25px 0 15px 0;
+					color: black;
+					font-size: 10px;
+					text-align: center;
+					border-radius: 20px;
 				}
 			}
 		}

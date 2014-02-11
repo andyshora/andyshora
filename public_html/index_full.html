@@ -19,6 +19,33 @@
 	<meta http-equiv="X-UA-Compatible" content="chrome=1">
 	<!--[if lt IE 7 ]><script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
 	<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})});</script><![endif]-->
+	<script>
+		function articleCountCallback(count, url) {
+			console.log('articleCountCallback -> ', count, url);
+		}
+		$(document).ready(function() {
+
+			var baseUrl = 'http://andyshora.com/';
+
+			$('.featured li>a').each(function() {
+				var href = $(this).attr('href');
+				// console.log('href -> ', href);
+
+				var url = encodeURIComponent(baseUrl + href);
+				// console.log('url -> ', url);
+
+				$.getJSON('https://cdn.api.twitter.com/1/urls/count.json?url='+url+'&callback=?',
+					{},
+
+					function(data) {
+						var matchUrl = data.url.replace(/\/$/, '').replace(baseUrl, '');
+						console.log('matchUrl -> ', matchUrl, data.count);
+
+						$('[href="'+matchUrl+'"]').attr('data-rt-count', data.count);
+					});
+			});
+		});
+	</script>
 </head>
 <body>
 
