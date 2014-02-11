@@ -1,7 +1,7 @@
 #!/bin/sh
 cd public_html/pages
 
-templates=( html_open html_close head footer author_wilf author comments )
+templates=( html_open html_close head footer author_wilf author_pedro author comments )
 filename=""
 
 for file in *.html

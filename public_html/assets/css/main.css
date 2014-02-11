@@ -665,6 +665,16 @@ footer p {
   margin: 6px 0 0 20px;
   border: none; }
 
+.author__pic-pedro {
+  background: white url(https://pbs.twimg.com/profile_images/378800000175768176/54abbd7652fad8d3f130dcd3b683280f.jpeg) center center no-repeat;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+  float: left;
+  border-radius: 50px 50px 0 50px;
+  margin: 6px 0 0 20px;
+  border: none; }
+
 header {
   position: relative;
   width: 100%;
