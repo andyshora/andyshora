@@ -489,6 +489,8 @@ section h3 {
   color: white;
   background: #70b863;
   border: 1px solid #2b9921; }
+  .takeaway-tip a {
+    color: black; }
 
 .page-article__heading {
   margin: 50px 0 20px; }
@@ -1855,3 +1857,18 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
   .demo-dialog > h3 {
     text-align: center;
     margin: 10px auto; }
+
+.wallop-demo {
+  border: none; }
+  .wallop-demo p {
+    text-align: center; }
+
+.wallop-slider {
+  text-align: center; }
+
+.wallop-slider__btn {
+  background: black;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-bottom: 10px; }
