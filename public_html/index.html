@@ -7,18 +7,15 @@
 			var baseUrl = 'http://andyshora.com/';
 
 			$('.featured li>a').each(function() {
-				var href = $(this).attr('href');
-				// console.log('href -> ', href);
 
+				var href = $(this).attr('href');
 				var url = encodeURIComponent(baseUrl + href);
-				// console.log('url -> ', url);
 
 				$.getJSON('https://cdn.api.twitter.com/1/urls/count.json?url='+url+'&callback=?',
 					{},
 
 					function(data) {
 						var matchUrl = data.url.replace(/\/$/, '').replace(baseUrl, '');
-						console.log('matchUrl -> ', matchUrl, data.count);
 
 						$('[href="'+matchUrl+'"]').attr('data-rt-count', data.count);
 					});
