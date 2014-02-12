@@ -84,22 +84,22 @@ module.exports = function(grunt) {
 		sass: {
 			dist: {
 				files: {
-					'public_html/assets/css/main.css': 'public_html/assets/css/sass/main.scss'
+					'assets/css/main.css': 'assets/css/sass/main.scss'
 				}
 			}
 		},
 
 		cssmin: {
 				'css': {
-						'src': ['public_html/assets/css/main.css'],
-						'dest': 'public_html/assets/css/m.min.css'
+						'src': ['assets/css/main.css'],
+						'dest': 'assets/css/m.min.css'
 				}
 		},
 
 		min: {
 			'js': {
-						'src': ['public_html/assets/js/main.js'],
-						'dest': 'public_html/assets/js/m.min.js'
+						'src': ['assets/js/main.js'],
+						'dest': 'assets/js/m.min.js'
 				}
 		},
 
@@ -138,9 +138,9 @@ module.exports = function(grunt) {
 				mode: 'gzip'
 				},
 				expand: true,
-				cwd: 'public_html/assets/js',
+				cwd: 'assets/js',
 				src: ['*.js'],
-				dest: 'public_html/assets/js'
+				dest: 'assets/js'
 			}
 		},
 
@@ -193,6 +193,6 @@ module.exports = function(grunt) {
 
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'sass', 'cssmin', 'shell', 'min', 'replace', 'htmlcompressor', 'compress']);
+	grunt.registerTask('default', ['sass', 'cssmin', 'shell', 'min', 'replace', 'htmlcompressor', 'compress']);
 
 };
