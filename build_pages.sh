@@ -33,6 +33,6 @@ do
 
 		echo "$line"
 
-	done < $file > t && mv t "../$filename"
+	done < $file > t && mv t "../../$filename"
 
 done
