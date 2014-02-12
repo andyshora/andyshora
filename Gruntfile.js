@@ -123,7 +123,7 @@ module.exports = function(grunt) {
 		htmlcompressor: {
 			compile: {
 				files: {
-					'public_html/index.html': 'public_html/index_full.html'
+					'index.html': 'public_html/index_full.html'
 				},
 				options: {
 					type: 'html',
