@@ -56,7 +56,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #ccc;
   margin: 1em 0;
   padding: 0; }
 
@@ -79,7 +79,7 @@ p {
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
   clear: both;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-weight: 700; }
 
 hr {
@@ -156,7 +156,7 @@ code, kbd {
   font: 13px Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace; }
 
 abbr, acronym, dfn {
-  border-bottom: 1px dotted #666666;
+  border-bottom: 1px dotted #666;
   cursor: help; }
 
 address {
@@ -189,7 +189,7 @@ textarea {
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
   color: #888; }
 
 input[type=text]:focus,
@@ -260,7 +260,7 @@ html {
 
 body {
   color: #373737;
-  font: 15px "Open Sans", Helvetica, Arial, sans-serif;
+  font: 15px 'Open Sans', Helvetica, Arial, sans-serif;
   font-weight: 400;
   line-height: 1.625;
   background: #f9f9f7 url(http://andyshora.blob.core.windows.net/assets/noisy-texture-100x100-o6-d18-c-e8e8e8-t0.png) 0 0 repeat; }
@@ -419,7 +419,7 @@ section {
   section.comments {
     padding: 0 20px; }
   section.demo {
-    border: 1px solid #cccccc;
+    border: 1px solid #ccc;
     min-height: 100px; }
   section.parallax1 {
     height: 1000px;
@@ -485,14 +485,14 @@ section h3 {
 
 .performance-test {
   padding: 20px;
-  border: 2px dashed lightgrey;
+  border: 2px dashed #d3d3d3;
   text-align: center; }
   .performance-test button {
     margin: 0 auto; }
 
 .test-box {
   background: white;
-  border: 1px solid lightgrey;
+  border: 1px solid #d3d3d3;
   margin: 0 0 10px;
   padding: 20px;
   text-align: center; }
@@ -504,7 +504,7 @@ section h3 {
   font-weight: bold;
   color: white;
   background: #70b863;
-  border: 1px solid #2b9921; }
+  border: 1px solid #2B9921; }
   .takeaway-tip a {
     color: black; }
 
@@ -573,7 +573,7 @@ footer {
   width: 100%;
   padding: 20px 0;
   text-align: center;
-  border-top: 1px solid lightgrey;
+  border-top: 1px solid #d3d3d3;
   background: url(http://andyshora.blob.core.windows.net/assets/noisy-texture-100x100-o6-d18-c-e8e8e8-t0.png) 0 0 repeat;
   clear: both; }
 
@@ -1621,10 +1621,10 @@ p.sub {
   right: 50px;
   top: 60px;
   z-index: 1005;
-  transition: top 0.5s;
-  -moz-transition: top 0.5s;
-  -webkit-transition: top 0.5s;
-  -o-transition: top 0.5s; }
+  transition: top .5s;
+  -moz-transition: top .5s;
+  -webkit-transition: top .5s;
+  -o-transition: top .5s; }
 
 #links_wrap.fixed {
   top: -100px; }
@@ -1656,7 +1656,7 @@ ul#links > li > a {
 
 h2.london_post_title, h2.london_post_title a {
   color: #000;
-  margin: 1em 0 0.25em;
+  margin: 1em 0 .25em;
   font-size: 1.2em;
   font-weight: normal;
   font-family: Helvetica, Arial;

@@ -1,0 +1,133 @@
+<!-- INCLUDE:html_open -->
+<title>Grunt YSlow</title>
+<meta name="description" content="Measure your web page performance using the YSlow Grunt task">
+<!-- INCLUDE:head -->
+
+<div id="body_wrap">
+
+	<header class="page-header">
+		<div class="page-header__title">
+			<h1>Grunt YSlow</h1>
+			<p>A Grunt Task to Measure and Grade Web Page Performance. By <a href="#author">Andy Shora</a></p>
+			<a href="/">&larr; back to andyshora.com</a> | <a class="twitter-share-button-placeholder" data-via="andyshora">Tweet this article<i class="icon icon-twitter"></i></a>
+		</div>
+		<div class="header_twitter"><a href="http://twitter.com/andyshora" title="Follow me on Twitter @andyshora"></a></div>
+	</header>
+
+	<div class="page-article">
+		<section class="page-article__heading">
+			<h2>Need a way to measure your page load time using Grunt?</h2>
+			<p>Or how about the number of requests your page makes, or the total page weight?</p>
+			<p>I can't take the credit for the underlying library, but I've packaged up the <a href="http://yslow.org/">YSlow library</a> into a Grunt task so you can test the performance of your web pages against whatever thresholds you need, even on a page-by-page basis.</p>
+			<img src="assets/img/yslow-console.png" alt="" style="max-width:300px">
+			<p>(looks like I've got some more tweaking to do...)</p>
+		</section>
+		<section>
+			<h2>How to Install</h2>
+			<p>Simply run:</p>
+			<pre class="prettyprint">npm install grunt-yslow --save-dev</pre>
+		</section>
+		<hr>
+		<section>
+			<h2>Configuration</h2>
+			<p>You can find the <a href="https://github.com/andyshora/grunt-yslow">latest configuration options on Github</a>, but for the moment you can define something like this:</p>
+			<pre class="prettyprint">
+yslow: {
+  options: {
+    thresholds: {
+      weight: 180,
+      speed: 1000,
+      score: 80,
+      requests: 15
+    }
+  },
+  pages: {
+    files: [
+      {
+        src: 'http://andyshora.com'
+      },
+      {
+        src: 'http://www.google.co.uk',
+        thresholds: {
+          weight: 100
+        }
+      }
+    ]
+  }
+}
+			</pre>
+			<p>Note that any of the global thresholds can be overridden by thresholds defined at the individual page level.</p>
+		</section>
+		<hr>
+		<section>
+			<h2>But Doesn't Yahoo Suck?</h2>
+			<p>Ummm... sure, yahoo.com is still a beast of a website, but since the <a href="https://github.com/marcelduran">chief maintainer</a> of the YSlow repo now works for Google, and all of the <a href="http://yslow.org/ruleset-matrix/">criteria used to calculate a 'YSlow Grade'</a> are still very relevant, I'd like to think this is one of the little gems created by talented engineers who are slowly steering Yahoo in the right direction.</p>
+		</section>
+		<hr>
+		<section>
+			<h2>A Quick Word on Performance</h2>
+			<p>This package should be used to save you a bit of time profiling your web pages, and eventually to ensure nobody pushes a change to production which results in you breaking all of your performance targets. This will obviously lead to unhappy users, and ultimately more rainforests destroyed by the increased power consumption of devices downloading your page and data centers hosting your website. (I've had 2 coffees just now).</p>
+			<p>Just because your page loads in a fraction of a second, and gains a 90+ YSlow score does NOT mean that your web page doesn't suck. This module isn't able to tell how many critical resources are loaded asynchronously, and similarly it cannot determine the delay before the user can actually see or do something useful.</p>
+		</section>
+		<hr>
+		<section>
+			<h2>Still a Work in Progress...</h2>
+			<p>Feedback is welcome, I'd be really grateful if you could <a href="https://github.com/andyshora/grunt-yslow/issues">raise issues on Github</a>. Note that I'm not confident enough to put a major version number on the package yet, there's still a few more bugs to fix, but please take it for a spin!</p>
+		</section>
+	</div>
+
+</div>
+<!-- INCLUDE:author -->
+<!-- INCLUDE:comments -->
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			$('.twitter-share-button-placeholder').bind('mouseover', function() {
+				enableShareButton($(this));
+			});
+
+			if (Modernizr.touch) {
+				enableShareButton($('.twitter-share-button-placeholder'));
+			}
+
+
+
+			window._gaq = [['_setAccount','UA-17716290-10'],['_trackPageview'],['_trackPageLoadTime']];
+			Modernizr.load({
+			load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+			});
+
+			prettyPrint();
+		});
+
+
+
+		function enableShareButton(elm) {
+
+				elm.addClass('twitter-share-button')
+					.removeClass('twitter-share-button-placeholder')
+					.attr('href', 'https://twitter.com/share')
+					.unbind('click');
+
+				!function(d,s,id){
+					var js,
+					fjs=d.getElementsByTagName(s)[0],
+					p=/^http:/.test(d.location)?'http':'https';
+
+					if(!d.getElementById(id)){
+						js=d.createElement(s);
+						js.id=id;
+						js.src=p+'://platform.twitter.com/widgets.js';
+						fjs.parentNode.insertBefore(js,fjs);
+					}
+				}(document, 'script', 'twitter-wjs');
+
+		}
+		function revealEmail() {
+			alert('andyshora' + '@gmail.com');
+		}
+	</script>
+
+<!-- INCLUDE:footer -->
+<!-- INCLUDE:html_close -->
