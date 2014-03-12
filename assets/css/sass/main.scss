@@ -250,7 +250,7 @@ section {
 }
 
 /* prettprint overrides */
-.page-article pre.prettyprint {
+section pre.prettyprint {
 	text-align: left;
 	font-size: 14px;
 	font-family: Consolas, monaco, monospace;
@@ -1570,7 +1570,7 @@ pre.prettyprint, code.prettyprint{
         border-radius: 8px;
 }
 
-.page-article pre.prettyprint {
+section pre.prettyprint {
     width: 100%;
     margin: 1em auto;
     padding: 1em;

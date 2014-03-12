@@ -456,7 +456,7 @@ section {
       z-index: 1; }
 
 /* prettprint overrides */
-.page-article pre.prettyprint {
+section pre.prettyprint {
   text-align: left;
   font-size: 14px;
   font-family: Consolas, monaco, monospace;
@@ -466,7 +466,7 @@ section {
   width: 94%;
   padding: 20px 3% !important;
   color: white; }
-  .page-article pre.prettyprint span.com {
+  section pre.prettyprint span.com {
     color: #5fc5bd; }
 
 section h3 {
@@ -1820,7 +1820,7 @@ pre.prettyprint, code.prettyprint {
   -khtml-border-radius: 8px;
   border-radius: 8px; }
 
-.page-article pre.prettyprint {
+section pre.prettyprint {
   width: 100%;
   margin: 1em auto;
   padding: 1em; }
