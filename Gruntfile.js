@@ -96,13 +96,6 @@ module.exports = function(grunt) {
 				}
 		},
 
-		min: {
-			'js': {
-						'src': ['assets/js/main.js'],
-						'dest': 'assets/js/m.min.js'
-				}
-		},
-
 		replace: {
 			homepage: {
 				src: ['public_html/dev.html'],
@@ -147,7 +140,7 @@ module.exports = function(grunt) {
 		watch: {
 			scripts: {
 				files: ['**/*.scss'],
-				tasks: ['sass'],
+				tasks: ['sass', 'cssmin'],
 				options: {
 					nospawn: true
 				}
@@ -188,11 +181,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-htmlcompressor');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-compress');
-	grunt.loadNpmTasks('grunt-yslow');
+	// grunt.loadNpmTasks('grunt-yslow');
 	grunt.loadNpmTasks('grunt-shell');
 
 
 	// Default task.
-	grunt.registerTask('default', ['sass', 'cssmin', 'shell', 'min', 'replace', 'htmlcompressor', 'compress']);
+	grunt.registerTask('default', ['sass', 'cssmin', 'shell', 'replace', 'htmlcompressor', 'compress']);
 
 };
