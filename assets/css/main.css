@@ -571,10 +571,10 @@ section h3 {
     width: 40%; } }
 footer {
   width: 100%;
-  padding: 20px 0;
+  padding: 20px 0 10px;
   text-align: center;
   border-top: 1px solid lightgrey;
-  background: url(http://andyshora.blob.core.windows.net/assets/noisy-texture-100x100-o6-d18-c-e8e8e8-t0.png) 0 0 repeat;
+  background: #1a1a1a;
   clear: both; }
 
 footer p {
