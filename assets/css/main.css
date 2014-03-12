@@ -263,7 +263,7 @@ body {
   font: 15px "Open Sans", Helvetica, Arial, sans-serif;
   font-weight: 400;
   line-height: 1.625;
-  background: #f9f9f7 url(http://andyshora.blob.core.windows.net/assets/noisy-texture-100x100-o6-d18-c-e8e8e8-t0.png) 0 0 repeat; }
+  background: #E6E6E6; }
 
 h1 {
   font-size: 28px;
@@ -275,18 +275,18 @@ h2 {
   font-size: 24px;
   line-height: 32px; }
 
-@font-face {
+/*@font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: local("Open Sans"), local("OpenSans"), url(fonts/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format("woff"); }
-
+  src: local('Open Sans'), local('OpenSans'), url(fonts/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  src: local("Open Sans Bold"), local("OpenSans-Bold"), url(fonts/k3k702ZOKiLJc3WVjuplzKRDOzjiPcYnFooOUGCOsRk.woff) format("woff"); }
-
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(fonts/k3k702ZOKiLJc3WVjuplzKRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+}*/
 .twitter-share-button-placeholder .icon {
   margin: 0 0 0 5px;
   color: white; }
