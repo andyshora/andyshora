@@ -1,0 +1,130 @@
+<!-- CUSTOMSLUG:iframes-responsive-web-apps-tips -->
+<!-- INCLUDE:html_open -->
+<title>Reasons not to serve responsive web apps within iframes</title>
+<meta name="description" content="A few tips on the problems you'll face when serving responsive web apps within iframes">
+<!-- INCLUDE:head -->
+
+<div id="body_wrap">
+
+	<header class="page-header">
+		<div class="page-header__title">
+			<h1>Reasons not to serve responsive web apps within iframes</h1>
+			<p>A few tips on the problems you'll face when serving responsive web apps within iframes. A messy brain dump by <a href="#author">Andy Shora</a></p>
+			<a href="/">&larr; back to andyshora.com</a> | <a class="twitter-share-button-placeholder" data-via="andyshora">Tweet this article<i class="icon icon-twitter"></i></a>
+		</div>
+		<div class="header_twitter"><a href="http://twitter.com/andyshora" title="Follow me on Twitter @andyshora"></a></div>
+	</header>
+
+	<div class="page-article">
+		<section class="page-article__heading">
+			<h2>Here's a few good reasons why not to serve responsive web apps within iframes.</h2>
+			<p>If you're starting a project with this kind of iframe restriction, please take this advice from someone who has taken the wrong advice multiple times and misdiagnosed the problems.</p>
+			<p>Seriously though  - your app is going to have some major issues if you're not careful!</p>
+		</section>
+		<hr>
+		<section>
+
+			<h2>Chrome has a weird fixed scrollbar bug</h2>
+			<p><strong>The scroll bar handle doesn't appear to move when you scroll.</strong></p>
+
+			<ul><li>The only solution is for every window resize event (you can debounce it with caution), send a message from the child to the parent frame asking for a window resize to the height of the content (passed as a param).</li>
+			<li>This means for Chrome (if you're just sniffing for window.chrome) the iframe will potentially be thousands of pixels high, and the scrollbar works because it's actually scrolling the parent page and not the child. A reprocussion of this is that no scroll events get fired ont he child page, so avoid relying on scroll events all together.</li>
+			<li>If you debounce the resizing be careful, as some supressed resize events may be significant ones, which may cause double scrollbars and a rare phenomenon what I like to call 'iframe dancing'. This is where the client sends a resize request, the parent resizes (but adds an extra scrollbar temporarily), then due to the extra scrollbar the client width changes and some content wraps, so the client sends another resize request, the parent scrollbar disappears, then the whole thing is repeated. etc, etc. You're basically going to need some additional logic within the resize request code to make sure you're not sending a resize request which is going to cause this loop. If you're struggling with this, get in touch! It's not pretty.</li></ul>
+		</section>
+		<hr>
+		<section>
+			<h2>Mobile Safari resizing iframes by default, and you can't override it!</h2>
+			<ul><li>Mobile Safari will resize the iframe to the height of the content, regardless of any styles or attributes declared on the iframe (including !important rules).</li>
+			<li>The solution is to wrap the iframe in a div with overflow:auto, but this may have some reprocussions for other mobile browsers.</li>
+			<li><a href="https://coderwall.com/p/c-aqqw">Fix</a></li></ul>
+		</section>
+		<hr>
+		<section>
+
+			<h2>Avoid fixed position elements at all costs.</h2>
+			<p><strong>Politely TELL your UX that 'sticky' navigation is NOT an option!</strong></p>
+			<ul><li>Due to the above Chrome scroll bug fix, fixed position elements will not appear fixed, as the child page never scrolls (the parent page simply scrolls it's 'view' of the iframe).</li>
+			<li>Due to the mobile safari fix, it's exactly the same situation, fixed position elements will never appear to be fixed, they'll simply scroll away with the content.</li></ul>
+
+			<h2>Mobile Safari applies the elastic out-of-bounds effect to the x-axis as well.</h2>
+			<p><strong>This is due to the app being a page within an iframe.</strong></p>
+			<ul><li>There may be a fix for this, but I've avoided supressing touchmove events as it's bad practice.</li>
+				<li>If there's a nice fix, I'd love to hear it in the comments below :-)</li>
+			</ul>
+		</section>
+		<hr>
+		<section>
+			<h2>CSS Hardware Acceleration appears to be affected</h2>
+			<ul><li>On some mobile devices performance for transformed layers is jerky and flickers. This is not apparent when the app is served outside the iframe.</li>
+				<li>I haven't found a fix for this yet, and I'm not really a fan of applying hardware acceleration to large elements due to the memory and GPU consumption.</li>
+				<li>If somebody insists on serving an app within an iframe, they can't expect a smooth native app experience, so my advice is to remove transitions on transforms so they move between states discretely.</li>
+			</ul>
+		</section>
+		<hr>
+		<section>
+
+			<h2>Summary</h2>
+			<p>If you are restricted to serving your app within an iframe:</p>
+
+			<ul><li>Avoid all fixed position elements. Rethink your sticky navigation.</li>
+			<li>Accept that CSS animation is not going to be smooth on some mobile devives.</li>
+			<li>Chrome will need a scroll fix, unless you want to take an accessibility hit and expose a rare bug in the latest modern browser. This means you will need JavaScript on the parent page to respond to resize requests via postMessage from the client, or you'll see multiple scrollbars.</li>
+			<li>You shouldn't be doing anything on scroll events.</li></ul>
+		</section>
+	</div>
+
+</div>
+<!-- INCLUDE:author -->
+<!-- INCLUDE:comments -->
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			$('.twitter-share-button-placeholder').bind('mouseover', function() {
+				enableShareButton($(this));
+			});
+
+			if (Modernizr.touch) {
+				enableShareButton($('.twitter-share-button-placeholder'));
+			}
+
+
+
+			window._gaq = [['_setAccount','UA-17716290-10'],['_trackPageview'],['_trackPageLoadTime']];
+			Modernizr.load({
+			load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+			});
+
+			prettyPrint();
+		});
+
+
+
+		function enableShareButton(elm) {
+
+				elm.addClass('twitter-share-button')
+					.removeClass('twitter-share-button-placeholder')
+					.attr('href', 'https://twitter.com/share')
+					.unbind('click');
+
+				!function(d,s,id){
+					var js,
+					fjs=d.getElementsByTagName(s)[0],
+					p=/^http:/.test(d.location)?'http':'https';
+
+					if(!d.getElementById(id)){
+						js=d.createElement(s);
+						js.id=id;
+						js.src=p+'://platform.twitter.com/widgets.js';
+						fjs.parentNode.insertBefore(js,fjs);
+					}
+				}(document, 'script', 'twitter-wjs');
+
+		}
+		function revealEmail() {
+			alert('andyshora' + '@gmail.com');
+		}
+	</script>
+
+<!-- INCLUDE:footer -->
+<!-- INCLUDE:html_close -->
