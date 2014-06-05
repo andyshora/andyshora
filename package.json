@@ -1,27 +1,22 @@
 {
-  "name": "jquery-plugin",
-  "version": "0.0.0-ignored",
+  "name": "andyshora.com",
+  "version": "0.0.1",
   "engines": {
     "node": ">= 0.8.0"
   },
-  "scripts": {
-    "test": "grunt qunit"
-  },
+  "repository": "https://github.com/andyshora/andyshora.git",
   "devDependencies": {
     "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-qunit": "~0.1.1",
     "grunt-contrib-concat": "~0.1.2",
     "grunt-contrib-uglify": "~0.1.1",
     "grunt-contrib-watch": "~0.2.0",
     "grunt-contrib-clean": "~0.4.0",
-    "grunt-casperjs": "~1.0.3",
     "minify": "~0.1.8",
     "grunt": "~0.4.x",
     "replace": "0.2.3",
     "grunt-contrib-sass": "~0.3.0",
     "grunt-contrib-compress": "~0.5.0",
     "grunt-shell": "~0.2.2",
-    "grunt-yui-compressor": "~0.3.0",
     "grunt-text-replace": "~0.3.10",
     "grunt-htmlcompressor": "~0.1.10"
   }

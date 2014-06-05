@@ -4,8 +4,8 @@
 <head>
 	<meta charset="utf-8">
 	<script>window.prettyPrint=function(){};</script>
-<title>Binding Functions in AngularJS Directives</title>
-<meta name="description" content="Binding Functions in AngularJS Directives">
+<title>Designing a RESTful API using NodeJS and Express</title>
+<meta name="description" content="Designing a RESTful API using NodeJS and Express">
 	<link rel="stylesheet" href="assets/css/m.min.css">
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<meta name="author" content="Andy Shora">
@@ -29,146 +29,68 @@
 <body>
 
 <div id="body_wrap">
-
 	<header class="page-header">
 		<div class="page-header__title">
-			<h1>Binding Functions in AngularJS Directives</h1>
-			<p>When to make use of function binding in AngularJS directives. By <a href="#author">Andy Shora</a></p>
+			<h1>Designing a RESTful API using NodeJS and Express</h1>
+			<p>How to implement a RESTful API using NodeJS and Express, following RESTful design principles and a few extras. By <a href="#author">Andy Shora</a></p>
 			<a href="/">&larr; back to andyshora.com</a> | <a class="twitter-share-button-placeholder" data-via="andyshora">Tweet this article<i class="icon icon-twitter"></i></a>
 		</div>
 		<div class="header_twitter"><a href="http://twitter.com/andyshora" title="Follow me on Twitter @andyshora"></a></div>
 	</header>
-
-	<div class="page-article" ng-app="functionsDemoApp">
-		<section>
-			<p>You're probably already familiar with the concept of binding objects (=) and strings (@) to AngularJS directives, allowing the directive access to some variables in the parent scope. An interesting third option is the ability to bind functions (&amp;) from the parent module, meaning they can be executed when some event occurs in the child directive.</p>
-			<p>Binding functions is really useful for certain components, and in this article I'm going to run through some examples of when and when not to make use of binding functions in your directives.</p>
+	<div class="page-article">
+		<section class="page-article__heading">
+			<h2>Let's build a RESTful API which is fast and secure!</h2>
+			<p>It seems quite easy to follow a basic API tutorial and setup some routes to serve data, but in this article I'm going to try to explain the importance of nailing down some solid API design principles, as well as beefing up a wall of security to protect your data!</p>
+			<p><a href="http://nodejs.org/">NodeJS</a> is now my backend language of choice, it's super-fast and flexible, and <a href="http://expressjs.com/">ExpressJS</a> is a relatively thin layer of abstraction I use which exposes all the features I need to implement the REST API.</p>
 		</section>
 		<section>
-			<h2>Example 1: A Message Dialog Directive</h2>
-			<p>I've created a simple dialog box, which takes two parameters:</p>
-			<ul>
+			<h2>First, let's cover some important API Design Principles</h2>
+			<p>The following principles are key to any good RESTful service, and I will aim to implement them in my API using Node and Express:</p>
+			<ol>
 				<li>
-					<strong><i>message</i></strong> (string) - the message to be displayed in the dialog.
+					<h3>Provide Intuitive Endpoints</h3>
+					<p>Developers should be able to explore the API without documentation. Paths should refer to the object entities they are interfacing, POST/GET/PUT/DELETE headers should correspond to create/read/update/delete operations, leaving no place for verbs.</p>
+					<p><i>For example: a POST request to /api/users would create a user, and a GET request to /api/users/123 would read a user.</i></p>
 				</li>
 				<li>
-					<strong><i>open</i></strong> (object) - a boolean variable specifying whether the dialog should be open or closed.
+					<h3>Allow Exploration via OPTIONS Request</h3>
+					<p>Missing from most APIs, but extremely useful, OPTIONS requests should allow the client to discover what it's allowed to do with the resource. There are no accepted standards for what a server is supposed to return in the response, so I normally look to responds with a semantic description of the valid operations which can be send to the endpoint in question, as well as describing parameters and authentication requirements.</p>
+					<p>It's also worth noting that the headers the client sends in the request may effect the Allow header the server sends in the response.<p>
+					<p><i>For example, if valid authentication headers are specified in the request headers, the server may respond with Allow POST, PUT and DELETE options. If the client sends plain headers, the server may tell the client it's only allowed to read data, responding only with a GET option in the Allow header.</i></p>
+
 				</li>
 				<li>
-					<strong><i>onOpen</i></strong> (function) - the function to be executed within the parent scope (Demo1Ctrl) when the dialog is opened.
+					<h3>Respond with Correct Status Codes</h3>
+					<p>It's not uncommon to query an API these days, and get nothing but 200/404/500 http status codes back. If you're reading this, I don't need to tell you that there's <a href="http://httpstatus.es/" title="http status codes">tons more http status codes</a> which APIs should be responding with.</p>
+					<p><i>Some commonly forgotten but important status codes: 201 - resource created, 400 - bad syntax (server-side validation failed)</i></p>
 				</li>
 				<li>
-					<strong><i>onClose</i></strong> (function) - the function to be executed within the parent scope (Demo1Ctrl) when the dialog is closed/dismissed.
+					<h3>Use Query Parameters to Enable Searching, Filtering, Sorting and Limiting</h3>
+					<p>The querystring should act as a secondary set of instructions to your API. The endpoint and the method will explain the client's primary intention by revealing the target resource and the operation, and the parameters in the querystring will explain how the client wants the data transformed before it comes back.</p>
+					<p><i>For example, a GET request to /api/films?genre=action&order=popularity&limit=10 will return the 10 most popular action films in the database.</i></p>
 				</li>
-			</ul>
-			<p>The dialog is opened by changing the value of $scope.dialogOpen to <i>true</i> in the parent scope. You can see that this variable is bound to the dialog's $scope.open, which in turn controls whether the component is shown via the <i>ng-show</i> directive on the dialog component's root node.</p>
+				<li>
+					<h3></h3>
+					<p></p>
+				</li>
+				<li>
+					<h3></h3>
+					<p></p>
+				</li>
+				<li>
+					<h3></h3>
+					<p></p>
+				</li>
+				<li>
+					<h3></h3>
+					<p></p>
+				</li>
+			</ol>
+			<p></p>
 		</section>
-		<section>
-			<h2>Code</h2>
-			<pre class="prettyprint lang-js">
-// init angular app on this page
-var app;
-(function() {
-  'use strict';
-  app = angular.module('functionsDemoApp', []);
+		<hr>
 
-  app.directive('dialog', function () {
-      return {
-        template: '<div class="demo-dialog" ng-show="open"><h3>{{message}}</h3><button ng-click="_onCloseClicked()">Close</button></div>',
-        restrict: 'AE',
-        scope: {
-          open: '=',
-          message: '@',
-          onOpen: '&',
-          onClose: '&'
-        },
-        link: function($scope) {
-          $scope.$watch('open', function(open) {
-            console.log('open change -> ', open);
-            if (open) {
-              // execute function bound from the parent scope
-              $scope.onOpen();
-            } else {
-              // execute function bound from the parent scope
-              $scope.onClose();
-            }
-          });
 
-          // the reason for this extra internal function
-          // is so we can close the dialog
-          // before the parent function is triggered
-          $scope._onCloseClicked = function() {
-            $scope.open = false;
-            $scope.onClose();
-          };
-        }
-      };
-    })
-  .controller('Demo1Ctrl', function ($scope) {
-
-    var _defaultMessage = 'Click the button to open the dialog';
-    $scope.globalMessage = _defaultMessage;
-
-    $scope.dialogOpen = false;
-    $scope.dialogMessage = 'This is the dialog message!';
-
-    $scope.showDialog = function() {
-      $scope.dialogOpen = true;
-    };
-
-    $scope.onDialogOpen = function() {
-      console.log('onDialogOpen -> ');
-      $scope.globalMessage = 'The dialog is now open. Close it to see the onClose function execute the function bound to it from the parent scope!';
-    };
-    $scope.onDialogClose = function() {
-      $scope.globalMessage = _defaultMessage + ' - this update was triggered from the directive!';
-    };
-  });
-
-})();
-			</pre>
-
-		</section>
-		<section>
-
-			<h2>Demo</h2>
-			<div class="demo-wrapper" ng-controller="Demo1Ctrl">
-				<button ng-click="showDialog()">Show dialog</button>
-				<p><i>{{globalMessage}}</i></p>
-				<dialog
-					open="dialogOpen"
-					message="{{dialogMessage}}"
-					on-open="onDialogOpen()"
-					on-close="onDialogClose()"></dialog>
-			</div>
-
-		</section>
-		<section>
-
-			<h2>Tips for when to bind functions to directives</h2>
-			<ul>
-				<li>
-					<h4>We use function binding to keep our directives ambiguous and reusable. Directives need to stay dumb!</h4>
-					<p>A dialog directive should not be at all concerned with how it's being used, it just does it's job by opening, showing a message, and closing. It provides 'hooks' on the open/close interactions so the parent can decide what logic should execute next.</p>
-				</li>
-				<li>
-					<h4>Always call an event handler on the directive's scope first, from events triggered from within the template.</h4>
-					<p>It's good practice to always call a function in the current controller, as opposed to specifying the bound function directly in the template. In the example above, I call <i>_onCloseClicked()</i> before calling the bound function, because I actually need to close the dialog first.</p>
-					<p>By reading the name of the event handlers, you should be able to tell exactly what type of control is calling them and what the interaction was without even looking at the template.</p>
-					<p>For naming conventions, I normal prefix event handlers with an underscore, and name them like <i>_on&lt;ControlName&gt;&lt;Action&gt;</i>. Some more examples: <i>_onSliderDragStart, _onCheckboxClicked, _onCarouselSwipedLeft</i>.</p>
-				</li>
-			</ul>
-
-			<h2>Here's when NOT to bind functions to directives</h2>
-			<p>Please don't get used to doing any of the following 'anti-patterns':</p>
-			<ul>
-				<li>
-					<h4>Don't assume that a function will get called.</h4>
-					<p>What if the user never closes the dialog? What if they find another clever way of closing it without it triggering the <i>onClose</i> function? Make sure your parent controller can recover even in the event of the child directive failing.</p>
-				</li>
-			</ul>
-
-		</section>
 	</div>
 
 </div>
@@ -202,69 +124,7 @@ var app;
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </section>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
 	<script type="text/javascript">
-
-		// init angular app on this page
-		var app;
-		(function() {
-			'use strict';
-			app = angular.module('functionsDemoApp', []);
-
-			app.directive('dialog', function () {
-					return {
-						template: '<div class="demo-dialog" ng-show="open"><h3>{{message}}</h3><button ng-click="_onCloseClicked()">Close</button></div>',
-						restrict: 'AE',
-						scope: {
-							open: '=',
-							message: '@',
-							onOpen: '&',
-							onClose: '&'
-						},
-						link: function($scope) {
-							$scope.$watch('open', function(open) {
-								console.log('open change -> ', open);
-								if (open) {
-									// execute function bound from the parent scope
-									$scope.onOpen();
-								} else {
-									// execute function bound from the parent scope
-									$scope.onClose();
-								}
-							});
-
-							// the reason for this extra internal function
-							// is so we can close the dialog
-							// before the parent function is triggered
-							$scope._onCloseClicked = function() {
-								$scope.open = false;
-								$scope.onClose();
-							};
-						}
-					};
-				})
-			.controller('Demo1Ctrl', function ($scope) {
-
-				var _defaultMessage = 'Click the button to open the dialog';
-				$scope.globalMessage = _defaultMessage;
-
-				$scope.dialogOpen = false;
-				$scope.dialogMessage = 'This is the dialog message!';
-
-				$scope.showDialog = function() {
-					$scope.dialogOpen = true;
-				};
-
-				$scope.onDialogOpen = function() {
-					console.log('onDialogOpen -> ');
-					$scope.globalMessage = 'The dialog is now open. Close it to see the onClose function execute the function bound to it from the parent scope!';
-				};
-				$scope.onDialogClose = function() {
-					$scope.globalMessage = _defaultMessage + ' - this update was triggered from the directive!';
-				};
-			});
-
-		})();
 
 		$(document).ready(function() {
 

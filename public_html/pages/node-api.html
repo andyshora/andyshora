@@ -1,0 +1,126 @@
+<!-- CUSTOMSLUG:restful-api-design-nodejs-express -->
+<!-- INCLUDE:html_open -->
+<title>Designing a RESTful API using NodeJS and Express</title>
+<meta name="description" content="Designing a RESTful API using NodeJS and Express">
+<!-- INCLUDE:head -->
+
+<div id="body_wrap">
+	<header class="page-header">
+		<div class="page-header__title">
+			<h1>Designing a RESTful API using NodeJS and Express</h1>
+			<p>How to implement a RESTful API using NodeJS and Express, following RESTful design principles and a few extras. By <a href="#author">Andy Shora</a></p>
+			<a href="/">&larr; back to andyshora.com</a> | <a class="twitter-share-button-placeholder" data-via="andyshora">Tweet this article<i class="icon icon-twitter"></i></a>
+		</div>
+		<div class="header_twitter"><a href="http://twitter.com/andyshora" title="Follow me on Twitter @andyshora"></a></div>
+	</header>
+	<div class="page-article">
+		<section class="page-article__heading">
+			<h2>Let's build a RESTful API which is fast and secure!</h2>
+			<p>It seems quite easy to follow a basic API tutorial and setup some routes to serve data, but in this article I'm going to try to explain the importance of nailing down some solid API design principles, as well as beefing up a wall of security to protect your data!</p>
+			<p><a href="http://nodejs.org/">NodeJS</a> is now my backend language of choice, it's super-fast and flexible, and <a href="http://expressjs.com/">ExpressJS</a> is a relatively thin layer of abstraction I use which exposes all the features I need to implement the REST API.</p>
+		</section>
+		<section>
+			<h2>First, let's cover some important API Design Principles</h2>
+			<p>The following principles are key to any good RESTful service, and I will aim to implement them in my API using Node and Express:</p>
+			<ol>
+				<li>
+					<h3>Provide Intuitive Endpoints</h3>
+					<p>Developers should be able to explore the API without documentation. Paths should refer to the object entities they are interfacing, POST/GET/PUT/DELETE headers should correspond to create/read/update/delete operations, leaving no place for verbs.</p>
+					<p><i>For example: a POST request to /api/users would create a user, and a GET request to /api/users/123 would read a user.</i></p>
+				</li>
+				<li>
+					<h3>Allow Exploration via OPTIONS Request</h3>
+					<p>Missing from most APIs, but extremely useful, OPTIONS requests should allow the client to discover what it's allowed to do with the resource. There are no accepted standards for what a server is supposed to return in the response, so I normally look to responds with a semantic description of the valid operations which can be send to the endpoint in question, as well as describing parameters and authentication requirements.</p>
+					<p>It's also worth noting that the headers the client sends in the request may effect the Allow header the server sends in the response.<p>
+					<p><i>For example, if valid authentication headers are specified in the request headers, the server may respond with Allow POST, PUT and DELETE options. If the client sends plain headers, the server may tell the client it's only allowed to read data, responding only with a GET option in the Allow header.</i></p>
+
+				</li>
+				<li>
+					<h3>Respond with Correct Status Codes</h3>
+					<p>It's not uncommon to query an API these days, and get nothing but 200/404/500 http status codes back. If you're reading this, I don't need to tell you that there's <a href="http://httpstatus.es/" title="http status codes">tons more http status codes</a> which APIs should be responding with.</p>
+					<p><i>Some commonly forgotten but important status codes: 201 - resource created, 400 - bad syntax (server-side validation failed)</i></p>
+				</li>
+				<li>
+					<h3>Use Query Parameters to Enable Searching, Filtering, Sorting and Limiting</h3>
+					<p>The querystring should act as a secondary set of instructions to your API. The endpoint and the method will explain the client's primary intention by revealing the target resource and the operation, and the parameters in the querystring will explain how the client wants the data transformed before it comes back.</p>
+					<p><i>For example, a GET request to /api/films?genre=action&order=popularity&limit=10 will return the 10 most popular action films in the database.</i></p>
+				</li>
+				<li>
+					<h3></h3>
+					<p></p>
+				</li>
+				<li>
+					<h3></h3>
+					<p></p>
+				</li>
+				<li>
+					<h3></h3>
+					<p></p>
+				</li>
+				<li>
+					<h3></h3>
+					<p></p>
+				</li>
+			</ol>
+			<p></p>
+		</section>
+		<hr>
+
+
+	</div>
+
+</div>
+<!-- INCLUDE:author -->
+<!-- INCLUDE:comments -->
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			$('.twitter-share-button-placeholder').bind('mouseover', function() {
+				enableShareButton($(this));
+			});
+
+			if (Modernizr.touch) {
+				enableShareButton($('.twitter-share-button-placeholder'));
+			}
+
+
+
+			window._gaq = [['_setAccount','UA-17716290-10'],['_trackPageview'],['_trackPageLoadTime']];
+			Modernizr.load({
+			load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+			});
+
+			prettyPrint();
+		});
+
+
+
+		function enableShareButton(elm) {
+
+				elm.addClass('twitter-share-button')
+					.removeClass('twitter-share-button-placeholder')
+					.attr('href', 'https://twitter.com/share')
+					.unbind('click');
+
+				!function(d,s,id){
+					var js,
+					fjs=d.getElementsByTagName(s)[0],
+					p=/^http:/.test(d.location)?'http':'https';
+
+					if(!d.getElementById(id)){
+						js=d.createElement(s);
+						js.id=id;
+						js.src=p+'://platform.twitter.com/widgets.js';
+						fjs.parentNode.insertBefore(js,fjs);
+					}
+				}(document, 'script', 'twitter-wjs');
+
+		}
+		function revealEmail() {
+			alert('andyshora' + '@gmail.com');
+		}
+	</script>
+
+<!-- INCLUDE:footer -->
+<!-- INCLUDE:html_close -->

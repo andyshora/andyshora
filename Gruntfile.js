@@ -69,18 +69,6 @@ module.exports = function(grunt) {
 
 		},
 
-		casperjs: {
-				'homepage': {
-					options: {
-						includes: ['test/casperjs/inc.js'],
-						pre: ['test/casperjs/pre.js'],
-						post: ['test/casperjs/post.js']
-					},
-					files: { 'src': ['test/casperjs/tests/resources.js'] }
-				}
-
-		},
-
 		sass: {
 			dist: {
 				files: {
@@ -175,14 +163,13 @@ module.exports = function(grunt) {
 	//grunt.loadNpmTasks('grunt-contrib-qunit');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-casperjs');
-	grunt.loadNpmTasks('grunt-yui-compressor');
 	grunt.loadNpmTasks('grunt-text-replace');
 	grunt.loadNpmTasks('grunt-htmlcompressor');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-compress');
 	// grunt.loadNpmTasks('grunt-yslow');
 	grunt.loadNpmTasks('grunt-shell');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 
 
 	// Default task.
