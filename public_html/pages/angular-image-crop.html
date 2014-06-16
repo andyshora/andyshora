@@ -1,0 +1,164 @@
+<!-- CUSTOMSLUG:angular-image-cropper -->
+<!-- INCLUDE:html_open -->
+<title>Anguar Image Crop - Cropping images the easy way using AngularJS</title>
+<meta name="description" content="Anguar Image Crop - Cropping images the easy way using AngularJS">
+<!-- INCLUDE:head -->
+
+<div id="body_wrap">
+	<header class="page-header">
+		<div class="page-header__title">
+			<h1>Anguar Image Crop</h1>
+			<p>Cropping images the easy way using Angular. An AngularJS directive by <a href="#author">Andy Shora</a></p>
+			<a href="/">&larr; back to andyshora.com</a> | <a class="twitter-share-button-placeholder" data-text="Anguar Image Crop - Cropping images the easy way using @AngularJS" data-via="andyshora">Tweet this article<i class="icon icon-twitter"></i></a>
+		</div>
+		<div class="header_twitter"><a href="http://twitter.com/andyshora" title="Follow me on Twitter @andyshora"></a></div>
+	</header>
+	<div class="page-article">
+
+		<section>
+
+			<h1>A better way to crop images client-side using AngularJS</h1>
+
+			<p>Over the weekend I attempted to make a self-contained AngularJS Directive which will allow you to crop an image before it's uploaded to the server. My aim was to make it mobile-friendly, and smooth and intuitive to interact with.</p>
+			<p>Traditional image croppers involve drawing rectangular bounds with a flexible frame, but I wanted it to feel more draggable with touch gestures.</p>
+		</section>
+		<section class="images-section">
+			<img src="https://s3-eu-west-1.amazonaws.com/andyshora/crop-step-1.png" alt="AnguarJS Image Cropper">
+		</section>
+
+		<section>
+
+			<h2>Features</h2>
+
+			<ul>
+				<li>Touch support, swipe to move and drag handle to zoom.</li>
+				<li>Add any image file from your device/machine.</li>
+				<li>Output as a base64-encoded data uri.</li>
+				<li>Uses HTML5 Canvas to display image in a flexible context, to allow dragging and zooming.</li>
+				<li>Note that regardless of the shape of the cropping guideline, resulting images will be square. For example, using the 'circle' shape parameter will show a circular guide, but the resulting images will have to be masked when rendering to the user.</li>
+			</ul>
+
+		</section>
+
+		<section class="images-section">
+			<img src="https://s3-eu-west-1.amazonaws.com/andyshora/crop-step-2.png" alt="AnguarJS Image Cropper">
+		</section>
+
+		<section class="images-section">
+			<h1>Let's see a working example:</h1>
+			<a target="_blank "href="http://jsbin.com/yecaf/1/edit?javascript,output">Try the AngularJS Image Cropper on JSBin</a>
+		</section>
+
+		<section>
+			<h1>Download</h1>
+			<a href="https://github.com/andyshora/angular-image-crop">Download Angular Image Crop on Github</a>
+		</section>
+
+		<section>
+			<h1>Browser Support</h1>
+			<p>IE10+, Android 3+, iOS 6+, basically all modern browsers!</p>
+			<p>Cmon, what did you expect? Oh, and any requests to get this working in IE9 and below will be filed away in my 'special' folder.</p>
+		</section>
+
+		<section>
+			<h1>Usage</h1>
+			<ul>
+				<li>Include the directive</li>
+				<li>Include the styles</li>
+				<li>Initiatlise the directive <a href="http://jsbin.com/yecaf/1/edit?javascript,output" target="_blank">see standalone JSBin</a> for example code.</li>
+			</ul>
+<h3>Example markup for including the directive</h3>
+<pre>
+
+&lt;image-crop
+ data-width="300"
+ data-height="300"
+ data-shape="circle"
+ data-result="imageCropResult"
+&gt;&lt;/image-crop&gt;
+
+</pre>
+		</section>
+		<section>
+			<h1>Parameters</h1>
+
+
+<ul>
+
+		<li>width (string) - the width of the cropper</li>
+		<li>height (string) - the height of the cropper</li>
+		<li>shape (string) - the cropping guideline shape (circle/square)</li>
+		<li>result (bound string) - the variable which will have the resulting data uri bound to it</li>
+		<li>step (bound integer) - the variable which dictates which step the user will see (used for resetting purposes)</li>
+	</ul>
+
+</section>
+
+<section>
+	<h2>Known Issues</h2>
+
+	<ul><li>Currently not working with images captured on some mobile devices, due to orientation exif data being used mobile browsers. Other images on mobiles, including downloaded images are working fine. This should be fixed soon!</li></ul>
+</section>
+
+		<section>
+			<h2>Please help me improve this module :-)</h2>
+
+			<p>I developed this module for a responsive app I'm building, as I couldn't find any decent alternatives. Now I've bashed out v1 over a weekend, I'm planning for world domination, and I can't do it without your help!</p>
+			<p>I'd be really grateful for constructive feedback and feature suggestions!</p>
+		</section>
+	</div>
+
+</div>
+<!-- INCLUDE:author -->
+<!-- INCLUDE:comments -->
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			$('.twitter-share-button-placeholder').bind('mouseover', function() {
+				enableShareButton($(this));
+			});
+
+			if (Modernizr.touch) {
+				enableShareButton($('.twitter-share-button-placeholder'));
+			}
+
+
+
+			window._gaq = [['_setAccount','UA-17716290-10'],['_trackPageview'],['_trackPageLoadTime']];
+			Modernizr.load({
+			load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+			});
+
+			prettyPrint();
+		});
+
+
+		function enableShareButton(elm) {
+
+			elm.addClass('twitter-share-button')
+				.removeClass('twitter-share-button-placeholder')
+				.attr('href', 'https://twitter.com/share')
+				.unbind('click');
+
+			!function(d,s,id){
+				var js,
+				fjs=d.getElementsByTagName(s)[0],
+				p=/^http:/.test(d.location)?'http':'https';
+
+				if(!d.getElementById(id)){
+					js=d.createElement(s);
+					js.id=id;
+					js.src=p+'://platform.twitter.com/widgets.js';
+					fjs.parentNode.insertBefore(js,fjs);
+				}
+			}(document, 'script', 'twitter-wjs');
+
+		}
+		function revealEmail() {
+			alert('andyshora' + '@gmail.com');
+		}
+	</script>
+
+<!-- INCLUDE:footer -->
+<!-- INCLUDE:html_close -->
