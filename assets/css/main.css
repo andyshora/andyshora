@@ -298,7 +298,7 @@ h2 {
   margin: 0 0 0 5px;
   color: white; }
 
-.tag {
+.subject-tag {
   padding: 4px 7px;
   margin: 1px 1px 0 0;
   display: inline-block;
@@ -307,7 +307,7 @@ h2 {
   line-height: 19px;
   font-size: 15px;
   float: right; }
-  .follow-list .tag {
+  .follow-list .subject-tag {
     float: none; }
 
 .page-article {
@@ -631,7 +631,7 @@ footer p {
   height: 150px;
   float: left;
   border-radius: 75px 75px 0 75px;
-  background: white url(../img/2014-500.png) center center no-repeat;
+  background: white url(../img/avatar-512.png) center center no-repeat;
   -webkit-background-size: 160px;
   background-size: 160px;
   margin: -30px 0 0 20px;
@@ -702,7 +702,7 @@ footer p {
       margin-bottom: 10px; }
 
 .author__pic-wilf {
-  background: #fff url(http://andyshora.blob.core.windows.net/assets/wilf.jpg) center center no-repeat;
+  background: white url(http://andyshora.blob.core.windows.net/assets/wilf.jpg) center center no-repeat;
   background-size: 100%;
   width: 100px;
   height: 100px;
@@ -712,7 +712,7 @@ footer p {
   border: none; }
 
 .author__pic-pedro {
-  background: #fff url(https://pbs.twimg.com/profile_images/378800000175768176/54abbd7652fad8d3f130dcd3b683280f.jpeg) center center no-repeat;
+  background: white url(https://pbs.twimg.com/profile_images/378800000175768176/54abbd7652fad8d3f130dcd3b683280f.jpeg) center center no-repeat;
   background-size: 100%;
   width: 100px;
   height: 100px;
@@ -883,6 +883,7 @@ p.sub {
   from {
     left: 118px;
     opacity: 1; }
+
   to {
     left: 142px;
     opacity: 1; } }
@@ -890,6 +891,7 @@ p.sub {
   from {
     left: 118px;
     opacity: 1; }
+
   to {
     left: 142px;
     opacity: 1; } }
@@ -897,6 +899,7 @@ p.sub {
   from {
     left: 118px;
     opacity: 1; }
+
   to {
     left: 142px;
     opacity: 1; } }
@@ -904,6 +907,7 @@ p.sub {
   from {
     left: 118px;
     opacity: 1; }
+
   to {
     left: 142px;
     opacity: 1; } }
@@ -911,6 +915,7 @@ p.sub {
   from {
     left: 118px;
     opacity: 1; }
+
   to {
     left: 142px;
     opacity: 1; } }
@@ -918,6 +923,7 @@ p.sub {
   from {
     left: 158px;
     opacity: 1; }
+
   to {
     left: 182px;
     opacity: 1; } }
@@ -925,6 +931,7 @@ p.sub {
   from {
     left: 158px;
     opacity: 1; }
+
   to {
     left: 182px;
     opacity: 1; } }
@@ -932,6 +939,7 @@ p.sub {
   from {
     left: 158px;
     opacity: 1; }
+
   to {
     left: 182px;
     opacity: 1; } }
@@ -939,6 +947,7 @@ p.sub {
   from {
     left: 158px;
     opacity: 1; }
+
   to {
     left: 182px;
     opacity: 1; } }
@@ -946,6 +955,7 @@ p.sub {
   from {
     left: 158px;
     opacity: 1; }
+
   to {
     left: 182px;
     opacity: 1; } }
@@ -953,6 +963,7 @@ p.sub {
   from {
     left: 179px;
     opacity: 1; }
+
   to {
     left: 158px;
     opacity: 1; } }
@@ -960,6 +971,7 @@ p.sub {
   from {
     left: 179px;
     opacity: 1; }
+
   to {
     left: 158px;
     opacity: 1; } }
@@ -967,6 +979,7 @@ p.sub {
   from {
     left: 179px;
     opacity: 1; }
+
   to {
     left: 158px;
     opacity: 1; } }
@@ -974,6 +987,7 @@ p.sub {
   from {
     left: 179px;
     opacity: 1; }
+
   to {
     left: 158px;
     opacity: 1; } }
@@ -981,6 +995,7 @@ p.sub {
   from {
     left: 179px;
     opacity: 1; }
+
   to {
     left: 158px;
     opacity: 1; } }
@@ -988,6 +1003,7 @@ p.sub {
   from {
     left: 136px;
     opacity: 1; }
+
   to {
     left: 113px;
     opacity: 1; } }
@@ -995,6 +1011,7 @@ p.sub {
   from {
     left: 136px;
     opacity: 1; }
+
   to {
     left: 113px;
     opacity: 1; } }
@@ -1002,6 +1019,7 @@ p.sub {
   from {
     left: 136px;
     opacity: 1; }
+
   to {
     left: 113px;
     opacity: 1; } }
@@ -1009,6 +1027,7 @@ p.sub {
   from {
     left: 136px;
     opacity: 1; }
+
   to {
     left: 113px;
     opacity: 1; } }
@@ -1016,6 +1035,7 @@ p.sub {
   from {
     left: 136px;
     opacity: 1; }
+
   to {
     left: 113px;
     opacity: 1; } }
@@ -1331,26 +1351,31 @@ p.sub {
 @keyframes spinnerRotate {
   from {
     transform: rotate(0deg); }
+
   to {
     transform: rotate(360deg); } }
 @-o-keyframes spinnerRotate {
   from {
     -o-transform: rotate(0deg); }
+
   to {
     -o-transform: rotate(360deg); } }
 @-webkit-keyframes spinnerRotate {
   from {
     -webkit-transform: rotate(0deg); }
+
   to {
     -webkit-transform: rotate(360deg); } }
 @-moz-keyframes spinnerRotate {
   from {
     -moz-transform: rotate(0deg); }
+
   to {
     -moz-transform: rotate(360deg); } }
 @-ms-keyframes spinnerRotate {
   from {
     -ms-transform: rotate(0deg); }
+
   to {
     -ms-transform: rotate(360deg); } }
 .pod {
@@ -1387,76 +1412,91 @@ p.sub {
 @keyframes bgSlide {
   from {
     background-position: -500px 0; }
+
   to {
     background-position: 0 0; } }
 @-o-keyframes bgSlide {
   from {
     background-position: -500px 0; }
+
   to {
     background-position: 0 0; } }
 @-webkit-keyframes bgSlide {
   from {
     background-position: -500px 0; }
+
   to {
     background-position: 0 0; } }
 @-moz-keyframes bgSlide {
   from {
     background-position: -500px 0; }
+
   to {
     background-position: 0 0; } }
 @-ms-keyframes bgSlide {
   from {
     background-position: -500px 0; }
+
   to {
     background-position: 0 0; } }
 @-o-keyframes bgSlide2 {
   from {
     background-position: -300px 0; }
+
   to {
     background-position: 200px 0; } }
 @keyframes bgSlide2 {
   from {
     background-position: -300px 0; }
+
   to {
     background-position: 200px 0; } }
 @-webkit-keyframes bgSlide2 {
   from {
     background-position: -300px 0; }
+
   to {
     background-position: 200px 0; } }
 @-moz-keyframes bgSlide2 {
   from {
     background-position: -300px 0; }
+
   to {
     background-position: 200px 0; } }
 @-ms-keyframes bgSlide2 {
   from {
     background-position: -300px 0; }
+
   to {
     background-position: 200px 0; } }
 @-o-keyframes bgSlide3 {
   from {
     background-position: 0 0; }
+
   to {
     background-position: -500px 0; } }
 @keyframes bgSlide3 {
   from {
     background-position: 0 0; }
+
   to {
     background-position: -500px 0; } }
 @-webkit-keyframes bgSlide3 {
   from {
     background-position: 0 0; }
+
   to {
     background-position: -500px 0; } }
 @-moz-keyframes bgSlide3 {
   from {
     background-position: 0 0; }
+
   to {
     background-position: -500px 0; } }
 @-ms-keyframes bgSlide3 {
   from {
     background-position: 0 0; }
+
   to {
     background-position: -500px 0; } }
 #pod1 {
@@ -1837,5 +1877,3 @@ li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
   border: none;
   padding: 10px 15px;
   margin-bottom: 10px; }
-
-/*# sourceMappingURL=main.css.map */

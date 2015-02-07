@@ -167,7 +167,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-htmlcompressor');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-compress');
-	// grunt.loadNpmTasks('grunt-yslow');
+	grunt.loadNpmTasks('grunt-yslow');
 	grunt.loadNpmTasks('grunt-shell');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 
